@@ -95,7 +95,7 @@ const Contact = () => {
 
         <motion.button
           whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
-          className="bg-white/10 rounded-full px-8 py-5 border border-white/20 text-white font-bold text-xl shadow-lg transition-all"
+          className="bg-white/10 rounded-full px-8 py-5 border border-white/20 text-white font-bold text-xl shadow-lg transition-all cursor-pointer"
           type="submit"
         >
           Send Message
