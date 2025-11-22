@@ -56,31 +56,31 @@ const Info = ({setIsConsultationOpen}) => {
   return (
     <section id="info" className="bg-[#364c41] min-h-screen flex flex-col items-center justify-center py-20 px-6 md:px-16 relative">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-white/30 font-bold text-3xl md:text-7xl mb-12">
+        <h2 className="text-white/30 font-bold text-3xl md:text-7xl mb-8">
           Some Helpful Information
         </h2>
 
-        <p className="text-left md:max-w-5xl mx-auto mb-12 text-white text-lg md:text-3xl font-medium">
+        <p className="text-left md:max-w-5xl mx-auto mb-12 text-white text-md md:text-xl font-medium">
           If this is your first time ordering web development services, you might
           have many questions or feel unsure about what you really need. These
           explanations will help you understand what each service means and how
           it benefits your business online.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {topics.map((topic, index) => (
 
             
 
             <div
               key={index}
-              className="border border-white/10 bg-white/10 rounded-3xl shadow-sm overflow-hidden transition-all"
+              className="border border-white/10 bg-white/10 rounded-lg shadow-sm overflow-hidden transition-all"
             >
               <button
                 onClick={() =>
                   setOpenIndex(openIndex === index ? null : index)
                 }
-                className="w-full h-20 md:h-24 flex justify-between items-center text-left pl-6 pr-2 py-2 font-bold text-lg text-white/70 transition-colors"
+                className="w-full h-18 md:h-18 flex justify-between items-center text-left pl-6 pr-2 py-2 font-bold lg:text-lg text-white/70 transition-colors"
               >
                 {topic.title}
                 <FaChevronCircleDown

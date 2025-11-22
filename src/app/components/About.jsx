@@ -6,14 +6,14 @@ const About = () => {
 
             <section id='about' className="p-3 flex flex-col items-center justify-center min-h-screen bg-[#1B3A34] relative">
 
-          <div className="xl:max-w-3xl 2xl:max-w-5xl mx-auto ">
+          <div className="xl:max-w-3xl 2xl:max-w-5xl mx-auto space-y-8">
 
-            <h2 className="text-white/30 font-bold text-4xl xl:text-5xl 2xl:text-7xl mb-12">Where your ideas become digital reality</h2>
+            <h2 className="text-white/30 font-bold text-4xl xl:text-5xl 2xl:text-7xl">Where your ideas become digital reality</h2>
 
             <div className="text-white/60">
-              <h3 className="xl:text-2xl 2xl:text-4xl text-white/80 mb-8">Hi, I’m Ryno van Eeden — the full-stack developer and founder behind Code Studio Works</h3>
+              <h3 className="xl:text-xl 2xl:text-4xl text-white/80 font-bold">Hi, I’m Ryno van Eeden — the full-stack developer and founder behind Code Studio Works</h3>
 
-              <div className="text-sm xl:text-xl 2xl:text-2xl space-y-8">
+              <div className="text-sm xl:text-lg 2xl:text-xl space-y-5">
                 <p>I run a small virtual studio that helps new, small, and medium-sized businesses build and grow their online presence. From developing your first digital footprint strategy to web design, SEO, branding, and digital marketing, I provide an all-in-one suite of online services designed to make your business stand out in the digital space.</p>
 
               <p>I’m based in Michigan, USA, and work with clients around the world through virtual meetings and secure online payments.</p>

@@ -14,7 +14,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <section id="contact" className="min-h-screen flex flex-col items-center justify-center bg-[#496a5b] px-6 py-20 space-y-16 relative overflow-hidden relative">
+    <section id="contact" className="min-h-screen flex flex-col items-center justify-center bg-[#496a5b] px-6 py-20 space-y-8 relative overflow-hidden relative">
       {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -40 }}
@@ -41,7 +41,7 @@ const Contact = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
         whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
-        className="rounded-full shadow-md border border-white/20 bg-white/10 px-8 py-5 text-white font-bold text-2xl flex items-center gap-3"
+        className="rounded-full shadow-md border border-white/20 bg-white/10 px-5 py-3 text-white font-bold text-xl flex items-center gap-3"
       >
         <FaWhatsapp className="text-green-400" /> WhatsApp Me
       </motion.a>
@@ -51,7 +51,7 @@ const Contact = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.8 }}
-        className="text-white/30 font-bold text-3xl md:text-4xl mb-4"
+        className="text-white/30 font-bold text-3xl md:text-4xl "
       >
         Or Send a Message
       </motion.h3>
@@ -61,7 +61,7 @@ const Contact = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8, duration: 1 }}
-        className="w-full max-w-2xl flex flex-col space-y-8 rounded-3xl p-10 "
+        className="w-full max-w-2xl flex flex-col space-y-3 rounded-3xl "
       >
         <input
           className="bg-transparent border-b border-white/20 focus:border-white/50 outline-none text-white placeholder-white/40 text-xl py-3 transition-all duration-300"
@@ -95,7 +95,7 @@ const Contact = () => {
 
         <motion.button
           whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
-          className="bg-white/10 rounded-full px-8 py-5 border border-white/20 text-white font-bold text-xl shadow-lg transition-all cursor-pointer"
+          className="bg-white/10 rounded-lg px-8 py-3 border border-white/20 text-white font-bold text-xl shadow-lg transition-all cursor-pointer"
           type="submit"
         >
           Send Message

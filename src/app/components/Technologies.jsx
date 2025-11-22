@@ -61,10 +61,10 @@ const Technologies = () => {
             <h2 className="text-white/30 font-bold text-3xl xl:text-5xl 2xl:text-7xl xl:mb-6 2xl:mb-12 z-10">Supported Technologies, Languages and Tools</h2>
 
             {/* Technologies and Tools Bubbles */}
-            <div className="grid gap-2 md:gap-5 grid-cols-3 xl:grid-cols-8 max-w-[1600px]">
+            <div className="grid gap-2 grid-cols-3 xl:grid-cols-8 max-w-5xl">
 
                 {technologies.map(item => (
-                    <div key={item} className="bg-white/20 shadow-md h-12 md:h-22 text-white text-sm md:text-lg font-bold p-1 md:px-5 md:py-3 rounded-md md:rounded-3xl text-center flex items-center justify-center">
+                    <div key={item} className="bg-white/20 shadow-md h-12 md:h-14 text-white text-xs md:text-sm font-bold p-1  rounded-md md:rounded-lg text-center flex items-center justify-center">
                         <span className="flex justify-center">{item}</span>
                     </div>
                     
@@ -78,10 +78,10 @@ const Technologies = () => {
             <h2 className="text-white/30 font-bold text-3xl xl:text-5xl 2xl:text-7xl xl:mb-6 2xl:mb-12 z-10">Additional Services</h2>
 
             {/* Additional Services Bubbles */}
-            <div className="grid gap-2 md:gap-5 grid-cols-3 md:grid-cols-8 max-w-[1600px]">
+            <div className="grid gap-2 grid-cols-3 xl:grid-cols-8 max-w-5xl">
 
                 {additionalServices.map(item => (
-                    <div key={item} className="bg-white/20 shadow-md h-12 md:h-22 text-white text-sm md:text-lg font-bold p-1 md:px-5 md:py-3 rounded-md md:rounded-3xl text-center flex items-center justify-center">
+                    <div key={item} className="bg-white/20 shadow-md h-12 md:h-14 text-white text-xs md:text-sm font-bold p-1  rounded-md md:rounded-lg text-center flex items-center justify-center">
                         <span className="flex justify-center">{item}</span>
                     </div>
                 ))}
