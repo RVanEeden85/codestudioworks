@@ -105,6 +105,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                             <option disabled selected>
                                 Preferred Day
                             </option>
+                            <option value="today">Today</option>
                             <option>Monday</option>
                             <option>Tuesday</option>
                             <option>Wednesday</option>
