@@ -30,7 +30,7 @@ export default function ParallaxBackground({ image }) {
             />
 
             {/* Optional dark overlay */}
-            <div className="absolute inset-0 bg-black/30"></div>
+            <div className="absolute inset-0 bg-black/20"></div>
 
             {/* Foreground content */}
             {/* <div className="relative z-10 flex items-center justify-center h-full text-white text-5xl font-bold">

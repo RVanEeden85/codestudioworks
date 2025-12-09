@@ -50,7 +50,15 @@ const About = () => {
             {/* Photo */}
             <div className="w-1/3 relative">
                 {/* Overlay */}
-                <div className="inset-0 absolute left-0 top-0 w-full h-full bg-[#1B3A34] opacity-60"></div>
+                <div className="inset-0 absolute left-0 top-0 w-full h-full bg-[#1B3A34] opacity-40"></div>
+
+                {/* Photo Caption */}
+                <div className="absolute left-0 bottom-0 p-10 bg-[#142824] text-white/70 font-bold w-full text-center">
+                    <p>
+                        Ryno van Eeden — Full-Stack Developer & Owner of
+                        CodeStudioWorks
+                    </p>
+                </div>
 
                 <img
                     className=" w-full h-full object-cover"
