@@ -1,4 +1,5 @@
 import { FaCheck } from "react-icons/fa";
+import TrustSignalComp from "./TrustSignalComp";
 
 const Services = () => {
     return (
@@ -142,6 +143,11 @@ const Services = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* Trust Signals */}
+            <div className="">
+                <TrustSignalComp />
             </div>
         </section>
     );

@@ -1,11 +1,44 @@
 "use client";
+
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 import Lottie from "lottie-react";
 import animationData from "../../../public/lottie/falling-leaf.json";
 import { useRef, useEffect } from "react";
+import toast from "react-hot-toast";
 
 const Contact = () => {
+    const [status, setStatus] = useState("");
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        setStatus("Sending...");
+
+        const formData = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            tel: e.target.tel.value,
+            message: e.target.message.value,
+        };
+
+        const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
+
+        if (res.ok) {
+            setStatus("Message sent successfully!");
+            toast.success("Message sent successfully 🎉");
+
+            e.target.reset();
+        } else {
+            setStatus("Error sending message. Please try again.");
+
+            toast.error("Something went wrong. Please try again.");
+        }
+    }
     const lottieRef = useRef();
 
     useEffect(() => {
@@ -63,6 +96,7 @@ const Contact = () => {
 
             {/* Contact Form */}
             <motion.form
+                onSubmit={handleSubmit}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8, duration: 1 }}
