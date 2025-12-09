@@ -16,11 +16,11 @@ const Services = () => {
             </div>
 
             {/* Available Services Section Header */}
-            <div className="absolute w-full h-40 left-0 top-20  text-white/50 flex px-10 2xl:px-30 flex items-center justify-between">
+            <div className="text-white/50 flex mb-10 flex items-center justify-between max-w-7xl">
                 <h2 className="uppercase font-bold text-3xl xl:text-5xl 2xl:text-7xl z-10">
                     Available Services
                 </h2>
-                <div className="w-1/3">
+                <div className="w-1/3 bg-secondary z-10 p-5 border border-white/10">
                     <p className="text-white/50 font-semibold text-sm xl:text-lg 2xl:text-xl leading-snug">
                         Based in{" "}
                         <span className="font-bold text-white/80">
@@ -39,9 +39,9 @@ const Services = () => {
             {/* Content */}
 
             <div className="grid grid-cols-1 space-y-3 md:grid-cols-4 mx-auto xl:gap-2 2xl:gap-3 z-10 max-w-7xl">
-                <div className="p-3 flex flex-col bg-primary p-10 rounded-xl border h-full border-white/20 shadow-lg">
+                <div className="p-3 flex flex-col bg-primary p-10 border h-full border-white/10 shadow-lg">
                     <div className="">
-                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2">
+                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Branding & Visual Identity
                         </h2>
                         <div className="text-gray-300 text-xl">
@@ -65,9 +65,9 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="p-3 flex flex-col bg-primary p-10 rounded-xl border h-full border-white/20 shadow-lg">
+                <div className="p-3 flex flex-col bg-primary p-10 border h-full border-white/10 shadow-lg">
                     <div className="">
-                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2">
+                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Web & App Development
                         </h2>
                         <div className="text-gray-300 text-xl">
@@ -91,9 +91,9 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="p-3 flex flex-col bg-primary p-10 rounded-xl border h-full border-white/20 shadow-lg">
+                <div className="p-3 flex flex-col bg-primary p-10 border h-full border-white/10 shadow-lg">
                     <div className="">
-                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2">
+                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Digital Marketing & SEO
                         </h2>
                         <div className="text-gray-300 text-xl">
@@ -117,9 +117,9 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="p-3 flex flex-col bg-primary p-10 rounded-xl border h-full border-white/20 shadow-lg">
+                <div className="p-3 flex flex-col bg-primary p-10 border h-full border-white/10 shadow-lg">
                     <div className="">
-                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2">
+                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Support & Maintenance
                         </h2>
                         <div className="text-gray-300 text-xl">
