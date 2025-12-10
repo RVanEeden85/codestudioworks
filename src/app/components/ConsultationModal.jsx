@@ -30,7 +30,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[9999] p-3">
-            <div className="bg-primary border border-white/20 rounded-3xl w-full max-w-lg p-8 shadow-xl relative animate-fadeIn text-white">
+            <div className="bg-primary border border-white/20 rounded-3xl w-full max-w-lg p-5 md:p-8 shadow-xl relative animate-fadeIn text-white">
                 {/* Close Button */}
                 <button
                     onClick={onClose}
@@ -49,7 +49,10 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                     virtual meeting link.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-3 md:space-y-5"
+                >
                     <input
                         type="text"
                         name="name"

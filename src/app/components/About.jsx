@@ -1,22 +1,20 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-
 const About = () => {
     return (
-        <section id="about" className="min-h-screen flex">
-            <div className="w-2/3 p-3 md:p-20 flex flex-col items-center justify-center min-h-screen bg-[#1B3A34] relative">
-                {/* Text Content Left */}
-                <div className="max-w-xl mx-auto">
-                    <h2 className="absolute left-0 top-0 p-10 bg-black/30 w-full text-white/30 uppercase font-bold text-3xl xl:text-4xl 2xl:text-5xl">
-                        Where ideas become digital reality
-                    </h2>
+        <section id="about" className="min-h-screen flex flex-col md:flex-row">
+            <div className="md:w-2/3 flex flex-col md:items-center md:justify-center min-h-screen bg-[#1B3A34] relative">
+                <h2 className="block md:absolute left-0 top-0 p-5 md:p-10 bg-black/30 w-full text-white/30 uppercase font-bold text-4xl leading-normal md:text-3xl xl:text-4xl 2xl:text-5xl">
+                    Where ideas become digital reality
+                </h2>
 
+                {/* Text Content Left */}
+                <div className="md:max-w-xl mx-auto p-5 md:p-0">
                     <div className="text-white/60">
                         <h3 className="xl:text-2xl 2xl:text-4xl text-white/80 font-bold mb-3">
                             Hi, I’m Ryno van Eeden — the full-stack developer
                             and founder behind Code Studio Works
                         </h3>
 
-                        <div className="text-sm xl:text-lg 2xl:text-xl space-y-5">
+                        <div className="text-md xl:text-lg 2xl:text-xl space-y-5">
                             <p>
                                 I run a small virtual studio that helps new,
                                 small, and medium-sized businesses build and
@@ -48,23 +46,24 @@ const About = () => {
             </div>
 
             {/* Photo */}
-            <div className="w-1/3 relative">
+            <div className="md:w-1/3 relative">
                 {/* Overlay */}
                 <div className="inset-0 absolute left-0 top-0 w-full h-full bg-[#1B3A34] opacity-40"></div>
 
-                {/* Photo Caption */}
-                <div className="absolute left-0 bottom-0 p-10 bg-[#142824] text-white/70 font-bold w-full text-center">
-                    <p>
-                        Ryno van Eeden — Full-Stack Developer & Owner of
-                        CodeStudioWorks
-                    </p>
-                </div>
-
+                {/* Photo */}
                 <img
                     className=" w-full h-full object-cover"
                     src="/images/ryno.png"
                     alt="Full stack web app and website development studio in Westland, Michigan, USA - CodeStudioWorks"
                 />
+
+                {/* Photo Caption */}
+                <div className="md:absolute md:left-0 md:bottom-0 p-10 bg-[#142824] text-white/70 font-bold w-full text-center">
+                    <p>
+                        Ryno van Eeden — Full-Stack Developer & Owner of
+                        CodeStudioWorks
+                    </p>
+                </div>
             </div>
         </section>
     );

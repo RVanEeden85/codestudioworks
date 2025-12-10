@@ -5,7 +5,7 @@ const Services = () => {
     return (
         <section
             id="services"
-            className="p-3 py-20 min-h-screen bg-[#1B3A34] flex flex-col items-center justify-center relative"
+            className="p-10 py-20 min-h-screen bg-primary flex flex-col items-center justify-center relative"
         >
             {/* Background */}
             <div className="inset-0 w-full h-full object-cover absolute top-0 left-0 opacity-30">
@@ -17,11 +17,11 @@ const Services = () => {
             </div>
 
             {/* Available Services Section Header */}
-            <div className="text-white/50 flex mb-10 flex items-end justify-between max-w-7xl">
-                <h2 className="uppercase font-bold text-3xl xl:text-5xl 2xl:text-7xl z-10">
+            <div className="text-white/70 mb-10 md:flex md:items-end md:justify-between max-w-7xl">
+                <h2 className="uppercase font-bold text-2xl xl:text-5xl 2xl:text-7xl z-10">
                     Available Services
                 </h2>
-                <div className="w-1/3 bg-secondary z-10 p-5 rounded border border-white/10">
+                <div className="md:w-1/3 bg-secondary z-10 p-5 rounded border border-white/10">
                     <p className="text-white/50 font-semibold text-sm xl:text-lg 2xl:text-xl leading-snug">
                         Based in{" "}
                         <span className="font-bold text-white/80">
@@ -39,7 +39,7 @@ const Services = () => {
 
             {/* Content */}
 
-            <div className="grid grid-cols-1 space-y-3 md:grid-cols-4 mx-auto xl:gap-2 2xl:gap-3 z-10 max-w-7xl">
+            <div className="grid grid-cols-1 space-y-3 md:grid-cols-4 mx-auto gap-5 xl:gap-2 2xl:gap-3 z-10 max-w-7xl">
                 <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg rounded">
                     <div className="">
                         <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">

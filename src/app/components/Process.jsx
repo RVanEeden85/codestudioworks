@@ -152,13 +152,13 @@ export default function Process({ setIsConsultationOpen }) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: i * 0.1 }}
-                            className="bg-white/10 py-3 px-10 rounded hover:bg-white/20 transition h-26"
+                            className="bg-white/10 py-3 px-5 md:px-10 rounded hover:bg-white/20 transition  md:h-26"
                         >
                             <div className="flex items-center gap-4 mb-1">
-                                <div className="text-white/30 text-3xl">
+                                <div className="text-white/30 text-lg md:text-3xl">
                                     {step.icon}
                                 </div>
-                                <h4 className="font-semibold text-xl">
+                                <h4 className="font-semibold text-lg md:text-xl">
                                     {step.title}
                                 </h4>
                             </div>
@@ -180,7 +180,7 @@ export default function Process({ setIsConsultationOpen }) {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: i * 0.1 }}
-                            className="bg-white/10 py-3 px-10 rounded hover:bg-white/20 transition h-26"
+                            className="bg-white/10 py-3 px-5 md:px-10 rounded hover:bg-white/20 transition  md:h-26"
                         >
                             <div className="flex items-center gap-4 mb-1">
                                 <div className="text-white/30 text-3xl">
