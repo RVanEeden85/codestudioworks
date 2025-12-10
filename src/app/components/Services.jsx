@@ -1,5 +1,6 @@
 import { FaCheck } from "react-icons/fa";
 import TrustSignalComp from "./TrustSignalComp";
+import Image from "next/image";
 
 const Services = () => {
     return (
@@ -9,11 +10,20 @@ const Services = () => {
         >
             {/* Background */}
             <div className="inset-0 w-full h-full object-cover absolute top-0 left-0 opacity-30">
-                <img
+                <Image
+                    src="/images/bg2.webp"
+                    alt="Website designer in Westland, Michigan. Web Development agency in USA."
+                    width={1000}
+                    height={900}
+                    sizes="(max-width: 640px) 120px, (max-width: 1024px) 400px, 900px"
+                    className="w-full h-full object-cover"
+                />
+
+                {/* <img
                     className="w-full h-full object-cover"
                     src="/images/bg2.webp"
                     alt="Website designer in Westland, Michigan. Web Development agency in USA."
-                />
+                /> */}
             </div>
 
             {/* Available Services Section Header */}

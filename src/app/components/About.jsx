@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const About = () => {
     return (
         <section id="about" className="min-h-screen flex flex-col md:flex-row">
@@ -51,10 +53,14 @@ const About = () => {
                 <div className="inset-0 absolute left-0 top-0 w-full h-full bg-[#1B3A34] opacity-40"></div>
 
                 {/* Photo */}
-                <img
-                    className=" w-full h-full object-cover"
+
+                <Image
                     src="/images/ryno.webp"
+                    className="w-full h-full object-cover"
                     alt="Full stack web development and website design studio in Westland, Michigan, USA - CodeStudioWorks"
+                    width={900}
+                    height={1000}
+                    sizes="(max-width: 640px) 400px, (max-width: 1024px) 600px, 800px"
                 />
 
                 {/* Photo Caption */}
