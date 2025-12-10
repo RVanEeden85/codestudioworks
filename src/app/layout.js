@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/NavBar";
 import Logo from "./components/Logo";
 import { Toaster } from "react-hot-toast";
+import CopyrightBar from "./components/Copyright-bar";
 
 const caveat = Caveat({
     variable: "--font-caveat",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
                 <Navbar />
                 {children}
                 <Toaster position="top-right" />
+                <CopyrightBar />
             </body>
         </html>
     );
