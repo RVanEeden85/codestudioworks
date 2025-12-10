@@ -54,7 +54,7 @@ const About = () => {
                 <img
                     className=" w-full h-full object-cover"
                     src="/images/ryno.png"
-                    alt="Full stack web app and website development studio in Westland, Michigan, USA - CodeStudioWorks"
+                    alt="Full stack web development and website design studio in Westland, Michigan, USA - CodeStudioWorks"
                 />
 
                 {/* Photo Caption */}

@@ -27,7 +27,7 @@ const Logo = () => {
         >
             <Image
                 src="/images/Logo.webp"
-                alt="Code Studio Works logo"
+                alt="Website design and web development services in Westland Michigan – CodeStudioWorks"
                 width={600}
                 height={200}
             />

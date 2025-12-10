@@ -12,7 +12,7 @@ const Services = () => {
                 <img
                     className="w-full h-full object-cover"
                     src="/images/bg2.webp"
-                    alt=""
+                    alt="Website designer in Westland, Michigan. Web Development agency in USA."
                 />
             </div>
 

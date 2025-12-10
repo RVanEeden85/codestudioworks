@@ -69,7 +69,8 @@ const Contact = () => {
 
             {/* WhatsApp Button */}
             <motion.a
-                href="https://wa.me/13132135404"
+                href="https://wa.me/13132135404?text=Hi%20Ryno%20at%20CodeStudioWorks!%20I%E2%80%99d%20love%20to%20chat%20about%20a%20project%20or%20your%20services.
+"
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, scale: 0.9 }}
