@@ -21,7 +21,7 @@ const Services = () => {
                 <h2 className="uppercase font-bold text-3xl xl:text-5xl 2xl:text-7xl z-10">
                     Available Services
                 </h2>
-                <div className="w-1/3 bg-secondary z-10 p-5 border border-white/10">
+                <div className="w-1/3 bg-secondary z-10 p-5 rounded border border-white/10">
                     <p className="text-white/50 font-semibold text-sm xl:text-lg 2xl:text-xl leading-snug">
                         Based in{" "}
                         <span className="font-bold text-white/80">
@@ -40,7 +40,7 @@ const Services = () => {
             {/* Content */}
 
             <div className="grid grid-cols-1 space-y-3 md:grid-cols-4 mx-auto xl:gap-2 2xl:gap-3 z-10 max-w-7xl">
-                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg">
+                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg rounded">
                     <div className="">
                         <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Branding & Visual Identity
@@ -66,7 +66,7 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg">
+                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg rounded">
                     <div className="">
                         <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Web & App Development
@@ -92,7 +92,7 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg">
+                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg rounded">
                     <div className="">
                         <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Digital Marketing & SEO
@@ -118,7 +118,7 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg">
+                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg rounded">
                     <div className="">
                         <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Support & Maintenance
