@@ -30,6 +30,9 @@ const Logo = () => {
                 alt="Website design and web development services in Westland Michigan – CodeStudioWorks"
                 width={600}
                 height={200}
+                priority
+                sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 600px"
+                className="w-auto h-auto"
             />
         </motion.div>
     );
