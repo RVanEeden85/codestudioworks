@@ -17,7 +17,7 @@ const Services = () => {
             </div>
 
             {/* Available Services Section Header */}
-            <div className="text-white/50 flex mb-10 flex items-center justify-between max-w-7xl">
+            <div className="text-white/50 flex mb-10 flex items-end justify-between max-w-7xl">
                 <h2 className="uppercase font-bold text-3xl xl:text-5xl 2xl:text-7xl z-10">
                     Available Services
                 </h2>
@@ -40,25 +40,25 @@ const Services = () => {
             {/* Content */}
 
             <div className="grid grid-cols-1 space-y-3 md:grid-cols-4 mx-auto xl:gap-2 2xl:gap-3 z-10 max-w-7xl">
-                <div className="p-3 flex flex-col bg-primary p-10 border h-full border-white/10 shadow-lg">
+                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg">
                     <div className="">
-                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
+                        <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Branding & Visual Identity
                         </h2>
-                        <div className="text-gray-300 text-xl">
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                        <div className="text-gray-300 text-md">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Logo Design
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Brand Guidelines
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Business Cards & Stationery
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Social Media Branding
                             </span>
@@ -66,25 +66,25 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="p-3 flex flex-col bg-primary p-10 border h-full border-white/10 shadow-lg">
+                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg">
                     <div className="">
-                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
+                        <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Web & App Development
                         </h2>
-                        <div className="text-gray-300 text-xl">
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                        <div className="text-gray-300 text-md">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Website Design & Development
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Web Applications (Custom Solutions)
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 E-Commerce Sites
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 API & Backend Development
                             </span>
@@ -92,25 +92,25 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="p-3 flex flex-col bg-primary p-10 border h-full border-white/10 shadow-lg">
+                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg">
                     <div className="">
-                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
+                        <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Digital Marketing & SEO
                         </h2>
-                        <div className="text-gray-300 text-xl">
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                        <div className="text-gray-300 text-md">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 SEO Optimisation
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Paid Ads (Meta, Google)
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Email Marketing
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Social Media Strategy & Content
                             </span>
@@ -118,25 +118,25 @@ const Services = () => {
                     </div>
                 </div>
 
-                <div className="p-3 flex flex-col bg-primary p-10 border h-full border-white/10 shadow-lg">
+                <div className="flex flex-col bg-primary p-6 border h-full border-white/10 shadow-lg">
                     <div className="">
-                        <h2 className="font-bold xl:text-xl 2xl:text-2xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
+                        <h2 className="font-bold xl:text-lg 2xl:text-xl text-white/70 uppercase mb-2 border-b-1 border-b-white/10 pb-5">
                             Support & Maintenance
                         </h2>
-                        <div className="text-gray-300 text-xl">
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                        <div className="text-gray-300 text-md">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Website Hosting & Updates
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Performance Monitoring
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Security & Backups
                             </span>
-                            <span className="min-h-18 xl:min-h-18 2xl:min-h-20 xl:max-h-20 2xl:max-h-30 bg-[#1B3A34] flex items-center justify-start py-2 flex gap-3 items-center">
+                            <span className="flex items-start justify-start py-2 flex gap-3">
                                 <FaCheck />
                                 Content Updates & Management
                             </span>
