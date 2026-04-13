@@ -1,7 +1,7 @@
 import { getSiteUrl } from "./_lib/siteUrl";
 
 export default function robots() {
-    const siteUrl = getSiteUrl();
+    const siteUrl = "https://codestudioworks.com";
 
     return {
         rules: {
@@ -11,4 +11,3 @@ export default function robots() {
         sitemap: `${siteUrl}/sitemap.xml`,
     };
 }
-

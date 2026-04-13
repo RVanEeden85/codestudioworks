@@ -1,7 +1,7 @@
 import { getSiteUrl } from "./_lib/siteUrl";
 
 export default function sitemap() {
-    const siteUrl = getSiteUrl();
+    const siteUrl = "https://codestudioworks.com";
     const lastModified = new Date();
 
     return [
@@ -13,4 +13,3 @@ export default function sitemap() {
         },
     ];
 }
-

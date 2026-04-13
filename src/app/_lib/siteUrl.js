@@ -19,4 +19,3 @@ export function getSiteUrl() {
 
     return "https://www.codestudioworks.com";
 }
-
