@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import Postmark from "postmark";
-
-const client = new Postmark.ServerClient(process.env.POSTMARK_API_KEY);
+import * as postmark from "postmark";
 
 export async function POST(req) {
     try {
@@ -21,6 +19,16 @@ export async function POST(req) {
             preferredTime,
             message,
         } = body;
+
+        if (!process.env.POSTMARK_API_KEY || !process.env.POSTMARK_FROM_EMAIL) {
+            console.error("Missing Postmark environment variables");
+            return NextResponse.json(
+                { error: "Email service not configured" },
+                { status: 500 }
+            );
+        }
+
+        const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 
         // Send email to you
         await client.sendEmail({

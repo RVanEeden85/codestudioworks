@@ -5,7 +5,7 @@ const About = () => {
         <section id="about" className="min-h-screen flex flex-col md:flex-row">
             <div className="md:w-2/3 flex flex-col md:items-center md:justify-center min-h-screen bg-[#1B3A34] relative">
                 <h2 className="block md:absolute left-0 top-0 p-5 md:p-10 bg-black/30 w-full text-white/30 uppercase font-bold text-4xl leading-normal md:text-3xl xl:text-4xl 2xl:text-5xl">
-                    Where ideas become digital reality
+                    Websites & Digital Marketing for Small Businesses
                 </h2>
 
                 {/* Text Content Left */}

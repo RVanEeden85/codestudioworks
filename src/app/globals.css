@@ -14,6 +14,7 @@
     --background: #f9f9f9;
     --foreground: #111111;
     --green-border: #5e7067;
+    --font-caveat: ui-rounded, "Comic Sans MS", "Apple Chancery", cursive;
 }
 
 body {

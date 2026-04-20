@@ -1,19 +1,19 @@
-import { Caveat } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/NavBar";
 import Logo from "./components/Logo";
 import { Toaster } from "react-hot-toast";
 import CopyrightBar from "./components/Copyright-bar";
 import WhatsAppButton from "./components/WaButton";
+import { getSiteUrl } from "./_lib/siteUrl";
 
-const caveat = Caveat({
-    variable: "--font-caveat",
-    subsets: ["latin"],
-    weight: ["400"],
-});
+const siteUrl = getSiteUrl();
 
 export const metadata = {
-    title: "Web Design, Web Development & IT Support | CodeStudioWorks Michigan",
+    metadataBase: new URL(siteUrl),
+    title: {
+        default: "CodeStudioWorks | Web Design, Development & IT Support",
+        template: "%s | CodeStudioWorks",
+    },
     description:
         "CodeStudioWorks offers custom web development, web design, IT support, WordPress repairs, SEO, and remote computer assistance. Based in Michigan and serving clients across the USA and globally.",
     keywords: [
@@ -32,29 +32,80 @@ export const metadata = {
     creator: "CodeStudioWorks",
     publisher: "CodeStudioWorks",
     alternates: {
-        canonical: "https://www.codestudioworks.com",
+        canonical: siteUrl,
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+        },
     },
     openGraph: {
         title: "CodeStudioWorks — Web Development & IT Support in Michigan",
         description:
             "Professional web design, web development, WordPress fixes, IT support, and digital strategy for small businesses. Offering remote support and custom-coded solutions.",
-        url: "https://www.codestudioworks.com",
+        url: siteUrl,
         siteName: "CodeStudioWorks",
         locale: "en_US",
         type: "website",
+        images: [
+            {
+                url: "/opengraph-image",
+                width: 1200,
+                height: 630,
+                alt: "CodeStudioWorks",
+            },
+        ],
     },
     twitter: {
         card: "summary_large_image",
         title: "CodeStudioWorks — Web Development & IT Support",
         description:
             "Custom websites, software development, IT support & WordPress fixes. Based in Michigan, serving clients worldwide.",
+        images: ["/twitter-image"],
     },
 };
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className={`${caveat.variable} antialiased`}>
+            <head>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@graph": [
+                                {
+                                    "@type": "Organization",
+                                    "@id": `${siteUrl}/#organization`,
+                                    name: "CodeStudioWorks",
+                                    url: siteUrl,
+                                    logo: {
+                                        "@type": "ImageObject",
+                                        url: `${siteUrl}/icon.png`,
+                                    },
+                                },
+                                {
+                                    "@type": "WebSite",
+                                    "@id": `${siteUrl}/#website`,
+                                    url: siteUrl,
+                                    name: "CodeStudioWorks",
+                                    publisher: {
+                                        "@id": `${siteUrl}/#organization`,
+                                    },
+                                },
+                            ],
+                        }),
+                    }}
+                />
+            </head>
+            <body className="antialiased">
                 <Logo />
                 <Navbar />
                 {children}

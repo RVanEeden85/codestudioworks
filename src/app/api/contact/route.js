@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import postmark from "postmark";
+import * as postmark from "postmark";
 
 export async function POST(request) {
     try {
@@ -10,6 +10,18 @@ export async function POST(request) {
             return NextResponse.json(
                 { error: "Missing required fields" },
                 { status: 400 }
+            );
+        }
+
+        if (
+            !process.env.POSTMARK_API_KEY ||
+            !process.env.POSTMARK_FROM_EMAIL ||
+            !process.env.POSTMARK_TO_EMAIL
+        ) {
+            console.error("Missing Postmark environment variables");
+            return NextResponse.json(
+                { error: "Email service not configured" },
+                { status: 500 }
             );
         }
 

@@ -131,8 +131,9 @@ export default function Process({ setIsConsultationOpen }) {
                     Simple and Transparent Process
                 </h2>
                 <p className="text-gray-200 text-lg md:text-xl">
-                    Whether you're building a new website, developing software,
-                    or needing IT support — here’s exactly how we work together.
+                    Whether you&apos;re building a new website, developing
+                    software, or needing IT support — here&apos;s exactly how we
+                    work together.
                 </p>
             </div>
 
