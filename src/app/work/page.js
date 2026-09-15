@@ -28,13 +28,13 @@ export default function WorkPage() {
             </section>
 
             <section className="py-16 md:py-20">
-                <div className="section-shell grid gap-5">
+                <div className="work-gallery section-shell grid gap-8">
                     {projects.map((project, index) => (
                         <article
                             key={project.slug}
-                            className="architectural-slab grid overflow-hidden lg:grid-cols-[0.72fr_1.28fr]"
+                            className="work-gallery-card architectural-slab grid overflow-hidden lg:grid-cols-[0.78fr_1.22fr]"
                         >
-                            <div className="relative flex min-h-72 flex-col justify-between overflow-hidden bg-secondary p-6 text-white md:p-8">
+                            <div className="work-gallery-visual relative flex min-h-72 flex-col justify-between overflow-hidden bg-secondary p-6 text-white md:p-8 lg:sticky lg:top-[92px] lg:h-[calc(100vh-116px)] lg:max-h-[680px]">
                                 <div className="noise-overlay absolute inset-0 opacity-30" />
                                 <div className="relative">
                                     <p className="text-sm font-black uppercase text-accent">

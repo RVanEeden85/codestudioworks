@@ -230,6 +230,88 @@ html {
     background-size: cover;
 }
 
+.architectural-page .concrete-panel-wall {
+    --diagonal-shadow-x: -340px;
+    --slab-highlight-opacity: 0.04;
+    --slab-light-x: -12%;
+    --slab-shadow-length: 8px;
+    --slab-shadow-opacity: 0.04;
+    --slab-pair-width: clamp(420px, 33.32vw, 620px);
+    --slab-width: clamp(210px, 16.66vw, 310px);
+    background-color: #b8b8b1;
+    background-image:
+        linear-gradient(rgba(193, 193, 185, 0.12), rgba(120, 121, 116, 0.1)),
+        url("/images/concrete-panel-wall.png");
+    background-blend-mode: multiply, normal;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.architectural-page .concrete-panel-wall::before {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(194, 194, 187, 0.26) 0%,
+            rgba(194, 194, 187, 0.18) 28%,
+            rgba(194, 194, 187, 0.07) 43%,
+            transparent 56%
+        ),
+        radial-gradient(
+            ellipse 24% 140% at var(--slab-light-x) 46%,
+            rgba(255, 255, 255, var(--slab-highlight-opacity)),
+            transparent 72%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(8, 9, 9, var(--slab-shadow-opacity)) 0,
+            transparent var(--slab-shadow-length)
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.2) 0,
+            rgba(26, 28, 26, 0.22) 1px,
+            transparent 2px
+        );
+    background-position: center, center, 0 0, 0 0;
+    background-repeat: no-repeat, no-repeat, repeat, repeat;
+    background-size:
+        100% 100%,
+        100% 100%,
+        var(--slab-width) 100%,
+        var(--slab-width) 100%;
+    content: "";
+    inset: 0;
+    mix-blend-mode: normal;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+}
+
+.architectural-page .concrete-panel-wall > .section-shell,
+.architectural-page .concrete-image-section > .section-shell {
+    position: relative;
+    z-index: 2;
+}
+
+.architectural-page .concrete-image-section::before {
+    background:
+        radial-gradient(
+            ellipse 30% 150% at var(--slab-light-x, 50%) 48%,
+            rgba(255, 255, 255, var(--slab-highlight-opacity, 0.05)),
+            transparent 72%
+        ),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='stone'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.07' numOctaves='3' seed='9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23stone)' opacity='.13'/%3E%3C/svg%3E");
+    content: "";
+    inset: 0;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+}
+
 .architectural-page .monolith-cta {
     background-color: #080909;
     background-image:
@@ -270,6 +352,505 @@ html {
     color: #080909;
 }
 
+/* Monolith in Motion */
+:root {
+    --pointer-x: 50vw;
+    --pointer-y: 50vh;
+}
+
+.scroll-progress {
+    background: #d7f45d;
+    box-shadow: 0 0 18px rgba(215, 244, 93, 0.65);
+    height: 2px;
+    inset: 0 0 auto;
+    position: fixed;
+    transform-origin: 0 50%;
+    z-index: 90;
+}
+
+.route-curtain {
+    background:
+        linear-gradient(90deg, transparent 49.9%, rgba(215, 244, 93, 0.32) 50%, transparent 50.1%),
+        #101211;
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+    transform-origin: 50% 0;
+    z-index: 80;
+}
+
+.intro-curtain {
+    align-items: center;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(39, 46, 41, 0.75), transparent 38%),
+        linear-gradient(90deg, transparent 49.95%, rgba(255, 255, 255, 0.05) 50%, transparent 50.05%),
+        #080909;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    pointer-events: none;
+    position: fixed;
+    z-index: 100;
+}
+
+.intro-line {
+    background: linear-gradient(90deg, transparent, #d7f45d, transparent);
+    display: block;
+    height: 1px;
+    margin: 24px auto 0;
+    transform-origin: center;
+    width: min(42vw, 300px);
+}
+
+.ambient-grain {
+    animation: grain-shift 0.8s steps(2) infinite;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    inset: -60px;
+    mix-blend-mode: soft-light;
+    opacity: 0.035;
+    pointer-events: none;
+    position: fixed;
+    z-index: 45;
+}
+
+.cursor-light {
+    background: radial-gradient(circle 290px at var(--pointer-x) var(--pointer-y), rgba(238, 236, 229, 0.075), transparent 68%);
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transition: opacity 500ms ease;
+    z-index: 44;
+}
+
+.fine-pointer-motion .cursor-light {
+    opacity: 1;
+}
+
+.motion-reveal {
+    opacity: 0;
+    transform: translate3d(0, 36px, 0);
+    transition:
+        opacity 850ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+        transform 1000ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+        border-color 350ms ease,
+        box-shadow 500ms ease;
+    will-change: transform, opacity;
+}
+
+.motion-reveal.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.motion-tilt {
+    transform-style: preserve-3d;
+}
+
+.motion-reveal.motion-tilt.is-revealed.is-interacting,
+.motion-tilt.is-interacting {
+    box-shadow: 0 42px 95px rgba(0, 0, 0, 0.42);
+    transform: perspective(1100px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translate3d(0, -4px, 16px);
+    transition:
+        transform 180ms ease-out,
+        box-shadow 350ms ease,
+        border-color 350ms ease;
+}
+
+.architectural-page .architectural-slab::after {
+    background: radial-gradient(circle 260px at var(--surface-x, 50%) var(--surface-y, 50%), rgba(215, 244, 93, 0.085), transparent 68%);
+    content: "";
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity 350ms ease;
+}
+
+.architectural-page .architectural-slab.is-interacting::after {
+    opacity: 1;
+}
+
+.motion-magnetic {
+    transform: translate3d(var(--magnetic-x, 0), var(--magnetic-y, 0), 0);
+    transition:
+        transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 250ms ease,
+        border-color 250ms ease,
+        color 250ms ease;
+    will-change: transform;
+}
+
+.hero-architecture {
+    perspective: 1200px;
+}
+
+.hero-depth-base,
+.hero-depth-foreground {
+    inset: -5%;
+    position: absolute;
+}
+
+.hero-depth-base img {
+    transform: scale(1.02);
+}
+
+.hero-depth-foreground {
+    background-image: url("/images/architectural-hero.png");
+    background-position: 64% center;
+    background-size: cover;
+    clip-path: polygon(67% 0, 100% 0, 100% 100%, 54% 100%);
+    filter: contrast(1.04) brightness(1.05);
+    opacity: 0.9;
+    transform-origin: 82% 58%;
+}
+
+.hero-light-sweep {
+    animation: architectural-light-sweep 10s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+    background: linear-gradient(102deg, transparent 42%, rgba(238, 236, 229, 0.02) 49%, rgba(238, 236, 229, 0.18) 51%, transparent 57%);
+    inset: -20%;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    position: absolute;
+    transform: translateX(-42%) skewX(-8deg);
+}
+
+.hero-heading-reveal {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+    transform: translateY(52px);
+}
+
+.hero-step-line {
+    transform-origin: left center;
+}
+
+.architectural-page section {
+    position: relative;
+}
+
+.architectural-page section::after {
+    background: linear-gradient(90deg, transparent, rgba(215, 244, 93, 0.24), transparent);
+    bottom: -1px;
+    content: "";
+    height: 1px;
+    left: 50%;
+    opacity: 0.38;
+    position: absolute;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+    width: min(88vw, 1240px);
+}
+
+.architectural-page section:has(.section-shell.is-revealed)::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.architectural-page .concrete-cast-shadows {
+    background-image:
+        linear-gradient(
+            112deg,
+            transparent 0 18%,
+            rgba(12, 13, 12, 0.16) 27%,
+            rgba(9, 10, 9, 0.78) 39%,
+            rgba(22, 23, 21, 0.3) 51%,
+            transparent 62% 100%
+        ),
+        linear-gradient(
+            112deg,
+            transparent 0 38%,
+            rgba(255, 255, 248, 0.72) 49%,
+            rgba(255, 255, 248, 0.2) 61%,
+            transparent 73% 100%
+        );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 78% 155%;
+    bottom: -20%;
+    left: -20%;
+    opacity: 0.78;
+    pointer-events: none;
+    position: absolute;
+    right: -20%;
+    top: -20%;
+    transform: translate3d(var(--diagonal-shadow-x), 0, 0);
+    z-index: 1;
+}
+
+.architectural-page details {
+    overflow: hidden;
+    position: relative;
+}
+
+.architectural-page details summary {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.architectural-page details summary::after {
+    color: #d7f45d;
+    content: "+";
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.architectural-page details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.architectural-page details[open] > :not(summary) {
+    animation: detail-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.architectural-page label {
+    position: relative;
+}
+
+.architectural-page label:has(input:not([type="checkbox"]), select, textarea)::after {
+    background: #d7f45d;
+    bottom: 0;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    width: 100%;
+}
+
+.architectural-page label:has(input:focus, select:focus, textarea:focus)::after {
+    transform: scaleX(1);
+}
+
+.architectural-page [aria-live="polite"] > * {
+    animation: status-arrive 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.work-gallery {
+    counter-reset: gallery;
+}
+
+.work-gallery-card {
+    min-height: min(74vh, 720px);
+    overflow: hidden;
+}
+
+.work-gallery-visual {
+    background-color: #080909;
+    background-position: center;
+    background-size: cover;
+    isolation: isolate;
+    min-height: 330px;
+    transition: background-position 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.work-gallery-card:nth-child(1) .work-gallery-visual {
+    background-image: linear-gradient(155deg, rgba(8, 9, 9, 0.22), rgba(8, 9, 9, 0.92)), url("/images/architectural-hero.png");
+}
+
+.work-gallery-card:nth-child(2) .work-gallery-visual {
+    background-image: linear-gradient(155deg, rgba(8, 9, 9, 0.18), rgba(8, 9, 9, 0.94)), url("/images/concrete-sculpture.png");
+}
+
+.work-gallery-card:nth-child(3) .work-gallery-visual {
+    background-image: linear-gradient(155deg, rgba(8, 9, 9, 0.32), rgba(8, 9, 9, 0.94)), url("/images/concrete-passage.png");
+}
+
+.work-gallery-card:hover .work-gallery-visual {
+    background-position: 58% 48%;
+}
+
+.work-gallery-card .work-gallery-visual::after {
+    background: linear-gradient(115deg, transparent 35%, rgba(238, 236, 229, 0.17) 49%, transparent 62%);
+    content: "";
+    inset: -30%;
+    mix-blend-mode: screen;
+    opacity: 0;
+    position: absolute;
+    transform: translateX(-55%);
+    transition: opacity 400ms ease, transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+}
+
+.work-gallery-card:hover .work-gallery-visual::after {
+    opacity: 0.68;
+    transform: translateX(48%);
+}
+
+.work-card,
+.service-motion-card {
+    overflow: hidden;
+}
+
+.home-project-rail {
+    min-height: 100%;
+}
+
+.project-rail-card {
+    background-position: center;
+    background-size: cover;
+    isolation: isolate;
+}
+
+.project-rail-card.project-visual-hero {
+    background-image: url("/images/architectural-hero.png");
+}
+
+.project-rail-card.project-visual-sculpture {
+    background-image: url("/images/concrete-sculpture.png");
+    background-position: center 45%;
+}
+
+.project-rail-card.project-visual-passage {
+    background-image: url("/images/concrete-passage.png");
+}
+
+.project-card-shade {
+    background: linear-gradient(105deg, rgba(8, 9, 9, 0.97) 0%, rgba(8, 9, 9, 0.82) 48%, rgba(8, 9, 9, 0.22) 100%);
+    inset: 0;
+    position: absolute;
+    z-index: 0;
+}
+
+.project-rail-card::after {
+    z-index: 2;
+}
+
+@media (min-width: 1024px) {
+    .home-project-rail {
+        height: 235vh;
+    }
+}
+
+.work-card > *,
+.service-motion-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.founder-portrait img {
+    filter: grayscale(1) contrast(1.08);
+    transform: scale(1.025);
+    transition: filter 900ms ease, transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.founder-portrait::after {
+    background: linear-gradient(105deg, transparent 34%, rgba(215, 244, 93, 0.13), transparent 59%);
+    content: "";
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: translateX(-70%);
+    transition: opacity 350ms ease, transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.founder-portrait:hover img {
+    filter: grayscale(0.72) contrast(1.05);
+    transform: scale(1.065);
+}
+
+.founder-portrait:hover::after {
+    opacity: 1;
+    transform: translateX(70%);
+}
+
+.cinematic-cta::before {
+    animation: cta-breathe 9s ease-in-out infinite alternate;
+    background: radial-gradient(circle at 82% 50%, rgba(215, 244, 93, 0.08), transparent 22%);
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+.process-slab {
+    overflow: hidden;
+    position: relative;
+}
+
+.process-slab::before {
+    background: linear-gradient(135deg, transparent 46%, rgba(255, 255, 255, 0.28) 50%, transparent 54%);
+    content: "";
+    inset: -80%;
+    opacity: 0;
+    position: absolute;
+    transform: translateX(-45%);
+    transition: opacity 300ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.process-slab:hover::before {
+    opacity: 1;
+    transform: translateX(45%);
+}
+
+.brand-motion {
+    filter: drop-shadow(0 0 0 rgba(215, 244, 93, 0));
+    transition: filter 450ms ease, transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-motion:hover {
+    filter: drop-shadow(0 0 12px rgba(215, 244, 93, 0.22));
+    transform: translateY(-1px);
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    background: #d7f45d;
+    bottom: -11px;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+    width: 100%;
+}
+
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+@keyframes grain-shift {
+    0% { transform: translate3d(-1%, -1%, 0); }
+    25% { transform: translate3d(1%, -2%, 0); }
+    50% { transform: translate3d(-2%, 1%, 0); }
+    75% { transform: translate3d(2%, 2%, 0); }
+    100% { transform: translate3d(-1%, -1%, 0); }
+}
+
+@keyframes architectural-light-sweep {
+    0% { opacity: 0.24; transform: translateX(-48%) skewX(-8deg); }
+    45% { opacity: 0.7; }
+    100% { opacity: 0.32; transform: translateX(42%) skewX(-8deg); }
+}
+
+@keyframes detail-reveal {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes status-arrive {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cta-breathe {
+    from { opacity: 0.35; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1.08); }
+}
+
 @media (max-width: 640px) {
     .architectural-page .section-shell {
         width: min(100% - 28px, 1240px);
@@ -278,6 +859,26 @@ html {
     .architectural-page .monolith-cta {
         background-position: 75% bottom;
         background-size: auto 90%;
+    }
+
+    .cursor-light,
+    .ambient-grain {
+        display: none;
+    }
+
+    .hero-depth-foreground {
+        clip-path: polygon(72% 0, 100% 0, 100% 100%, 59% 100%);
+        opacity: 0.66;
+    }
+
+    .work-gallery-card {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 1023px) {
+    .home-project-track {
+        transform: none !important;
     }
 }
 
@@ -304,5 +905,20 @@ textarea {
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
+    }
+
+    .motion-reveal,
+    .hero-heading-reveal {
+        clip-path: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .ambient-grain,
+    .cursor-light,
+    .hero-light-sweep,
+    .route-curtain,
+    .intro-curtain {
+        display: none;
     }
 }

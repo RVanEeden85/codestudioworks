@@ -3,6 +3,7 @@ import Navbar from "./components/NavBar";
 import { Toaster } from "react-hot-toast";
 import CopyrightBar from "./components/Copyright-bar";
 import WhatsAppButton from "./components/WaButton";
+import MotionExperience from "./components/MotionExperience";
 import { getSiteUrl } from "./_lib/siteUrl";
 
 const siteUrl = getSiteUrl();
@@ -126,6 +127,7 @@ export default function RootLayout({ children }) {
                 />
             </head>
             <body className="antialiased">
+                <MotionExperience />
                 <Navbar />
                 {children}
                 <Toaster position="top-right" />

@@ -2,20 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import {
+    motion,
+    useMotionValue,
+    useReducedMotion,
+    useScroll,
+    useSpring,
+    useTransform,
+} from "framer-motion";
 import {
     FiArrowRight,
     FiBriefcase,
     FiCheck,
     FiCode,
-    FiExternalLink,
     FiLayers,
     FiMonitor,
     FiRefreshCw,
     FiSmartphone,
 } from "react-icons/fi";
 import ConsultationModal from "./components/ConsultationModal";
-import { projects } from "./work/_lib/projects";
+import CountUp from "./components/CountUp";
+import ProjectRail from "./components/ProjectRail";
 
 const audiences = [
     {
@@ -120,30 +128,96 @@ const faqs = [
 
 export default function Home() {
     const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+    const heroRef = useRef(null);
+    const prefersReducedMotion = useReducedMotion();
+    const pointerX = useMotionValue(0);
+    const pointerY = useMotionValue(0);
+    const foregroundX = useSpring(pointerX, { stiffness: 45, damping: 20 });
+    const foregroundY = useSpring(pointerY, { stiffness: 45, damping: 20 });
+    const { scrollYProgress: heroScrollProgress } = useScroll({
+        target: heroRef,
+        offset: ["start start", "end start"],
+    });
+    const heroScale = useTransform(heroScrollProgress, [0, 1], [1.03, 1.14]);
+    const heroImageY = useTransform(heroScrollProgress, [0, 1], ["0%", "11%"]);
+    const heroContentY = useTransform(heroScrollProgress, [0, 1], [0, -56]);
+    const heroContentOpacity = useTransform(heroScrollProgress, [0, 0.82], [1, 0.12]);
+
+    function handleHeroPointerMove(event) {
+        if (prefersReducedMotion) return;
+        const bounds = event.currentTarget.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+        pointerX.set(x * 18);
+        pointerY.set(y * 12);
+    }
+
+    function resetHeroPointer() {
+        pointerX.set(0);
+        pointerY.set(0);
+    }
 
     return (
-        <main className="architectural-page overflow-hidden bg-background pt-[72px]">
-            <section className="relative overflow-hidden border-b border-white/10 bg-black text-white">
-                <Image
-                    src="/images/architectural-hero.png"
-                    alt=""
-                    fill
-                    priority
-                    sizes="100vw"
-                    className="object-cover object-[64%_center]"
+        <main className="architectural-page overflow-x-clip bg-background pt-[72px]">
+            <section
+                ref={heroRef}
+                className="hero-architecture relative overflow-hidden border-b border-white/10 bg-black text-white"
+                onPointerMove={handleHeroPointerMove}
+                onPointerLeave={resetHeroPointer}
+            >
+                <motion.div
+                    className="hero-depth-base"
+                    style={prefersReducedMotion ? undefined : { y: heroImageY, scale: heroScale }}
+                >
+                    <Image
+                        src="/images/architectural-hero.png"
+                        alt=""
+                        fill
+                        priority
+                        sizes="100vw"
+                        className="object-cover object-[64%_center]"
+                    />
+                </motion.div>
+                <motion.div
+                    aria-hidden="true"
+                    className="hero-depth-foreground"
+                    style={prefersReducedMotion ? undefined : { x: foregroundX, y: foregroundY }}
                 />
+                <div aria-hidden="true" className="hero-light-sweep" />
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,9,9,0.98)_0%,rgba(8,9,9,0.9)_43%,rgba(8,9,9,0.18)_76%,rgba(8,9,9,0.05)_100%)]" />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,9,9,0.08),rgba(8,9,9,0.42))]" />
-                <div className="section-shell relative grid gap-12 py-20 lg:min-h-[calc(100svh-72px)] lg:grid-cols-[1.14fr_0.7fr] lg:items-center lg:py-16">
+                <motion.div
+                    className="section-shell relative grid gap-12 py-20 lg:min-h-[calc(100svh-72px)] lg:grid-cols-[1.14fr_0.7fr] lg:items-center lg:py-16"
+                    style={prefersReducedMotion ? undefined : { y: heroContentY, opacity: heroContentOpacity }}
+                >
                     <div className="max-w-4xl">
-                        <p className="eyebrow mb-4">Websites, apps and software—from idea to launch</p>
-                        <h1 className="text-balance text-5xl font-black leading-[0.9] text-white sm:text-6xl lg:text-[5.35rem]">
+                        <motion.p
+                            className="eyebrow mb-4"
+                            initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.28, duration: 0.7 }}
+                        >Websites, apps and software—from idea to launch</motion.p>
+                        <motion.h1
+                            className="hero-heading-reveal text-balance text-5xl font-black leading-[0.9] text-white sm:text-6xl lg:text-[5.35rem]"
+                            animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1, y: 0 }}
+                            transition={{ delay: 0.38, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+                        >
                             I turn business ideas into working websites, apps and software.
-                        </h1>
-                        <p className="mt-8 max-w-2xl border-l border-accent/70 pl-5 text-lg font-medium leading-8 text-white/68">
+                        </motion.h1>
+                        <motion.p
+                            className="mt-8 max-w-2xl border-l border-accent/70 pl-5 text-lg font-medium leading-8 text-white/68"
+                            initial={prefersReducedMotion ? false : { opacity: 0, x: -18 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.72, duration: 0.75 }}
+                        >
                             Starting from scratch? I can help you decide what you need, design and build it, connect the essential services, and take it live. Already established? I can improve an existing product or provide ongoing development support.
-                        </p>
-                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                        </motion.p>
+                        <motion.div
+                            className="mt-8 flex flex-col gap-3 sm:flex-row"
+                            initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.88, duration: 0.7 }}
+                        >
                             <Link
                                 href="/start-a-business"
                                 className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-4 text-base font-black text-[#080909] transition hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
@@ -158,34 +232,45 @@ export default function Home() {
                             >
                                 I Need Development Help
                             </button>
-                        </div>
+                        </motion.div>
                     </div>
 
-                    <div className="architectural-slab self-end p-4 text-white sm:p-5 lg:mb-6">
+                    <motion.div
+                        className="motion-static architectural-slab self-end p-4 text-white sm:p-5 lg:mb-6"
+                        initial={prefersReducedMotion ? false : { opacity: 0, x: 56, rotateY: -5 }}
+                        animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                        transition={{ delay: 0.72, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                    >
                         <div className="border border-white/10 bg-black/40 p-5 backdrop-blur-md">
                             <p className="text-xs font-black uppercase text-accent">From your first idea to a live result</p>
                             <p className="mt-2 text-2xl font-black">You do not need to arrive with a technical plan.</p>
                             <div className="mt-5 grid gap-3">
                                 {["Explain the business and its goals", "Get a clear recommendation and written project plan", "Review the design and build as it takes shape", "Launch with the right access and ongoing support"].map((item, index) => (
-                                    <div key={item} className="flex items-start gap-3 border-t border-white/14 py-4 first:border-t-0">
+                                    <motion.div
+                                        key={item}
+                                        className="hero-step-line flex items-start gap-3 border-t border-white/14 py-4 first:border-t-0"
+                                        initial={prefersReducedMotion ? false : { opacity: 0, scaleX: 0.7, x: 16 }}
+                                        animate={{ opacity: 1, scaleX: 1, x: 0 }}
+                                        transition={{ delay: 1 + index * 0.1, duration: 0.55 }}
+                                    >
                                         <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-black text-[#080909]">{index + 1}</span>
                                         <p className="font-bold leading-6 text-white/78">{item}</p>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </section>
 
             <section aria-label="Studio facts" className="border-b border-white/10 bg-[#080909]">
                 <div className="section-shell grid divide-y divide-white/10 py-2 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                     {[
-                        ["15 years", "Professional software experience"],
+                        [<><CountUp key="experience" end={15} />+ years</>, "Professional software experience"],
                         ["1:1", "Direct access to the developer"],
                         ["Websites + apps", "Planning, building, and launch help"],
                     ].map(([value, label]) => (
-                        <div key={label} className="px-4 py-5 text-center">
+                        <div key={label} className="motion-reveal-item px-4 py-5 text-center">
                             <p className="text-2xl font-black text-white">{value}</p>
                             <p className="mt-1 text-sm font-bold text-white/50">{label}</p>
                         </div>
@@ -193,7 +278,8 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="architectural-light py-20 md:py-28">
+            <section className="concrete-panel-wall architectural-light py-20 md:py-28">
+                <div aria-hidden="true" className="concrete-cast-shadows" />
                 <div className="section-shell">
                     <div className="max-w-3xl">
                         <p className="eyebrow">Choose the situation that sounds like yours</p>
@@ -217,30 +303,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section id="work" className="bg-[#080909] py-20 text-white md:py-28">
-                <div className="section-shell">
-                    <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-                        <div>
-                            <p className="text-sm font-black uppercase text-accent">Proof, not promises</p>
-                            <h2 className="mt-4 max-w-4xl text-4xl font-black leading-tight md:text-6xl">Real websites, apps, and platforms I have helped build.</h2>
-                        </div>
-                        <Link href="/work" className="inline-flex items-center gap-2 font-black text-accent hover:text-white">View all work <FiArrowRight aria-hidden="true" /></Link>
-                    </div>
-                    <div className="mt-10 grid gap-4 lg:grid-cols-3">
-                        {projects.map((project, index) => (
-                            <article key={project.slug} className="architectural-slab flex min-h-[330px] flex-col p-7">
-                                <p className="text-xs font-black uppercase text-accent">0{index + 1} · {project.context}</p>
-                                <h3 className="mt-5 text-3xl font-black">{project.name}</h3>
-                                <p className="mt-4 flex-1 font-medium leading-7 text-white/66">{project.headline}</p>
-                                <div className="mt-6 flex items-center gap-4">
-                                    <Link href={`/work/${project.slug}`} className="inline-flex items-center gap-2 text-sm font-black text-white hover:text-accent">Case details <FiArrowRight aria-hidden="true" /></Link>
-                                    <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} website`} className="text-white/55 hover:text-accent"><FiExternalLink aria-hidden="true" /></a>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <ProjectRail />
 
             <section id="services" className="concrete-image-section architectural-light py-20 md:py-28">
                 <div className="section-shell">
@@ -255,7 +318,7 @@ export default function Home() {
                     </div>
                     <div className="mt-10 grid gap-4 md:grid-cols-2">
                         {offers.map((offer) => (
-                            <Link key={offer.title} href={offer.href} className="architectural-slab group p-7 text-white transition hover:-translate-y-1 hover:border-accent/50">
+                            <Link key={offer.title} href={offer.href} className="architectural-slab service-motion-card group p-7 text-white transition hover:border-accent/50">
                                 <div className="flex items-start justify-between gap-6">
                                     <span className="flex h-12 w-12 items-center justify-center rounded-md bg-accent text-2xl text-[#080909]">{offer.icon}</span>
                                     <FiArrowRight className="text-xl text-accent transition group-hover:translate-x-1" aria-hidden="true" />
@@ -270,7 +333,7 @@ export default function Home() {
 
             <section className="bg-[#101211] py-20 md:py-28">
                 <div className="section-shell grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-                    <div className="relative overflow-hidden border border-white/12 bg-black">
+                    <div className="founder-portrait relative overflow-hidden border border-white/12 bg-black">
                         <Image src="/images/ryno.webp" alt="Ryno van Eeden, founder and full-stack developer at CodeStudioWorks" width={900} height={1000} className="aspect-[4/5] w-full object-cover grayscale contrast-[1.08]" sizes="(max-width: 1024px) 100vw, 42vw" />
                         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/82 to-transparent p-6">
                             <p className="text-sm font-black uppercase text-accent">Founder-led delivery</p>
@@ -295,7 +358,8 @@ export default function Home() {
                 </div>
             </section>
 
-            <section id="process" className="architectural-light py-20 md:py-28">
+            <section id="process" className="concrete-panel-wall architectural-light py-20 md:py-28">
+                <div aria-hidden="true" className="concrete-cast-shadows" />
                 <div className="section-shell">
                     <div className="mx-auto max-w-3xl text-center">
                         <p className="eyebrow">How the work moves</p>
@@ -303,7 +367,7 @@ export default function Home() {
                     </div>
                     <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-black/10 bg-black/10 md:grid-cols-2 lg:grid-cols-4">
                         {process.map(([title, text], index) => (
-                            <article key={title} className="bg-[#cfccc4] p-7">
+                            <article key={title} className="process-slab motion-reveal-item bg-[#cfccc4] p-7">
                                 <p className="text-sm font-black text-[#263c33]">0{index + 1}</p>
                                 <h3 className="mt-8 text-2xl font-black text-secondary">{title}</h3>
                                 <p className="mt-3 font-medium leading-7 text-black/62">{text}</p>
@@ -330,7 +394,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="monolith-cta border-t border-white/10 py-20 text-white md:py-28">
+            <section className="monolith-cta cinematic-cta border-t border-white/10 py-20 text-white md:py-28">
                 <div className="section-shell grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
                     <div>
                         <p className="text-sm font-black uppercase text-accent">Ready to define the right first step?</p>

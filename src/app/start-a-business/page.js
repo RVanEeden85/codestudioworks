@@ -99,7 +99,8 @@ export default function StartABusinessPage() {
                 </div>
             </section>
 
-            <section className="architectural-light py-20 md:py-28">
+            <section className="concrete-panel-wall architectural-light py-20 md:py-28">
+                <div aria-hidden="true" className="concrete-cast-shadows" />
                 <div className="section-shell grid gap-10 lg:grid-cols-[0.68fr_1.32fr]">
                     <div>
                         <p className="eyebrow">From idea to launch</p>
