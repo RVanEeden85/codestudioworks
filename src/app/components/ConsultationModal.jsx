@@ -1,174 +1,186 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { FiX } from "react-icons/fi";
+
+const fieldClass =
+    "w-full rounded-md border border-black/12 bg-background px-4 py-3 text-secondary outline-none transition focus:border-primary focus-visible:ring-2 focus-visible:ring-primary/25";
 
 const ConsultationModal = ({ isOpen, onClose }) => {
-    const [status, setStatus] = useState("");
+    const dialogRef = useRef(null);
+    const firstFieldRef = useRef(null);
+    const [status, setStatus] = useState("idle");
+
+    useEffect(() => {
+        if (!isOpen) return undefined;
+
+        const previousFocus = document.activeElement;
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        firstFieldRef.current?.focus();
+
+        function handleKeyDown(event) {
+            if (event.key === "Escape") {
+                onClose();
+                return;
+            }
+
+            if (event.key !== "Tab" || !dialogRef.current) return;
+
+            const focusable = Array.from(
+                dialogRef.current.querySelectorAll(
+                    'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled])'
+                )
+            );
+            if (focusable.length === 0) return;
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+            document.body.style.overflow = previousOverflow;
+            previousFocus?.focus?.();
+        };
+    }, [isOpen, onClose]);
 
     if (!isOpen) return null;
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        setStatus("loading");
+    async function handleSubmit(event) {
+        event.preventDefault();
+        setStatus("sending");
 
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
+        const form = event.currentTarget;
+        const data = Object.fromEntries(new FormData(form));
+        data.privacyAccepted = data.privacyAccepted === "on";
 
-        const res = await fetch("/api/consultation", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: { "Content-Type": "application/json" },
-        });
+        try {
+            const response = await fetch("/api/consultation", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: { "Content-Type": "application/json" },
+            });
 
-        if (res.ok) {
+            if (!response.ok) throw new Error("Request failed");
+
             setStatus("success");
-            e.target.reset();
-        } else {
+            form.reset();
+        } catch {
             setStatus("error");
         }
     }
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[9999] p-3">
-            <div className="bg-primary border border-white/20 rounded-3xl w-full max-w-lg p-5 md:p-8 shadow-xl relative animate-fadeIn text-white">
-                {/* Close Button */}
+        <div
+            className="fixed inset-0 z-[9999] flex items-start justify-center overflow-y-auto bg-black/65 p-3 backdrop-blur-sm md:items-center"
+            onMouseDown={(event) => {
+                if (event.target === event.currentTarget) onClose();
+            }}
+        >
+            <section
+                ref={dialogRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="consultation-title"
+                aria-describedby="consultation-description"
+                className="architectural-slab relative my-3 w-full max-w-2xl border border-white/14 bg-[#111412] p-5 text-white shadow-2xl md:p-8"
+            >
                 <button
+                    type="button"
                     onClick={onClose}
-                    className="absolute right-4 top-4 text-white cursor-pointer"
+                    className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-md bg-secondary text-xl text-white"
+                    aria-label="Close consultation request"
                 >
-                    ✕
+                    <FiX aria-hidden="true" />
                 </button>
 
-                <h2 className="text-3xl font-bold text-white mb-2">
-                    Book a Free Consultation
+                <p className="eyebrow pr-14">Project consultation</p>
+                <h2 id="consultation-title" className="mt-3 pr-14 text-3xl font-black text-secondary">
+                    Request a Free Consultation
                 </h2>
-
-                <p className="text-sm mb-3">
-                    Choose your preferred date and time below. Once booked,
-                    you’ll receive a confirmation email with your personalised
-                    virtual meeting link.
+                <p id="consultation-description" className="mb-6 mt-3 max-w-xl text-sm font-medium leading-6 text-black/60">
+                    Share the business goal and your preferred availability. This sends a consultation request; the appointment is confirmed after I reply.
                 </p>
 
-                <form
-                    onSubmit={handleSubmit}
-                    className="space-y-3 md:space-y-5"
-                >
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Your Name"
-                        className="w-full p-3 rounded-xl bg-white/10"
-                    />
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Your Email"
-                        className="w-full p-3 rounded-xl bg-white/10"
-                    />
-                    <input
-                        type="tel"
-                        name="phone"
-                        placeholder="Your Phone Number"
-                        className="w-full p-3 rounded-xl bg-white/10"
-                    />
-
-                    {/* TaxNumber */}
-                    <div className="hidden">
-                        <input
-                            type="text"
-                            name="taxNumber"
-                            placeholder="Your Tax Number"
-                            className="w-full p-3 rounded-xl bg-white/10"
-                        />
+                <form onSubmit={handleSubmit} className="grid gap-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        <label className="grid gap-2 text-sm font-black">
+                            Your name
+                            <input ref={firstFieldRef} type="text" name="name" autoComplete="name" className={fieldClass} required />
+                        </label>
+                        <label className="grid gap-2 text-sm font-black">
+                            Email address
+                            <input type="email" name="email" autoComplete="email" className={fieldClass} required />
+                        </label>
+                        <label className="grid gap-2 text-sm font-black">
+                            Phone number <span className="font-medium text-black/45">Optional</span>
+                            <input type="tel" name="phone" autoComplete="tel" className={fieldClass} />
+                        </label>
+                        <label className="grid gap-2 text-sm font-black">
+                            Project type
+                            <select name="projectType" defaultValue="" className={fieldClass} required>
+                                <option value="" disabled>Select one</option>
+                                <option>Business website</option>
+                                <option>Website redesign</option>
+                                <option>New business launch</option>
+                                <option>Web or mobile application</option>
+                                <option>Custom business tool or integration</option>
+                                <option>Ongoing development support</option>
+                                <option>Website support or takeover</option>
+                            </select>
+                        </label>
+                        <label className="grid gap-2 text-sm font-black">
+                            Preferred window
+                            <select name="preferredTime" defaultValue="" className={fieldClass} required>
+                                <option value="" disabled>Select one</option>
+                                <option>Weekday morning</option>
+                                <option>Weekday afternoon</option>
+                                <option>Weekday evening</option>
+                                <option>Flexible</option>
+                            </select>
+                        </label>
+                        <label className="grid gap-2 text-sm font-black">
+                            Your timezone
+                            <input name="timeZone" placeholder="Example: Eastern Time" className={fieldClass} required />
+                        </label>
                     </div>
 
-                    <select
-                        name="projectType"
-                        className="w-full p-3 rounded-xl bg-white/10"
-                    >
-                        <option disabled selected>
-                            Project Type
-                        </option>
-                        <option>Branding & Identity</option>
-                        <option value="web design">Web Design</option>
-                        <option>Custom Website Development</option>
-                        <option value="maintenance">
-                            Website Maintenance & Support
-                        </option>
-                        <option value="software">Software Development</option>
-                        <option>Digital & Online Marketing</option>
-                        <option>IT Support & Maintenance</option>
-                    </select>
+                    <label className="grid gap-2 text-sm font-black">
+                        What should the project help the business achieve?
+                        <textarea name="message" className={`${fieldClass} min-h-28`} required />
+                    </label>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        <select
-                            name="preferredDay"
-                            className="p-3 rounded-xl bg-white/10"
-                        >
-                            <option disabled selected>
-                                Preferred Day
-                            </option>
-                            <option value="today">Today</option>
-                            <option>Monday</option>
-                            <option>Tuesday</option>
-                            <option>Wednesday</option>
-                            <option>Thursday</option>
-                            <option>Friday</option>
-                            <option>Saturday</option>
-                            <option>Sunday</option>
-                        </select>
-
-                        <select
-                            name="preferredTime"
-                            className="p-3 rounded-xl bg-white/10"
-                        >
-                            <option disabled selected>
-                                Preferred Time
-                            </option>
-                            <option value="now">Now</option>
-                            <option value="asap">As soon as possible</option>
-                            <option value="10:00">10:00 AM</option>
-                            <option value="12:00">12:00 PM</option>
-                            <option value="14:00">2:00 PM</option>
-                            <option value="16:00">4:00 PM</option>
-                            <option value="18:00">6:00 PM</option>
-                            <option value="20:00">8:00 PM</option>
-                        </select>
+                    <div className="sr-only" aria-hidden="true">
+                        <label>Website<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label>
                     </div>
 
-                    <textarea
-                        name="message"
-                        placeholder="Tell me more about your project..."
-                        className="w-full p-3 rounded-xl bg-white/10 h-28"
-                    ></textarea>
+                    <label className="flex items-start gap-3 text-sm font-medium leading-6 text-black/64">
+                        <input type="checkbox" name="privacyAccepted" required className="mt-1 h-4 w-4 shrink-0 accent-[#163f38]" />
+                        <span>I agree that CodeStudioWorks may use these details to respond to my enquiry. See the <Link href="/privacy" className="font-black text-primary underline">Privacy Policy</Link>.</span>
+                    </label>
 
-                    {status === "success" && (
-                        <p className="text-green-300 text-sm">
-                            Your booking request has been sent! I’ll email you
-                            shortly.
-                        </p>
-                    )}
+                    <div aria-live="polite" className="min-h-6 text-sm font-bold">
+                        {status === "success" && <p className="text-primary">Your consultation request was received. I&apos;ll reply to confirm the next step.</p>}
+                        {status === "error" && <p className="text-red-700">The request could not be sent. Please try again or use the contact page.</p>}
+                    </div>
 
-                    {status === "error" && (
-                        <p className="text-red-300 text-sm">
-                            Something went wrong. Please try again.
-                        </p>
-                    )}
-
-                    {status === "loading" && (
-                        <p className="text-white/50 text-sm italic">
-                            Sending your request...
-                        </p>
-                    )}
-
-                    <button
-                        type="submit"
-                        className="w-full cursor-pointer bg-white/20 text-white py-3 rounded-xl text-lg font-semibold hover:bg-[#2a4343] transition-all duration-500"
-                    >
-                        Send Request
+                    <button type="submit" disabled={status === "sending"} className="w-full rounded-md bg-secondary py-3 text-lg font-black text-white transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60">
+                        {status === "sending" ? "Sending Request..." : "Send Consultation Request"}
                     </button>
                 </form>
-            </div>
+            </section>
         </div>
     );
 };

@@ -1,151 +1,175 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { FaWhatsapp } from "react-icons/fa";
-import Lottie from "lottie-react";
-import animationData from "../../../public/lottie/falling-leaf.json";
-import { useRef, useEffect } from "react";
 import toast from "react-hot-toast";
+import { FiArrowRight, FiClock, FiMapPin, FiMessageSquare } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
-const Contact = () => {
-    const [status, setStatus] = useState("");
+const fieldClass =
+    "w-full rounded-md border border-black/12 bg-background px-4 py-3 text-secondary outline-none transition focus:border-primary focus-visible:ring-2 focus-visible:ring-primary/25";
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        setStatus("Sending...");
+const serviceOptions = [
+    "New business launch",
+    "Business website",
+    "Website redesign",
+    "E-commerce",
+    "App or custom business tool",
+    "Mobile application",
+    "Ongoing development support",
+    "Website support or takeover",
+    "Not sure yet",
+];
 
-        const formData = {
-            name: e.target.name.value,
-            email: e.target.email.value,
-            tel: e.target.tel.value,
-            message: e.target.message.value,
-        };
+export default function Contact({ initialService = "" }) {
+    const [status, setStatus] = useState("idle");
+    const serviceAliases = {
+        "Business Websites": "Business website",
+        "Apps & Business Tools": "App or custom business tool",
+        "Ongoing Development Support": "Ongoing development support",
+        "Website & Technical Support": "Website support or takeover",
+    };
+    const selectedService = serviceAliases[initialService] || initialService;
 
-        const res = await fetch("/api/contact", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-        });
+    async function handleSubmit(event) {
+        event.preventDefault();
+        setStatus("sending");
 
-        if (res.ok) {
-            setStatus("Message sent successfully!");
-            toast.success("Message sent successfully 🎉");
+        const form = event.currentTarget;
+        const formData = new FormData(form);
 
-            e.target.reset();
-        } else {
-            setStatus("Error sending message. Please try again.");
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    source: "contact_form",
+                    name: formData.get("name"),
+                    email: formData.get("email"),
+                    tel: formData.get("tel"),
+                    message: [
+                        `Project type: ${formData.get("projectType")}`,
+                        `Working budget: ${formData.get("budget") || "Not provided"}`,
+                        "",
+                        formData.get("message"),
+                    ].join("\n"),
+                    privacyAccepted: formData.get("privacyAccepted") === "on",
+                    website: formData.get("website"),
+                }),
+            });
 
+            if (!response.ok) throw new Error("Request failed");
+
+            setStatus("success");
+            toast.success("Your enquiry was received");
+            form.reset();
+        } catch {
+            setStatus("error");
             toast.error("Something went wrong. Please try again.");
         }
     }
-    const lottieRef = useRef();
-
-    useEffect(() => {
-        lottieRef.current.setSpeed(0.4);
-    }, []);
 
     return (
-        <section
-            id="contact"
-            className="min-h-screen flex flex-col items-center justify-center bg-secondary px-6 py-20 space-y-8 relative overflow-hidden relative"
-        >
-            {/* Heading */}
-            <motion.h2
-                initial={{ opacity: 0, y: -40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-white/30 font-bold text-3xl md:text-6xl text-center"
-            >
-                Let’s Connect — I’m always up for a chat.
-            </motion.h2>
+        <section className="project-monolith-hero min-h-[calc(100svh-72px)] py-20 md:py-28">
+            <div className="section-shell grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+                <div>
+                    <p className="eyebrow">Start a project</p>
+                    <h1 className="mt-4 text-5xl font-black leading-tight text-secondary md:text-7xl">
+                        Tell me what the business needs next.
+                    </h1>
+                    <p className="mt-6 text-lg font-medium leading-8 text-black/64">
+                        Share the goal, current situation, and any timing or budget context you already have. I&apos;ll review it personally and recommend the most useful next step.
+                    </p>
 
-            <Lottie
-                lottieRef={lottieRef}
-                animationData={animationData}
-                loop={true}
-                className="absolute top-0 left-0 h-full"
-            />
+                    <div className="mt-8 grid gap-3">
+                        <a
+                            href="https://wa.me/13132135404?text=Hi%20Ryno%20at%20CodeStudioWorks!%20I%E2%80%99d%20love%20to%20chat%20about%20a%20project%20or%20your%20services."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="architectural-slab flex items-center gap-3 p-4 font-black text-white transition hover:border-accent"
+                        >
+                            <FaWhatsapp className="text-2xl text-[#168a3f]" aria-hidden="true" />
+                            Message on WhatsApp
+                        </a>
+                        <div className="architectural-rule flex items-center gap-3 py-4 font-bold text-white/76">
+                            <FiMapPin className="text-2xl text-primary" aria-hidden="true" />
+                            Michigan based, working remotely
+                        </div>
+                        <div className="architectural-rule flex items-center gap-3 py-4 font-bold text-white/76">
+                            <FiClock className="text-2xl text-primary" aria-hidden="true" />
+                            Replies are personal, not automated sales handoffs
+                        </div>
+                    </div>
+                </div>
 
-            {/* WhatsApp Button */}
-            <motion.a
-                href="https://wa.me/13132135404?text=Hi%20Ryno%20at%20CodeStudioWorks!%20I%E2%80%99d%20love%20to%20chat%20about%20a%20project%20or%20your%20services.
-"
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "rgba(255,255,255,0.15)",
-                }}
-                className="rounded-full shadow-md border border-white/20 bg-white/10 px-5 py-3 text-white font-bold text-xl flex items-center gap-3"
-            >
-                <FaWhatsapp className="text-green-400" /> WhatsApp Me
-            </motion.a>
+                <form onSubmit={handleSubmit} className="architectural-slab bg-[#111412]/95 p-6 backdrop-blur-md md:p-8">
+                    <div className="mb-8 flex items-center gap-3">
+                        <span className="flex h-12 w-12 items-center justify-center rounded-md bg-primary text-2xl text-white">
+                            <FiMessageSquare aria-hidden="true" />
+                        </span>
+                        <div>
+                            <h2 className="text-2xl font-black text-secondary">Project enquiry</h2>
+                            <p className="text-sm font-semibold text-black/55">A few useful details are enough to start.</p>
+                        </div>
+                    </div>
 
-            {/* Subheading */}
-            <motion.h3
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-                className="text-white/30 font-bold text-3xl md:text-4xl "
-            >
-                Or Send a Message
-            </motion.h3>
+                    <div className="grid gap-5 sm:grid-cols-2">
+                        <label className="grid gap-2 text-sm font-black text-secondary">
+                            Your name
+                            <input className={fieldClass} name="name" autoComplete="name" required />
+                        </label>
+                        <label className="grid gap-2 text-sm font-black text-secondary">
+                            Email address
+                            <input className={fieldClass} type="email" name="email" autoComplete="email" required />
+                        </label>
+                        <label className="grid gap-2 text-sm font-black text-secondary">
+                            Phone number <span className="font-medium text-black/45">Optional</span>
+                            <input className={fieldClass} type="tel" name="tel" autoComplete="tel" />
+                        </label>
+                        <label className="grid gap-2 text-sm font-black text-secondary">
+                            Project type
+                            <select className={fieldClass} name="projectType" defaultValue={serviceOptions.includes(selectedService) ? selectedService : ""} required>
+                                <option value="" disabled>Select one</option>
+                                {serviceOptions.map((option) => <option key={option}>{option}</option>)}
+                            </select>
+                        </label>
+                        <label className="grid gap-2 text-sm font-black text-secondary sm:col-span-2">
+                            Working budget <span className="font-medium text-black/45">Optional</span>
+                            <select className={fieldClass} name="budget" defaultValue="">
+                                <option value="">Not established yet</option>
+                                <option>Under $2,500 USD</option>
+                                <option>$2,500–$5,000 USD</option>
+                                <option>$5,000–$10,000 USD</option>
+                                <option>$10,000–$25,000 USD</option>
+                                <option>$25,000+ USD</option>
+                            </select>
+                        </label>
+                        <label className="grid gap-2 text-sm font-black text-secondary sm:col-span-2">
+                            What should the finished project help you achieve?
+                            <textarea className={`${fieldClass} min-h-44`} name="message" required />
+                        </label>
+                    </div>
 
-            {/* Contact Form */}
-            <motion.form
-                onSubmit={handleSubmit}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 1 }}
-                className="w-full max-w-2xl flex flex-col space-y-3 rounded-3xl "
-            >
-                <input
-                    className="bg-transparent border-b border-white/20 focus:border-white/50 outline-none text-white placeholder-white/40 text-xl py-3 transition-all duration-300"
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    required
-                />
+                    <div className="sr-only" aria-hidden="true">
+                        <label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
+                    </div>
 
-                <input
-                    className="bg-transparent border-b border-white/20 focus:border-white/50 outline-none text-white placeholder-white/40 text-xl py-3 transition-all duration-300"
-                    type="email"
-                    name="email"
-                    placeholder="Your Email Address"
-                    required
-                />
+                    <label className="mt-5 flex items-start gap-3 text-sm font-medium leading-6 text-black/64">
+                        <input type="checkbox" name="privacyAccepted" required className="mt-1 h-4 w-4 shrink-0 accent-[#163f38]" />
+                        <span>I agree that CodeStudioWorks may use these details to respond to my enquiry. See the <Link href="/privacy" className="font-black text-primary underline">Privacy Policy</Link>.</span>
+                    </label>
 
-                <input
-                    className="bg-transparent border-b border-white/20 focus:border-white/50 outline-none text-white placeholder-white/40 text-xl py-3 transition-all duration-300"
-                    type="tel"
-                    name="tel"
-                    placeholder="Your Phone Number"
-                />
+                    <div aria-live="polite" className="mt-4 min-h-6 text-sm font-bold">
+                        {status === "success" && <p className="text-primary">Your enquiry was received. I&apos;ll reply personally with the next step.</p>}
+                        {status === "error" && <p className="text-red-700">The request could not be sent. Please try again or message me on WhatsApp.</p>}
+                    </div>
 
-                <textarea
-                    className="bg-transparent border border-white/20 rounded-2xl focus:border-white/50 outline-none text-white placeholder-white/40 text-xl py-4 px-6 transition-all duration-300 min-h-[150px]"
-                    name="message"
-                    placeholder="Your Message..."
-                    required
-                ></textarea>
-
-                <motion.button
-                    whileHover={{
-                        scale: 1.05,
-                        backgroundColor: "rgba(255,255,255,0.2)",
-                    }}
-                    className="bg-white/10 rounded-lg px-8 py-3 border border-white/20 text-white font-bold text-xl shadow-lg transition-all cursor-pointer"
-                    type="submit"
-                >
-                    Send Message
-                </motion.button>
-            </motion.form>
+                    <button disabled={status === "sending"} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md bg-secondary px-6 py-4 text-base font-black text-white transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60" type="submit">
+                        {status === "sending" ? "Sending..." : "Send Enquiry"}
+                        <FiArrowRight aria-hidden="true" />
+                    </button>
+                </form>
+            </div>
         </section>
     );
-};
-
-export default Contact;
+}

@@ -1,0 +1,111 @@
+import Link from "next/link";
+import { FiArrowRight, FiExternalLink } from "react-icons/fi";
+import { projects } from "./_lib/projects";
+
+export const metadata = {
+    title: "Selected Work",
+    description:
+        "Explore selected CodeStudioWorks client delivery, product engineering, and professional full-stack platform work.",
+    alternates: { canonical: "/work" },
+};
+
+export default function WorkPage() {
+    return (
+        <main className="architectural-page bg-background pt-[72px]">
+            <section className="concrete-image-section architectural-light border-b border-black/10 py-16 md:py-24">
+                <div className="section-shell">
+                    <p className="eyebrow">Selected work</p>
+                    <h1 className="mt-4 max-w-5xl text-5xl font-black leading-[1.02] text-secondary md:text-7xl">
+                        Real websites and software, with my role clearly explained.
+                    </h1>
+                    <p className="mt-6 max-w-3xl text-lg font-medium leading-8 text-black/64">
+                        These examples include a client website, professional
+                        software work, and an independently developed product.
+                        Each one explains what I contributed without overstating
+                        results or ownership.
+                    </p>
+                </div>
+            </section>
+
+            <section className="py-16 md:py-20">
+                <div className="section-shell grid gap-5">
+                    {projects.map((project, index) => (
+                        <article
+                            key={project.slug}
+                            className="architectural-slab grid overflow-hidden lg:grid-cols-[0.72fr_1.28fr]"
+                        >
+                            <div className="relative flex min-h-72 flex-col justify-between overflow-hidden bg-secondary p-6 text-white md:p-8">
+                                <div className="noise-overlay absolute inset-0 opacity-30" />
+                                <div className="relative">
+                                    <p className="text-sm font-black uppercase text-accent">
+                                        0{index + 1} · {project.context}
+                                    </p>
+                                    <p className="mt-5 text-4xl font-black leading-tight md:text-5xl">
+                                        {project.name}
+                                    </p>
+                                </div>
+                                <div className="relative mt-12 flex flex-wrap gap-2">
+                                    {project.capabilities.map((item) => (
+                                        <span
+                                            key={item}
+                                            className="rounded-full border border-white/12 bg-white/8 px-3 py-2 text-xs font-bold text-white/72"
+                                        >
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="p-6 text-white md:p-8 lg:p-10">
+                                <h2 className="max-w-3xl text-3xl font-black leading-tight text-secondary md:text-4xl">
+                                    {project.headline}
+                                </h2>
+                                <p className="mt-5 max-w-3xl text-base font-medium leading-7 text-black/64">
+                                    {project.summary}
+                                </p>
+                                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                                    <Link
+                                        href={`/work/${project.slug}`}
+                                        className="inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-5 py-3 text-sm font-black text-white transition hover:bg-primary"
+                                    >
+                                        View Project Details
+                                        <FiArrowRight aria-hidden="true" />
+                                    </Link>
+                                    <a
+                                        href={project.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center gap-2 rounded-md border border-black/10 px-5 py-3 text-sm font-black text-secondary transition hover:border-primary"
+                                    >
+                                        {project.hrefLabel}
+                                        <FiExternalLink aria-hidden="true" />
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section className="monolith-cta border-t border-white/10 py-20 text-white md:py-28">
+                <div className="section-shell grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                    <div>
+                        <p className="text-sm font-black uppercase text-accent">
+                            Need something similar?
+                        </p>
+                        <h2 className="mt-3 max-w-4xl text-4xl font-black leading-tight md:text-5xl">
+                            Let&apos;s discuss the outcome your business needs.
+                        </h2>
+                    </div>
+                    <Link
+                        href="/contact"
+                        className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-4 font-black text-secondary transition hover:bg-white"
+                    >
+                        Discuss Your Project
+                        <FiArrowRight aria-hidden="true" />
+                    </Link>
+                </div>
+            </section>
+        </main>
+    );
+}

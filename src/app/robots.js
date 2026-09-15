@@ -1,12 +1,13 @@
 import { getSiteUrl } from "./_lib/siteUrl";
 
 export default function robots() {
-    const siteUrl = "https://codestudioworks.com";
+    const siteUrl = getSiteUrl();
 
     return {
         rules: {
             userAgent: "*",
             allow: "/",
+            disallow: ["/admin", "/api"],
         },
         sitemap: `${siteUrl}/sitemap.xml`,
     };

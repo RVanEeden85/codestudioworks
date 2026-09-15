@@ -7,21 +7,21 @@ export default function manifest() {
         name: "CodeStudioWorks",
         short_name: "CodeStudioWorks",
         description:
-            "Web design, web development, WordPress repairs, SEO, and IT support.",
+            "Independent websites, apps, custom software, and development support for growing businesses.",
         start_url: "/",
         display: "standalone",
-        background_color: "#f9f9f9",
-        theme_color: "#1b3a34",
+        background_color: "#080909",
+        theme_color: "#080909",
         categories: ["business", "technology"],
         id: siteUrl,
         icons: [
             {
-                src: "/icon.png",
+                src: "/brand/csw/codestudioworks-csw-icon-512.png",
                 sizes: "512x512",
                 type: "image/png",
             },
             {
-                src: "/apple-icon.png",
+                src: "/brand/csw/codestudioworks-csw-icon-180.png",
                 sizes: "180x180",
                 type: "image/png",
                 purpose: "any",
@@ -29,4 +29,3 @@ export default function manifest() {
         ],
     };
 }
-

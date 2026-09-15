@@ -3,15 +3,16 @@ import Contact from "../components/Contact";
 export const metadata = {
     title: "Contact",
     description:
-        "Contact CodeStudioWorks for web development, SEO, WordPress fixes, or remote IT support. Based in Michigan, serving clients worldwide.",
+        "Contact CodeStudioWorks to plan a small business website, custom web app, digital system, or ongoing website support.",
     alternates: { canonical: "/contact" },
 };
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }) {
+    const params = await searchParams;
+
     return (
-        <main className="overflow-hidden">
-            <Contact />
+        <main className="architectural-page bg-background pt-[72px]">
+            <Contact initialService={params?.service || ""} />
         </main>
     );
 }
-

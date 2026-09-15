@@ -3,15 +3,14 @@ import About from "../components/About";
 export const metadata = {
     title: "About",
     description:
-        "Learn about CodeStudioWorks: web development, IT support, and practical digital strategy for small businesses.",
+        "Meet Ryno van Eeden, the founder and full-stack developer behind CodeStudioWorks and its independent web, app, and software services.",
     alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
     return (
-        <main className="overflow-hidden">
+        <main className="architectural-page bg-background pt-[72px]">
             <About />
         </main>
     );
 }
-

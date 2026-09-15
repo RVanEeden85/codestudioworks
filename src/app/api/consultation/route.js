@@ -1,72 +1,159 @@
 import { NextResponse } from "next/server";
 import * as postmark from "postmark";
+import {
+    createRequestSubmission,
+    isRequestStorageConfigured,
+    updateRequestSubmissionEmailStatus,
+} from "../../_lib/requestSubmissions";
+import {
+    cleanText,
+    consumeRateLimit,
+    getRequestIp,
+    isSameOriginRequest,
+    isValidEmail,
+} from "../../_lib/formSecurity";
 
-export async function POST(req) {
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+function getMissingPostmarkEnv() {
+    return ["POSTMARK_API_KEY", "POSTMARK_FROM_EMAIL", "POSTMARK_TO_EMAIL"].filter(
+        (key) => !process.env[key]
+    );
+}
+
+function errorResponse(message, status, headers) {
+    return NextResponse.json({ error: message }, { status, headers });
+}
+
+export async function POST(request) {
     try {
-        const body = await req.json();
+        if (!isSameOriginRequest(request)) {
+            return errorResponse("Request origin not allowed", 403);
+        }
 
-        // Honeypot spam check
-        if (body.taxNumber && body.taxNumber.trim() !== "") {
+        const rateLimit = consumeRateLimit("consultation", getRequestIp(request), {
+            limit: 4,
+            windowMs: 10 * 60 * 1000,
+        });
+
+        if (!rateLimit.allowed) {
+            return errorResponse("Too many requests. Please try again shortly.", 429, {
+                "Retry-After": String(rateLimit.retryAfter),
+            });
+        }
+
+        const body = await request.json();
+
+        if (cleanText(body.website || body.taxNumber, 200)) {
             return NextResponse.json({ success: true });
         }
 
-        const {
+        const name = cleanText(body.name, 100);
+        const email = cleanText(body.email, 254).toLowerCase();
+        const phone = cleanText(body.phone, 50);
+        const projectType = cleanText(body.projectType, 120);
+        const preferredTime = cleanText(body.preferredTime, 120);
+        const timeZone = cleanText(body.timeZone, 120);
+        const message = cleanText(body.message, 5000, { multiline: true });
+
+        if (
+            !name ||
+            !isValidEmail(email) ||
+            !projectType ||
+            !preferredTime ||
+            !timeZone ||
+            !message ||
+            body.privacyAccepted !== true
+        ) {
+            return errorResponse("Please complete all required fields.", 400);
+        }
+
+        if (!isRequestStorageConfigured()) {
+            console.error("Consultation storage is not configured");
+            return errorResponse("Request storage not configured", 503);
+        }
+
+        const submission = await createRequestSubmission({
+            type: "consultation",
+            source: "consultation_modal",
+            status: "new",
             name,
             email,
             phone,
             projectType,
-            preferredDay,
             preferredTime,
+            timeZone,
             message,
-        } = body;
+            privacyAcceptedAt: new Date(),
+            consentVersion: "2026-09-14",
+            emailStatus: "pending",
+        });
 
-        if (!process.env.POSTMARK_API_KEY || !process.env.POSTMARK_FROM_EMAIL) {
-            console.error("Missing Postmark environment variables");
-            return NextResponse.json(
-                { error: "Email service not configured" },
-                { status: 500 }
-            );
+        const missingEnv = getMissingPostmarkEnv();
+
+        if (missingEnv.length > 0) {
+            console.error(`Missing Postmark environment variables: ${missingEnv.join(", ")}`);
+            await updateRequestSubmissionEmailStatus(submission._id, "not_configured");
+            return NextResponse.json({ success: true, requestId: submission._id.toString() });
         }
 
         const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 
-        // Send email to you
-        await client.sendEmail({
-            From: process.env.POSTMARK_FROM_EMAIL,
-            To: process.env.POSTMARK_TO_EMAIL,
-            Subject: `Consultation Booking Request – ${name}`,
-            HtmlBody: `
-                <h2>New Consultation Booking Request</h2>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Phone:</strong> ${phone}</p>
-                <p><strong>Project Type:</strong> ${projectType}</p>
-                <p><strong>Preferred Day:</strong> ${preferredDay}</p>
-                <p><strong>Preferred Time:</strong> ${preferredTime}</p>
-                <p><strong>Message:</strong><br>${message}</p>
-            `,
-        });
+        try {
+            await client.sendEmail({
+                From: process.env.POSTMARK_FROM_EMAIL,
+                To: process.env.POSTMARK_TO_EMAIL,
+                ReplyTo: email,
+                Subject: `Consultation request from ${name}`,
+                HtmlBody: `
+                    <h2>New consultation request</h2>
+                    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+                    <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+                    <p><strong>Phone:</strong> ${escapeHtml(phone || "Not provided")}</p>
+                    <p><strong>Project type:</strong> ${escapeHtml(projectType)}</p>
+                    <p><strong>Preferred window:</strong> ${escapeHtml(preferredTime)}</p>
+                    <p><strong>Timezone:</strong> ${escapeHtml(timeZone)}</p>
+                    <p><strong>Project goal:</strong><br>${escapeHtml(message).replaceAll("\n", "<br>")}</p>
+                `,
+                TextBody: [
+                    "New consultation request",
+                    `Name: ${name}`,
+                    `Email: ${email}`,
+                    `Phone: ${phone || "Not provided"}`,
+                    `Project type: ${projectType}`,
+                    `Preferred window: ${preferredTime}`,
+                    `Timezone: ${timeZone}`,
+                    "",
+                    message,
+                ].join("\n"),
+                MessageStream: "outbound",
+            });
 
-        // Auto-confirmation email to the user
-        await client.sendEmail({
-            From: "support@codestudioworks.com",
-            To: email,
-            Subject: "Your Consultation Request Has Been Received",
-            HtmlBody: `
-                <p>Hi ${name},</p>
-                <p>Thank you for booking a consultation! I will confirm your selected date and time shortly.</p>
-                <p>Looking forward to speaking with you.</p>
-                <br>
-                <p>— Ryno from CodeStudioWorks</p>
-            `,
-        });
+            await client.sendEmail({
+                From: process.env.POSTMARK_FROM_EMAIL,
+                To: email,
+                Subject: "CodeStudioWorks received your consultation request",
+                HtmlBody: `<p>Hi ${escapeHtml(name)},</p><p>Thanks for getting in touch. I received your consultation request and will reply personally to confirm the next step.</p><p>— Ryno at CodeStudioWorks</p>`,
+                TextBody: `Hi ${name},\n\nThanks for getting in touch. I received your consultation request and will reply personally to confirm the next step.\n\n— Ryno at CodeStudioWorks`,
+                MessageStream: "outbound",
+            });
 
-        return NextResponse.json({ success: true });
-    } catch (err) {
-        console.error("Consultation API Error:", err);
-        return NextResponse.json(
-            { error: "Failed to send email" },
-            { status: 500 }
-        );
+            await updateRequestSubmissionEmailStatus(submission._id, "sent");
+        } catch (emailError) {
+            console.error("Postmark consultation notification failed:", emailError);
+            await updateRequestSubmissionEmailStatus(submission._id, "failed");
+        }
+
+        return NextResponse.json({ success: true, requestId: submission._id.toString() });
+    } catch (error) {
+        console.error("Consultation request failed:", error);
+        return errorResponse("Request failed to submit", 500);
     }
 }

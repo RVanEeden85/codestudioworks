@@ -3,34 +3,306 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --color-primary: #1b3a34;
-    --color-secondary: #142824;
-    --color-accent: #c7d9d5;
-    --color-dark: #142824;
-    --color-light: #f7faf9;
+    --color-primary: #163f38;
+    --color-secondary: #0c1f1d;
+    --color-accent: #d7f45d;
+    --color-dark: #071312;
+    --color-light: #f7f4eb;
 }
 
 :root {
-    --background: #f9f9f9;
-    --foreground: #111111;
-    --green-border: #5e7067;
-    --font-caveat: ui-rounded, "Comic Sans MS", "Apple Chancery", cursive;
+    --background: #f7f4eb;
+    --foreground: #0c1614;
+    --muted: #64716d;
+    --line: #d8ddd5;
+    --surface: #fffdf7;
+    --surface-strong: #f0eadc;
+    --green-border: #9fb5ab;
+    --font-sans: Arial, Helvetica, sans-serif;
+    --arch-black: #080909;
+    --arch-carbon: #101211;
+    --arch-graphite: #1b1e1c;
+    --arch-concrete-dark: #555956;
+    --arch-concrete: #b8b8b1;
+    --arch-mineral: #eeece5;
 }
 
 body {
     background: var(--background);
     color: var(--foreground);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-sans);
+    min-height: 100vh;
 }
+
 html {
-    background-color: black;
+    background-color: var(--background);
     scroll-behavior: smooth;
 }
 
-.font-caveat {
-    font-family: var(--font-caveat);
+::selection {
+    background: #d7f45d;
+    color: #071312;
 }
 
 .green-border {
     border-color: var(--green-border);
+}
+
+.section-shell {
+    width: min(1180px, calc(100% - 40px));
+    margin-inline: auto;
+}
+
+.eyebrow {
+    color: #38645b;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.text-balance {
+    text-wrap: balance;
+}
+
+.noise-overlay {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 42px 42px;
+}
+
+/* Architectural Monolith visual system */
+.architectural-page {
+    background: var(--arch-carbon);
+    color: var(--arch-mineral);
+    isolation: isolate;
+}
+
+.architectural-page::before {
+    background-image:
+        linear-gradient(90deg, transparent 0 49.94%, rgba(255, 255, 255, 0.025) 50%, transparent 50.06%),
+        radial-gradient(circle at 20% 10%, rgba(215, 244, 93, 0.035), transparent 24%);
+    background-size: 96px 100%, 100% 100%;
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+    z-index: -1;
+}
+
+.architectural-page.bg-background,
+.architectural-page .bg-background {
+    background-color: var(--arch-carbon);
+}
+
+.architectural-page [class~="bg-[#fffdf7]"],
+.architectural-page [class~="bg-white"] {
+    background-color: var(--arch-graphite);
+}
+
+.architectural-page [class~="bg-secondary"],
+.architectural-page [class~="bg-primary"] {
+    background-color: var(--arch-black);
+}
+
+.architectural-page [class~="text-secondary"] {
+    color: var(--arch-mineral);
+}
+
+.architectural-page [class*="text-black/"] {
+    color: rgba(238, 236, 229, 0.66);
+}
+
+.architectural-page [class~="text-primary"] {
+    color: #d7f45d;
+}
+
+.architectural-page [class~="border-black/10"],
+.architectural-page [class~="border-black/12"] {
+    border-color: rgba(238, 236, 229, 0.14);
+}
+
+.architectural-page [class*="rounded-xl"],
+.architectural-page [class*="rounded-lg"],
+.architectural-page [class*="rounded-md"] {
+    border-radius: 2px;
+}
+
+.architectural-page h1,
+.architectural-page h2,
+.architectural-page h3 {
+    letter-spacing: -0.045em;
+}
+
+.architectural-page .eyebrow {
+    color: #d7f45d;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+}
+
+.architectural-page .section-shell {
+    width: min(1240px, calc(100% - 40px));
+}
+
+.architectural-page input,
+.architectural-page select,
+.architectural-page textarea {
+    background: #111412;
+    border-color: rgba(238, 236, 229, 0.18);
+    color: var(--arch-mineral);
+}
+
+.architectural-page option {
+    background: #111412;
+    color: var(--arch-mineral);
+}
+
+.architectural-page input::placeholder,
+.architectural-page textarea::placeholder {
+    color: rgba(238, 236, 229, 0.38);
+}
+
+.architectural-page .architectural-light {
+    background-color: var(--arch-concrete);
+    background-image:
+        linear-gradient(90deg, rgba(18, 20, 19, 0.09) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0));
+    background-size: min(25vw, 310px) 100%, 100% 100%;
+    color: #101211;
+}
+
+.architectural-page .architectural-light [class~="text-secondary"],
+.architectural-page .architectural-light h1,
+.architectural-page .architectural-light h2,
+.architectural-page .architectural-light h3 {
+    color: #101211;
+}
+
+.architectural-page .architectural-light [class*="text-black/"] {
+    color: rgba(16, 18, 17, 0.68);
+}
+
+.architectural-page .architectural-light .eyebrow,
+.architectural-page .architectural-light [class~="text-primary"] {
+    color: #263c33;
+}
+
+.architectural-page .architectural-light [class~="border-black/10"] {
+    border-color: rgba(8, 9, 9, 0.2);
+}
+
+.architectural-page .architectural-light .architectural-slab,
+.architectural-page .architectural-light .architectural-slab h1,
+.architectural-page .architectural-light .architectural-slab h2,
+.architectural-page .architectural-light .architectural-slab h3,
+.architectural-page .architectural-light .architectural-slab [class~="text-secondary"] {
+    color: var(--arch-mineral);
+}
+
+.architectural-page .architectural-light .architectural-slab [class*="text-black/"] {
+    color: rgba(238, 236, 229, 0.66);
+}
+
+.architectural-page .architectural-slab {
+    background: linear-gradient(145deg, #202422, #121513 62%);
+    border: 1px solid rgba(238, 236, 229, 0.15);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+    position: relative;
+}
+
+.architectural-page .architectural-slab::before {
+    background: linear-gradient(90deg, #d7f45d 0 36px, transparent 36px);
+    content: "";
+    height: 2px;
+    left: -1px;
+    position: absolute;
+    top: -1px;
+    width: calc(100% + 2px);
+}
+
+.architectural-page .concrete-image-section {
+    background-color: #b8b8b1;
+    background-image:
+        linear-gradient(90deg, rgba(184, 184, 177, 0.96) 0%, rgba(184, 184, 177, 0.9) 46%, rgba(184, 184, 177, 0.54) 100%),
+        url("/images/concrete-passage.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.architectural-page .monolith-cta {
+    background-color: #080909;
+    background-image:
+        linear-gradient(90deg, rgba(8, 9, 9, 0.98) 0%, rgba(8, 9, 9, 0.84) 58%, rgba(8, 9, 9, 0.3) 100%),
+        url("/images/concrete-sculpture.png");
+    background-position: 86% center;
+    background-repeat: no-repeat;
+    background-size: auto 145%;
+}
+
+.architectural-page .project-monolith-hero {
+    background-color: #080909;
+    background-image:
+        linear-gradient(90deg, rgba(8, 9, 9, 0.97), rgba(8, 9, 9, 0.82) 54%, rgba(8, 9, 9, 0.25)),
+        url("/images/architectural-hero.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.architectural-page [class~="bg-accent"][class~="text-secondary"] {
+    color: #080909;
+}
+
+.architectural-page .architectural-rule {
+    border-top: 1px solid rgba(238, 236, 229, 0.18);
+}
+
+.architectural-page .lime-index {
+    color: #d7f45d;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.architectural-page .hover\:bg-primary:hover,
+.architectural-page .hover\:bg-accent:hover {
+    color: #080909;
+}
+
+@media (max-width: 640px) {
+    .architectural-page .section-shell {
+        width: min(100% - 28px, 1240px);
+    }
+
+    .architectural-page .monolith-cta {
+        background-position: 75% bottom;
+        background-size: auto 90%;
+    }
+}
+
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+    outline: 3px solid #d7f45d;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
 }

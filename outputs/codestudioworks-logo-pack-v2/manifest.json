@@ -1,0 +1,37 @@
+{
+  "brand": "CodeStudioWorks",
+  "concept": "Selected CSW monogram",
+  "version": "2.1",
+  "source": "assets/brand/codestudioworks-csw-selected-source.png",
+  "sourceSha256": "774a7050c9e3a1bcff2df9cf8ef3e2570ca63b2739923d77628e1a8e6cc0c694",
+  "colors": {
+    "forest": "#0c1f1d",
+    "lime": "#d7f45d",
+    "warmWhite": "#fffdf7"
+  },
+  "formats": {
+    "svg": [
+      "svg/codestudioworks-logo-stacked.svg",
+      "svg/codestudioworks-logo-stacked-reverse.svg",
+      "svg/codestudioworks-logo-stacked-monochrome.svg",
+      "svg/codestudioworks-csw-mark.svg",
+      "svg/codestudioworks-csw-mark-reverse.svg",
+      "svg/codestudioworks-csw-icon.svg"
+    ],
+    "png": [
+      "png/codestudioworks-csw-icon-1024.png",
+      "png/codestudioworks-csw-icon-180.png",
+      "png/codestudioworks-csw-icon-192.png",
+      "png/codestudioworks-csw-icon-32.png",
+      "png/codestudioworks-csw-icon-512.png",
+      "png/codestudioworks-csw-mark-1024.png",
+      "png/codestudioworks-csw-mark-512.png",
+      "png/codestudioworks-logo-approved.png",
+      "png/codestudioworks-logo-email-600.png",
+      "png/codestudioworks-logo-stacked-1200.png",
+      "png/codestudioworks-logo-stacked-2400.png",
+      "png/codestudioworks-logo-stacked-monochrome-1200.png",
+      "png/codestudioworks-logo-stacked-reverse-1200.png"
+    ]
+  }
+}

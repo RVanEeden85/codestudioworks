@@ -1,9 +1,10 @@
 import { getSiteUrl } from "./_lib/siteUrl";
 import { services } from "./services/_lib/services";
+import { projects } from "./work/_lib/projects";
 
 export default function sitemap() {
     const siteUrl = getSiteUrl();
-    const lastModified = new Date();
+    const lastModified = new Date("2026-09-14T00:00:00.000Z");
 
     const staticRoutes = [
         {
@@ -13,7 +14,19 @@ export default function sitemap() {
             priority: 1,
         },
         {
+            url: `${siteUrl}/start-a-business`,
+            lastModified,
+            changeFrequency: "monthly",
+            priority: 0.9,
+        },
+        {
             url: `${siteUrl}/services`,
+            lastModified,
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
+        {
+            url: `${siteUrl}/work`,
             lastModified,
             changeFrequency: "monthly",
             priority: 0.8,
@@ -36,6 +49,18 @@ export default function sitemap() {
             changeFrequency: "yearly",
             priority: 0.6,
         },
+        {
+            url: `${siteUrl}/privacy`,
+            lastModified,
+            changeFrequency: "yearly",
+            priority: 0.2,
+        },
+        {
+            url: `${siteUrl}/terms`,
+            lastModified,
+            changeFrequency: "yearly",
+            priority: 0.2,
+        },
     ];
 
     const serviceRoutes = services.map((service) => ({
@@ -45,5 +70,12 @@ export default function sitemap() {
         priority: 0.6,
     }));
 
-    return [...staticRoutes, ...serviceRoutes];
+    const projectRoutes = projects.map((project) => ({
+        url: `${siteUrl}/work/${project.slug}`,
+        lastModified,
+        changeFrequency: "yearly",
+        priority: 0.5,
+    }));
+
+    return [...staticRoutes, ...serviceRoutes, ...projectRoutes];
 }

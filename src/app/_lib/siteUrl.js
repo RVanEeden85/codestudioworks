@@ -13,9 +13,5 @@ export function getSiteUrl() {
     const normalizedExplicit = normalizeSiteUrl(explicit);
     if (normalizedExplicit) return normalizedExplicit;
 
-    if (process.env.VERCEL_URL) {
-        return normalizeSiteUrl(`https://${process.env.VERCEL_URL}`);
-    }
-
     return "https://www.codestudioworks.com";
 }

@@ -1,6 +1,5 @@
 import "./globals.css";
 import Navbar from "./components/NavBar";
-import Logo from "./components/Logo";
 import { Toaster } from "react-hot-toast";
 import CopyrightBar from "./components/Copyright-bar";
 import WhatsAppButton from "./components/WaButton";
@@ -11,22 +10,23 @@ const siteUrl = getSiteUrl();
 export const metadata = {
     metadataBase: new URL(siteUrl),
     title: {
-        default: "CodeStudioWorks | Web Design, Development & IT Support",
+        default: "CodeStudioWorks | Websites, Web Apps & Digital Systems",
         template: "%s | CodeStudioWorks",
     },
     description:
-        "CodeStudioWorks offers custom web development, web design, IT support, WordPress repairs, SEO, and remote computer assistance. Based in Michigan and serving clients across the USA and globally.",
+        "CodeStudioWorks is an independent development studio for professional websites, web and mobile apps, custom software, integrations, and ongoing technical support.",
     keywords: [
         "web development Michigan",
         "web design Michigan",
-        "IT support Michigan",
-        "remote IT support USA",
         "Next.js developer Michigan",
-        "WordPress developer Michigan",
         "website maintenance Michigan",
         "custom web applications",
         "web developer near me",
-        "software developer freelance",
+        "freelance software developer",
+        "fractional development partner",
+        "small business website design",
+        "custom business software",
+        "founder led web studio",
     ],
     authors: [{ name: "Ryno van Eeden" }],
     creator: "CodeStudioWorks",
@@ -46,9 +46,9 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: "CodeStudioWorks — Web Development & IT Support in Michigan",
+        title: "CodeStudioWorks - Websites, Web Apps & Digital Systems",
         description:
-            "Professional web design, web development, WordPress fixes, IT support, and digital strategy for small businesses. Offering remote support and custom-coded solutions.",
+            "Independent web, app, and software development for small businesses, startups, and companies that need reliable technical capacity.",
         url: siteUrl,
         siteName: "CodeStudioWorks",
         locale: "en_US",
@@ -64,9 +64,9 @@ export const metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "CodeStudioWorks — Web Development & IT Support",
+        title: "CodeStudioWorks - Websites, Web Apps & Digital Systems",
         description:
-            "Custom websites, software development, IT support & WordPress fixes. Based in Michigan, serving clients worldwide.",
+            "Professional websites, apps, custom software, and ongoing development support.",
         images: ["/twitter-image"],
     },
 };
@@ -82,14 +82,34 @@ export default function RootLayout({ children }) {
                             "@context": "https://schema.org",
                             "@graph": [
                                 {
-                                    "@type": "Organization",
+                                    "@type": "ProfessionalService",
                                     "@id": `${siteUrl}/#organization`,
                                     name: "CodeStudioWorks",
                                     url: siteUrl,
                                     logo: {
                                         "@type": "ImageObject",
-                                        url: `${siteUrl}/icon.png`,
+                                        url: `${siteUrl}/brand/csw/codestudioworks-csw-icon-512.png`,
                                     },
+                                    founder: {
+                                        "@id": `${siteUrl}/#ryno-van-eeden`,
+                                    },
+                                    areaServed: "Worldwide",
+                                    serviceType: [
+                                        "Web development",
+                                        "Mobile app development",
+                                        "Custom software development",
+                                        "Fractional development support",
+                                    ],
+                                },
+                                {
+                                    "@type": "Person",
+                                    "@id": `${siteUrl}/#ryno-van-eeden`,
+                                    name: "Ryno van Eeden",
+                                    jobTitle: "Founder and Full-Stack Developer",
+                                    worksFor: {
+                                        "@id": `${siteUrl}/#organization`,
+                                    },
+                                    url: `${siteUrl}/about`,
                                 },
                                 {
                                     "@type": "WebSite",
@@ -106,7 +126,6 @@ export default function RootLayout({ children }) {
                 />
             </head>
             <body className="antialiased">
-                <Logo />
                 <Navbar />
                 {children}
                 <Toaster position="top-right" />
