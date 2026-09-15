@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FiArrowRight, FiExternalLink } from "react-icons/fi";
+import WorkArchiveHero from "../components/WorkArchiveHero";
 import { projects } from "./_lib/projects";
 
 export const metadata = {
@@ -12,22 +13,9 @@ export const metadata = {
 export default function WorkPage() {
     return (
         <main className="architectural-page bg-background pt-[72px]">
-            <section className="concrete-image-section architectural-light border-b border-black/10 py-16 md:py-24">
-                <div className="section-shell">
-                    <p className="eyebrow">Selected work</p>
-                    <h1 className="mt-4 max-w-5xl text-5xl font-black leading-[1.02] text-secondary md:text-7xl">
-                        Real websites and software, with my role clearly explained.
-                    </h1>
-                    <p className="mt-6 max-w-3xl text-lg font-medium leading-8 text-black/64">
-                        These examples include a client website, professional
-                        software work, and an independently developed product.
-                        Each one explains what I contributed without overstating
-                        results or ownership.
-                    </p>
-                </div>
-            </section>
+            <WorkArchiveHero />
 
-            <section className="py-16 md:py-20">
+            <section id="selected-work" className="scroll-mt-24 py-16 md:py-20">
                 <div className="work-gallery section-shell grid gap-8">
                     {projects.map((project, index) => (
                         <article

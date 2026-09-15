@@ -4,10 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
+import { FiArrowUpRight, FiHome, FiMenu, FiX } from "react-icons/fi";
 import BrandMark from "./BrandMark";
 
 const links = [
+    { href: "/", label: "Home", iconOnly: true },
     { href: "/start-a-business", label: "New Business" },
     { href: "/services", label: "Services" },
     { href: "/work", label: "Work" },
@@ -21,6 +22,7 @@ const Navbar = () => {
     const pathname = usePathname();
 
     function isActive(href) {
+        if (href.includes("#")) return false;
         const cleanHref = href.split("#")[0];
         if (cleanHref === "/") return pathname === "/";
         return pathname === cleanHref || pathname.startsWith(`${cleanHref}/`);
@@ -48,9 +50,16 @@ const Navbar = () => {
                             key={link.href}
                             href={link.href}
                             aria-current={isActive(link.href) ? "page" : undefined}
-                            className="nav-link transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                            aria-label={link.iconOnly ? link.label : undefined}
+                            title={link.iconOnly ? link.label : undefined}
+                            className={`nav-link transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${link.iconOnly ? "inline-flex items-center text-base" : ""}`}
                         >
-                            {link.label}
+                            {link.iconOnly ? (
+                                <>
+                                    <FiHome aria-hidden="true" />
+                                    <span className="sr-only">{link.label}</span>
+                                </>
+                            ) : link.label}
                         </Link>
                     ))}
                 </div>
@@ -91,7 +100,8 @@ const Navbar = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.045 }}
                             >
-                            <Link href={link.href} onClick={() => setIsOpen(false)} className="block rounded-sm border-t border-white/12 px-4 py-3 font-black text-white">
+                            <Link href={link.href} onClick={() => setIsOpen(false)} className="flex items-center gap-3 rounded-sm border-t border-white/12 px-4 py-3 font-black text-white">
+                                {link.iconOnly && <FiHome aria-hidden="true" className="text-accent" />}
                                 {link.label}
                             </Link>
                             </motion.div>

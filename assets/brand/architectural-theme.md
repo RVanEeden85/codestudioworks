@@ -36,6 +36,38 @@ Purpose: photographic material layer for pale cast-concrete content walls.
 
 The asset is an original, front-facing six-slab concrete elevation generated from a material-only reference. It deliberately contains no baked directional shadows so the website can add its own scroll-controlled cast-light system without visual conflict.
 
+### `public/images/start-business-threshold.jpg`
+
+Purpose: dedicated Starting a Business hero—an architectural metaphor for taking an idea across the threshold into a working business.
+
+Final prompt:
+
+> Create an entirely original monumental brutalist architectural interior called a concrete threshold: a vast quiet space where massive raw-concrete planes frame a deep black void, suggesting the transition from an idea into something real. It must feel premium, minimal, mesmerising, and spatial rather than like a conventional office or a concert stage. Use an abstract inhabitable gallery-scale environment of tall board-formed concrete walls, one enormous rectangular portal, a recessed shadow chamber, and a long dark floor plane with subtle reflection. Layered planes should recede into the void to create real depth. Cinematic ultra-wide 16:9 landscape, slightly low architectural camera. Keep the left 46% calm, softly illuminated, pale-to-medium mineral concrete with very little detail and generous negative space for large dark website text. Concentrate the portal, deepest void, sculptural mass, directional lines, and visual drama on the right half, but keep enough mid-gray surface behind a dark floating information card. Do not center the main opening. One controlled blade of cool white daylight enters from high left and grazes across selected concrete edges toward the right, creating long geometric shadows, narrow luminous seams, and a sense of movement through still architecture. Deep velvety black negative space, quiet anticipation, confidence, refinement. Palette: pale mineral gray, cool raw concrete, graphite, near-black, tiny restrained acid-lime reflected glint on one distant edge only. Materials: photorealistic raw cast concrete with fine pores, board-form seams, slight mineral bloom and matte weight; controlled texture, especially quiet on the left. No people, desks, furniture, plants, screens, technology imagery, windows with outdoor views, city, sky, text, letters, numbers, logos, signage, watermark, stage equipment, audience, sci-fi machinery, neon, orange lighting, heavy fog, colorful lighting, decorative objects, or symmetrical centered composition.
+
+### `public/images/services-gallery-hero.jpg`
+
+Purpose: dedicated Services hero, presenting several paths into one disciplined development practice through a sequence of monumental portals.
+
+Final prompt:
+
+> Create an entirely original monumental brutalist architectural interior called the Service Gallery. It should express several distinct paths through one disciplined development practice: a sequence of massive freestanding raw-concrete frames and deep rectangular chambers receding from the center-right into a vast black void. The image must feel premium, minimal, spatial, calm, and mesmerising—not like an office, technology render, or concert stage. Use an enormous dark gallery-scale interior with a matte graphite floor, towering board-formed concrete portals at different depths, narrow passages between them, and one deep shadow chamber. Cinematic ultra-wide 16:9 landscape, slightly low architectural camera. Keep the left 46% as uncluttered near-black negative space with a subtle graphite tonal gradient for large white website text. Begin the first architectural edge near the center, then concentrate three or four staggered concrete frames, illuminated planes, voids, and the strongest perspective on the right half. Controlled cool-white grazing light passes through the portals from high right, catching thin concrete edges and casting long soft-edged geometric shadows westward across the floor. Palette: architectural black, charcoal, graphite, cool mineral-gray concrete, restrained off-white highlights, with one tiny distant acid-lime reflected glint only. Materials: photorealistic matte raw cast concrete with subtle formwork seams and very fine pores; texture must be restrained and quiet. No people, furniture, screens, technology symbols, city, sky, outdoor view, text, letters, numbers, logos, signage, watermark, stage equipment, audience, sci-fi machinery, neon, orange light, colorful lighting, heavy fog, ruins, decorative objects, or centered symmetry.
+
+### `public/images/work-archive-hero.jpg`
+
+Purpose: dedicated Selected Work hero, translating the three clearly attributed case-study categories into a monumental curated archive.
+
+Final prompt:
+
+> Create one premium ultra-wide cinematic architectural background image for the hero of a solo software studio's Selected Work webpage. Create an original photorealistic abstract brutalist Monolith Archive. The left 46 percent is a calm near-black empty architectural void reserved for large white typography. The right 54 percent contains three monumental staggered charcoal concrete monoliths with deep recessed rectangular chambers, thick cantilever slabs, strong spatial depth, cool white grazing light from upper right catching restrained board-formed concrete texture, deep black shadows, faint floor reflection and thin horizon. Elegant high-end editorial architecture photography, graphite black and cool silver grey, quiet mesmerising luxury, dramatic light and void. No people, furniture, plants, screens, UI, text, letters, logos, signage, stage, concert elements, recognizable buildings, neon, or glossy plastic. Keep the subject away from the extreme edges for cover cropping and retain an award-winning independent software studio aesthetic.
+
+### `public/images/pricing-measured-horizon.jpg`
+
+Purpose: dedicated Pricing hero, using distant horizontal datum slabs to communicate proportion, clear starting points, and carefully defined scope without repeating the portal compositions used elsewhere.
+
+Final prompt:
+
+> Create an original photorealistic brutalist architectural scene called The Measured Horizon for a premium independent software studio's full-bleed 16:9 Pricing hero. Show an immense near-black gallery void from very far away with a low, straight-on cinematic viewpoint. Across only the lower third, three long low raw-concrete terraces or cantilevered datum slabs step gradually upward and recede into depth. Narrow black voids separate the tiers and extremely thin cool-white grazing light traces a few precise horizontal edges. A faint matte floor reflection grounds the distant structure. Keep the upper 58–62 percent almost entirely quiet black-to-graphite negative space for large centered white typography. The three monumental horizontal tiers should suggest three starting points held within one coherent system. Premium editorial architectural photography, original abstract brutalism, restrained museum installation, quiet luxury, refined and mesmerising. No text, letters, numbers, currency symbols, logos, signage, people, furniture, plants, screens, technology graphics, sky, recognizable buildings, concert or stage imagery, upright portals, arches, corridors, towers, sci-fi neon, warm orange light, heavy fog, glossy plastic, ruins, or excessive texture.
+
 ## Core palette
 
 - Architectural black: `#080909`

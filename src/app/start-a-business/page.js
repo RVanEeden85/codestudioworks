@@ -2,10 +2,9 @@ import Link from "next/link";
 import {
     FiArrowRight,
     FiCheck,
-    FiCheckCircle,
     FiGlobe,
-    FiHelpCircle,
 } from "react-icons/fi";
+import BusinessThresholdHero from "../components/BusinessThresholdHero";
 
 export const metadata = {
     title: "Starting a Business",
@@ -45,41 +44,7 @@ const faqs = [
 export default function StartABusinessPage() {
     return (
         <main className="architectural-page bg-background pt-[72px]">
-            <section className="concrete-image-section architectural-light relative overflow-hidden border-b border-black/10 py-16 md:py-24">
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(184,184,177,0.96),rgba(184,184,177,0.83)_60%,rgba(184,184,177,0.45))]" />
-                <div className="section-shell relative grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
-                    <div>
-                        <p className="eyebrow">Starting a business</p>
-                        <h1 className="mt-4 max-w-5xl text-5xl font-black leading-[1.02] text-secondary md:text-7xl">
-                            You bring the business idea. I&apos;ll help turn it into something real and working.
-                        </h1>
-                        <p className="mt-6 max-w-3xl text-xl font-medium leading-8 text-black/66">
-                            You do not need to know the technical terms or arrive with a complete plan. Tell me what the business will do and what customers need—I can guide the website, online tools, launch, and support from there.
-                        </p>
-                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                            <Link href="/contact?service=New%20business%20launch" className="inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-6 py-4 font-black text-white transition hover:bg-primary">
-                                Tell Me About Your Business <FiArrowRight aria-hidden="true" />
-                            </Link>
-                            <Link href="/pricing" className="inline-flex items-center justify-center rounded-md border border-black/30 bg-white/50 px-6 py-4 font-black text-[#101211] backdrop-blur-sm transition hover:border-black/60 hover:bg-white/75">
-                                See Starting Prices
-                            </Link>
-                        </div>
-                    </div>
-
-                    <aside className="architectural-slab p-6 text-white md:p-8">
-                        <FiHelpCircle className="text-4xl text-accent" aria-hidden="true" />
-                        <h2 className="mt-6 text-3xl font-black">Not sure what to ask for?</h2>
-                        <p className="mt-4 font-medium leading-7 text-white/72">Start with these three things:</p>
-                        <ul className="mt-5 grid gap-4">
-                            {["What the business sells or provides", "Who the ideal customer is", "What customers should be able to do online"].map((item) => (
-                                <li key={item} className="flex gap-3 rounded-md border border-white/10 bg-white/7 p-4 font-bold leading-6 text-white/80">
-                                    <FiCheckCircle className="mt-0.5 shrink-0 text-accent" aria-hidden="true" /> {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </aside>
-                </div>
-            </section>
+            <BusinessThresholdHero />
 
             <section className="bg-[#101211] py-20 md:py-28">
                 <div className="section-shell">
