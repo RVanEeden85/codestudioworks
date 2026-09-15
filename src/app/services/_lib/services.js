@@ -1,45 +1,45 @@
 export const services = [
     {
         slug: "business-website-launch",
-        name: "Business Websites",
+        name: "Business websites",
         shortName: "Websites",
         category: "Core service",
         summary:
-            "Professional websites and redesigns that make the offer clear, build trust, and give customers a confident next step.",
+            "Websites that explain what you do and make it easy for customers to enquire, book or buy.",
         bestFor:
             "Local businesses, professional services, established companies replacing an outdated site, and teams launching a new offer.",
         outcomes: [
-            "A clear page and content strategy",
+            "Page planning and content guidance",
             "Responsive design for phones, tablets, and desktops",
-            "Lead, booking, quote, or commerce journeys",
-            "A strong foundation for search engines and local visibility",
-            "Analytics and conversion-event planning",
-            "Deployment, ownership, and handoff support",
+            "Enquiry forms, bookings, quotes or online payments",
+            "Search-friendly pages and local business information",
+            "Visitor statistics and enquiry tracking",
+            "Launch support and access to your code and accounts",
         ],
         engagement:
-            "Most website projects begin with a defined scope and can continue through an optional care plan.",
+            "We agree on the pages, features, content, revisions and launch date before work begins. Ongoing maintenance is optional.",
         typicalTimeline: "Typically 3–8 weeks, depending on content and complexity.",
         priceGuide: "Projects currently start from $1,250 USD.",
         faqs: [
             {
                 question: "Can you redesign an existing website?",
                 answer:
-                    "Yes. I can retain useful content and brand equity while rebuilding the structure, presentation, performance, and customer journey.",
+                    "Yes. I can keep useful content and your existing branding while improving the design, speed and ease of use.",
             },
             {
                 question: "Will I be able to update the site?",
                 answer:
-                    "When regular editing matters, I can include a content management system and provide a practical handoff.",
+                    "Yes, if editing tools are included in the project. I’ll show you how to update your pages and content.",
             },
         ],
     },
     {
         slug: "custom-web-apps",
-        name: "Apps & Business Tools",
-        shortName: "Apps & Business Tools",
+        name: "Web and mobile apps",
+        shortName: "Web and mobile apps",
         category: "Core service",
         summary:
-            "Customer apps, mobile apps, booking systems, portals, dashboards, and custom tools that help a business operate or deliver its service.",
+            "Web and mobile apps for customers and staff, including booking systems, portals and tools that reduce manual work.",
         bestFor:
             "Entrepreneurs building a first usable product, businesses replacing spreadsheets or manual work, and companies creating a customer-facing application.",
         outcomes: [
@@ -48,17 +48,17 @@ export const services = [
             "Secure data, accounts, permissions, and business rules",
             "Administration screens and useful reporting",
             "Payments and connections to other business services",
-            "A maintainable foundation for future releases",
+            "Documented code that can be updated as your product grows",
         ],
         engagement:
-            "Custom product work normally starts by defining the smallest useful first version, then expands in later phases when the business is ready.",
+            "We plan the first version around the most useful features. Further features can be added in separately agreed stages.",
         typicalTimeline: "Most first releases require 6–16+ weeks.",
-        priceGuide: "Custom application foundations currently start from $7,500 USD.",
+        priceGuide: "App projects start from $7,500 USD.",
         faqs: [
             {
                 question: "Can you help shape an idea before development?",
                 answer:
-                    "Yes. Discovery can turn an early concept into a clear audience, workflow, feature boundary, technical plan, and first-release scope.",
+                    "Yes. We’ll work out who will use the app, what they need to do and which features to build first.",
             },
             {
                 question: "Do you build mobile apps?",
@@ -69,25 +69,25 @@ export const services = [
     },
     {
         slug: "fractional-development-partner",
-        name: "Ongoing Development Support",
+        name: "Ongoing development",
         shortName: "Development Support",
         category: "Ongoing service",
         summary:
-            "Regular, dependable development help for a business that does not need—or is not ready to hire—a full internal team.",
+            "New features, fixes and integrations for your existing website or app, with regular time set aside for your business.",
         bestFor:
             "Growing companies, founder-led teams, agencies needing implementation help, and organizations with a continuing list of digital improvements.",
         outcomes: [
-            "A clear, prioritized list of work",
+            "An agreed list of tasks in priority order",
             "Regular development help without a full-time hire",
             "Feature delivery, fixes, integrations, and improvements",
             "Plain-English technical guidance for business decisions",
-            "Documentation, source control, and maintainable handoff",
-            "Flexible coordination with internal or external stakeholders",
+            "Documented code, version history and a clear handover",
+            "Flexible coordination with your team and other suppliers",
         ],
         engagement:
-            "This is often called fractional development support. We agree on monthly availability, priorities, response expectations, and how progress will be reviewed.",
+            "We agree on development time each month, priorities, response times and regular progress reviews. Extra work is discussed before it is added.",
         typicalTimeline: "Available as an ongoing monthly engagement.",
-        priceGuide: "Monthly scopes are tailored to the required capacity and responsibility.",
+        priceGuide: "Monthly plans are quoted according to the time and support you need.",
         faqs: [
             {
                 question: "Is this the same as hiring an employee?",
@@ -103,23 +103,23 @@ export const services = [
     },
     {
         slug: "care-maintenance",
-        name: "Website & Technical Support",
+        name: "Website maintenance",
         shortName: "Technical Support",
         category: "Supporting service",
         summary:
-            "Ongoing website updates, maintenance, search improvements, service connections, and practical help after launch.",
+            "Keep your website up to date with routine updates, fixes, backups and technical checks.",
         bestFor:
-            "Businesses that want one accountable technical contact for a website or application that must stay useful and current.",
+            "Businesses that need reliable help keeping an existing website working and up to date.",
         outcomes: [
-            "Website updates and planned improvement blocks",
+            "Routine updates and small fixes",
             "Performance, security, and dependency checks",
             "Backups, hosting, domain, and deployment guidance",
             "Connections to CRM, payment, email, and other services",
-            "Technical search and local visibility foundations",
-            "Priority support under an agreed care plan",
+            "Checks for search and local business information",
+            "Support during the hours agreed in your plan",
         ],
         engagement:
-            "Care can be added after a new build or scoped for an existing site following a technical review.",
+            "After reviewing your website, we agree on the checks, updates, support hours and backup responsibilities included in your plan. Larger changes are quoted separately.",
         typicalTimeline: "Available monthly or as a defined improvement project.",
         priceGuide: "Care plans currently start from $150 USD per month.",
         faqs: [

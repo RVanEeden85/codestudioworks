@@ -25,6 +25,7 @@ const CopyrightBar = () => {
                     <Link href="/pricing" className="hover:text-accent">
                         Pricing
                     </Link>
+                    <a href="mailto:info@codestudioworks.com" className="text-white underline">info@codestudioworks.com</a>
                     <Link href="/contact" className="hover:text-accent">
                         Contact
                     </Link>

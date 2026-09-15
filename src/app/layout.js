@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import CopyrightBar from "./components/Copyright-bar";
 import WhatsAppButton from "./components/WaButton";
 import MotionExperience from "./components/MotionExperience";
+import CampaignAttribution from "./components/CampaignAttribution";
 import JsonLd from "./components/JsonLd";
 import {
     BUSINESS_PHONE,
@@ -171,6 +172,8 @@ export default function RootLayout({ children }) {
                 <JsonLd data={siteSchema} />
             </head>
             <body className="antialiased">
+                <a href="#main-content" className="skip-link">Skip to content</a>
+                <CampaignAttribution />
                 <MotionExperience />
                 <Navbar />
                 {children}

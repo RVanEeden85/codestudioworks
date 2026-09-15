@@ -17,7 +17,7 @@ export const metadata = buildMetadata({
 
 const launchSteps = [
     ["Tell me about the idea", "You explain the business, the customer, what you plan to sell, and what success should look like. No technical document is required."],
-    ["Work out what is actually needed", "I recommend the simplest useful combination of website pages, customer actions, business tools, and third-party services."],
+    ["Choose what to build", "I recommend the simplest useful combination of website pages, customer actions, business tools, and third-party services."],
     ["Confirm the plan", "You receive a written project plan covering the work, price, timeline, responsibilities, and costs that sit outside the project."],
     ["Review the design", "I shape the structure and visual direction so you can see how customers will understand and use the business online."],
     ["Build and connect everything", "I develop the approved experience and connect the agreed forms, bookings, payments, email, hosting, visitor measurement, or other services."],
@@ -30,7 +30,7 @@ const buildingBlocks = [
     "Enquiry, quote, appointment, or booking forms",
     "Online payments, products, or service deposits",
     "Professional email and customer-notification setup",
-    "Search, local visibility, and visitor measurement",
+    "Search setup and website visitor statistics",
     "Customer portals, dashboards, or custom business tools",
     "Ongoing updates and technical support after launch",
 ];
@@ -63,7 +63,7 @@ const pageSchema = graphSchema([
 
 export default function StartABusinessPage() {
     return (
-        <main className="architectural-page bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <JsonLd data={pageSchema} />
             <BusinessThresholdHero />
 
@@ -71,8 +71,8 @@ export default function StartABusinessPage() {
                 <div className="section-shell">
                     <div className="max-w-4xl">
                         <p className="eyebrow">What I can help put in place</p>
-                        <h2 className="mt-4 text-4xl font-black leading-tight text-secondary md:text-6xl">The online foundation your business actually needs.</h2>
-                        <p className="mt-5 max-w-3xl text-lg font-medium leading-8 text-black/64">Not every business needs every item. I recommend the useful pieces and leave out complexity that does not support the launch.</p>
+                        <h2 className="mt-4 text-4xl font-black leading-tight text-secondary md:text-6xl">Get your business ready for customers.</h2>
+                        <p className="mt-5 max-w-3xl text-lg font-medium leading-8 text-black/64">We’ll choose the website, tools and services that fit your launch and budget.</p>
                     </div>
                     <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                         {buildingBlocks.map((item) => (
@@ -90,10 +90,10 @@ export default function StartABusinessPage() {
                 <div className="section-shell grid gap-10 lg:grid-cols-[0.68fr_1.32fr]">
                     <div>
                         <p className="eyebrow">From idea to launch</p>
-                        <h2 className="mt-4 text-4xl font-black leading-tight text-secondary md:text-5xl">A guided process, one understandable step at a time.</h2>
+                        <h2 className="mt-4 text-4xl font-black leading-tight text-secondary md:text-5xl">From idea to launch.</h2>
                         <div className="architectural-slab mt-7 p-6 text-white">
                             <FiGlobe className="text-3xl text-accent" aria-hidden="true" />
-                            <p className="mt-4 font-bold leading-7 text-white/76">The goal is not simply to deliver files. It is to leave you with a functioning live result, the right account access, and a clear next step.</p>
+                            <p className="mt-4 font-bold leading-7 text-white/76">You’ll receive a working website, access to your accounts and guidance on keeping everything up to date.</p>
                         </div>
                     </div>
                     <ol className="grid gap-4 md:grid-cols-2">
@@ -112,7 +112,7 @@ export default function StartABusinessPage() {
                 <div className="section-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
                     <div>
                         <p className="eyebrow">Common questions</p>
-                        <h2 className="mt-4 text-4xl font-black leading-tight text-secondary md:text-5xl">You are not expected to know all of this already.</h2>
+                        <h2 className="mt-4 text-4xl font-black leading-tight text-secondary md:text-5xl">Questions about getting started?</h2>
                     </div>
                     <div className="grid gap-3">
                         {faqs.map(([question, answer]) => (
@@ -129,8 +129,8 @@ export default function StartABusinessPage() {
                 <div className="section-shell grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
                     <div>
                         <p className="text-sm font-black uppercase text-accent">Ready when the idea is</p>
-                        <h2 className="mt-3 max-w-4xl text-4xl font-black leading-tight md:text-5xl">Tell me about the business in your own words.</h2>
-                        <p className="mt-4 max-w-2xl font-medium leading-7 text-white/72">I&apos;ll help translate it into a practical digital plan.</p>
+                        <h2 className="mt-3 max-w-4xl text-4xl font-black leading-tight md:text-5xl">Let’s get your business online.</h2>
+                        <p className="mt-4 max-w-2xl font-medium leading-7 text-white/72">Tell me about your idea. I’ll help you decide what to build first.</p>
                     </div>
                     <Link href="/contact?service=New%20business%20launch" className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-4 font-black text-secondary transition hover:bg-white">
                         Start the Conversation <FiArrowRight aria-hidden="true" />

@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { projectTypes, projectTypeAliases } from "../_lib/projectTypes";
+import { getLeadAttribution } from "../_lib/leadAttribution";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FiArrowRight, FiClock, FiMapPin, FiMessageSquare } from "react-icons/fi";
@@ -10,17 +12,7 @@ import TurnstileWidget, { getInitialTurnstileToken } from "./TurnstileWidget";
 const fieldClass =
     "w-full rounded-md border border-black/12 bg-background px-4 py-3 text-secondary outline-none transition focus:border-primary focus-visible:ring-2 focus-visible:ring-primary/25";
 
-const serviceOptions = [
-    "New business launch",
-    "Business website",
-    "Website redesign",
-    "E-commerce",
-    "App or custom business tool",
-    "Mobile application",
-    "Ongoing development support",
-    "Website support or takeover",
-    "Not sure yet",
-];
+const serviceOptions = projectTypes;
 
 export default function Contact({ initialService = "" }) {
     const [status, setStatus] = useState("idle");
@@ -28,12 +20,7 @@ export default function Contact({ initialService = "" }) {
     const [turnstileReset, setTurnstileReset] = useState(0);
     const [submissionId, setSubmissionId] = useState(() => crypto.randomUUID());
     const [requestReference, setRequestReference] = useState("");
-    const serviceAliases = {
-        "Business Websites": "Business website",
-        "Apps & Business Tools": "App or custom business tool",
-        "Ongoing Development Support": "Ongoing development support",
-        "Website & Technical Support": "Website support or takeover",
-    };
+    const serviceAliases = projectTypeAliases;
     const selectedService = serviceAliases[initialService] || initialService;
 
     async function handleSubmit(event) {
@@ -54,7 +41,7 @@ export default function Contact({ initialService = "" }) {
                     tel: formData.get("tel"),
                     message: [
                         `Project type: ${formData.get("projectType")}`,
-                        `Working budget: ${formData.get("budget") || "Not provided"}`,
+                        `Budget: ${formData.get("budget") || "Not provided"}`,
                         "",
                         formData.get("message"),
                     ].join("\n"),
@@ -62,6 +49,7 @@ export default function Contact({ initialService = "" }) {
                     website: formData.get("website"),
                     turnstileToken,
                     submissionId,
+                    attribution: getLeadAttribution(),
                 }),
             });
 
@@ -89,13 +77,15 @@ export default function Contact({ initialService = "" }) {
                 <div>
                     <p className="eyebrow">Start a project</p>
                     <h1 className="mt-4 text-5xl font-black leading-tight text-secondary md:text-7xl">
-                        Tell me what the business needs next.
+                        Let’s discuss your project.
                     </h1>
                     <p className="mt-6 text-lg font-medium leading-8 text-black/64">
-                        Share the goal, current situation, and any timing or budget context you already have. I&apos;ll review it personally and recommend the most useful next step.
+                        Tell me what you want to build or improve. I’ll review your message and reply personally.
                     </p>
 
-                    <div className="mt-8 grid gap-3">
+                    <div className="contact-options mt-6 grid gap-3">
+                        <a href="mailto:info@codestudioworks.com" className="py-2 font-bold text-accent underline">info@codestudioworks.com</a>
+                        <a href="tel:+13132135404" className="py-2 font-bold text-white">Call +1 (313) 213-5404</a>
                         <a
                             href="https://wa.me/13132135404?text=Hi%20Ryno%20at%20CodeStudioWorks!%20I%E2%80%99d%20love%20to%20chat%20about%20a%20project%20or%20your%20services."
                             target="_blank"
@@ -111,7 +101,7 @@ export default function Contact({ initialService = "" }) {
                         </div>
                         <div className="architectural-rule flex items-center gap-3 py-4 font-bold text-white/76">
                             <FiClock className="text-2xl text-primary" aria-hidden="true" />
-                            Replies are personal, not automated sales handoffs
+                            You’ll hear directly from me
                         </div>
                         <Link href="/support" className="inline-flex items-center gap-2 pt-3 text-sm font-black text-accent hover:text-white">
                             Already a client? Open a support request <FiArrowRight aria-hidden="true" />
@@ -151,9 +141,9 @@ export default function Contact({ initialService = "" }) {
                             </select>
                         </label>
                         <label className="grid gap-2 text-sm font-black text-secondary sm:col-span-2">
-                            Working budget <span className="font-medium text-black/45">Optional</span>
+                            Budget <span className="font-medium text-black/45">Optional</span>
                             <select className={fieldClass} name="budget" defaultValue="">
-                                <option value="">Not established yet</option>
+                                <option value="">Not sure yet</option>
                                 <option>Under $2,500 USD</option>
                                 <option>$2,500–$5,000 USD</option>
                                 <option>$5,000–$10,000 USD</option>
@@ -162,7 +152,7 @@ export default function Contact({ initialService = "" }) {
                             </select>
                         </label>
                         <label className="grid gap-2 text-sm font-black text-secondary sm:col-span-2">
-                            What should the finished project help you achieve?
+                            What would you like help with?
                             <textarea className={`${fieldClass} min-h-44`} name="message" required />
                         </label>
                     </div>

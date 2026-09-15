@@ -10,13 +10,13 @@ const values = [
     },
     {
         icon: <FiCode />,
-        title: "Custom where it matters",
-        text: "The site or app is shaped around your business goals instead of forcing your offer into a generic template.",
+        title: "Built for your business",
+        text: "I choose the design and tools to fit your customers, your budget and the way you work.",
     },
     {
         icon: <FiShield />,
-        title: "Long-term mindset",
-        text: "Launch is only the start. The build should be maintainable, understandable, and ready for future improvements.",
+        title: "Support after launch",
+        text: "You receive documented work and a clear handover, with ongoing support available when you need it.",
     },
 ];
 
@@ -24,7 +24,7 @@ const About = () => {
     return (
         <section className="bg-[#101211] py-20 md:py-28">
             <div className="section-shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-                <div className="relative overflow-hidden border border-white/12 bg-black">
+                <div className="about-portrait relative overflow-hidden border border-white/12 bg-black">
                     <Image
                         src="/images/ryno.webp"
                         className="aspect-[4/5] w-full object-cover grayscale contrast-[1.08]"
@@ -46,32 +46,13 @@ const About = () => {
                 <div>
                     <p className="eyebrow">About the studio</p>
                     <h1 className="mt-4 text-5xl font-black leading-tight text-secondary md:text-7xl">
-                        An independent studio for businesses that want a real
-                        developer in their corner.
+                        Meet Ryno, your full-stack developer.
                     </h1>
-                    <div className="mt-6 space-y-5 text-lg font-medium leading-8 text-black/64">
-                        <p>
-                            CodeStudioWorks is my independent development studio,
-                            based in Detroit, Michigan. I work with businesses
-                            across Metro Detroit and worldwide through online
-                            meetings and digital delivery. I bring more than 15
-                            years in software to websites, applications, and
-                            online business tools for small businesses, startups,
-                            and established teams.
-                        </p>
-                        <p>
-                            My background spans international software work and
-                            modern full-stack delivery. I can lead a focused
-                            build, turn an early idea into a practical first
-                            release, or join an existing company as dependable
-                            freelance development help.
-                        </p>
-                        <p>
-                            You speak directly with me from scoping through
-                            launch. When specialist support or third-party tools
-                            are useful, I explain that clearly and keep ownership
-                            and responsibility visible.
-                        </p>
+                    <div className="mt-6 space-y-5 text-lg leading-relaxed text-white/85">
+                        <p>I’m Ryno van Eeden, the developer behind CodeStudioWorks. I’m based in Detroit and work with businesses locally and worldwide.</p>
+                        <p>I bring more than 15 years of software experience to websites, web and mobile apps, and business tools. My work includes a service-business website for Rolleston Tinting, full-stack contributions to State Champs! Sports Network and my independent product, EventBookr.</p>
+                        <p>I can build a new project or join your team to improve an existing one. We’ll agree on priorities, review progress together and keep your code and accounts organised for the future.</p>
+                        <Link href="/work" className="inline-flex font-bold text-accent underline">Explore my work</Link>
                     </div>
 
                     <div className="mt-8 grid gap-3">
@@ -95,7 +76,7 @@ const About = () => {
                         href="/contact"
                         className="mt-8 inline-flex items-center gap-2 rounded-md bg-secondary px-6 py-4 text-base font-black text-white transition hover:bg-primary"
                     >
-                        Start a Project
+                        Discuss your project
                         <FiArrowRight aria-hidden="true" />
                     </Link>
                 </div>

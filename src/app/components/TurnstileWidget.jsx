@@ -83,7 +83,7 @@ export default function TurnstileWidget({ action, onVerify, resetSignal = 0 }) {
     if (!siteKey) {
         return (
             <p className="mt-5 border border-amber-400/30 bg-amber-400/10 p-3 text-sm font-bold text-amber-200" role="alert">
-                Secure form verification is not configured yet.
+                This form is temporarily unavailable. Please email <a href="mailto:info@codestudioworks.com" className="underline">info@codestudioworks.com</a> and I’ll help you directly.
             </p>
         );
     }
@@ -94,11 +94,13 @@ export default function TurnstileWidget({ action, onVerify, resetSignal = 0 }) {
                 id="cloudflare-turnstile-api"
                 src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
                 strategy="afterInteractive"
+                onError={() => { setMessage("Security check unavailable. Please refresh or email me instead."); onVerifyRef.current(""); }}
                 onLoad={() => setScriptReady(true)}
                 onReady={() => setScriptReady(true)}
             />
             <div ref={containerRef} className="min-h-1 w-full overflow-hidden" />
-            <p className="sr-only" aria-live="polite">{message}</p>
+            <p className="mt-2 text-sm text-white/85" aria-live="polite">{message}</p>
+            {message.includes("unavailable") && <a href="mailto:info@codestudioworks.com" className="mt-2 inline-block text-sm font-bold text-accent underline">Email me instead</a>}
         </div>
     );
 }

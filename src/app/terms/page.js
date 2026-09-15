@@ -19,7 +19,7 @@ const sections = [
 
 export default function TermsPage() {
     return (
-        <main className="architectural-page bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <section className="concrete-image-section architectural-light border-b border-black/10 py-16 md:py-24">
                 <div className="section-shell max-w-4xl">
                     <p className="eyebrow">Terms</p>

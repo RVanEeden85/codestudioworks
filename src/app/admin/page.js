@@ -8,6 +8,7 @@ import {
 import {
     isRequestStorageConfigured,
     listRequestSubmissions,
+    getLeadSummary,
     serializeRequestSubmission,
 } from "../_lib/requestSubmissions";
 
@@ -93,9 +94,21 @@ export default async function AdminPage({ searchParams }) {
         );
     }
 
-    const requests = (await listRequestSubmissions()).map(
-        serializeRequestSubmission
-    );
+    let requests, leadSummary;
+    try {
+        const [submissions, summary] = await Promise.all([listRequestSubmissions(), getLeadSummary()]);
+        requests = submissions.map(serializeRequestSubmission);
+        leadSummary = summary;
+    } catch {
+        return <main className="min-h-screen bg-background px-5 py-24">
+            <section className="mx-auto max-w-3xl border border-black/20 bg-white p-8">
+                <h1 className="text-3xl font-bold">Requests are temporarily unavailable</h1>
+                <p className="mt-4 leading-relaxed">The dashboard could not connect to request storage. Your saved requests cannot be shown until the connection is restored.</p>
+                <p className="mt-3 leading-relaxed">Check the database hostname, credentials and network access in your hosting settings.</p>
+                <a href="/admin" className="mt-6 inline-block font-bold text-primary underline">Try again</a>
+            </section>
+        </main>;
+    }
 
     return (
         <main className="min-h-screen bg-background px-5 py-10">
@@ -133,7 +146,7 @@ export default async function AdminPage({ searchParams }) {
                 <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <div className="rounded-lg border border-black/10 bg-[#fffdf7] p-5">
                         <p className="text-sm font-black uppercase text-black/45">
-                            Total requests
+                            Latest requests (up to 50)
                         </p>
                         <p className="mt-2 text-4xl font-black text-secondary">
                             {requests.length}
@@ -172,6 +185,14 @@ export default async function AdminPage({ searchParams }) {
                     </div>
                 </div>
 
+                <section className="mt-6 overflow-x-auto rounded-lg border border-black/10 bg-white p-5">
+                    <h2 className="text-xl font-bold">Leads by source · all time</h2>
+                    <p className="mt-2 text-sm">Stages and revenue are updated manually. Source labels come from campaign links; direct visits may have no label.</p>
+                    <table className="mt-4 w-full text-left text-sm">
+                        <thead><tr>{["Source", "Enquiries", "Qualified or later", "Won", "Revenue received (USD)"].map(label=><th key={label} className="p-2">{label}</th>)}</tr></thead>
+                        <tbody>{leadSummary.map(row=><tr key={row._id} className="border-t"><td className="p-2">{row._id || "Direct / unknown"}</td><td className="p-2">{row.enquiries}</td><td className="p-2">{row.qualified}</td><td className="p-2">{row.won}</td><td className="p-2">{Number(row.revenue).toFixed(2)}</td></tr>)}</tbody>
+                    </table>
+                </section>
                 <div className="mt-6 overflow-hidden rounded-lg border border-black/10 bg-[#fffdf7]">
                     {requests.length === 0 ? (
                         <div className="p-8 text-center">
@@ -211,6 +232,19 @@ export default async function AdminPage({ searchParams }) {
                                             )}
                                         </div>
 
+                                        {request.type !== "support" && <form action={`/api/admin/requests/${request.id}/progress`} method="post" className="mt-4 flex flex-wrap items-end gap-3">
+                                            <label className="grid gap-1 text-sm font-bold">Lead stage
+                                                <select name="status" defaultValue={request.status} className="border p-2">
+                                                    {["new", "qualified", "consultation_held", "proposal_sent", "won", "closed"].map(stage => <option key={stage} value={stage}>{stage.replaceAll("_", " ")}</option>)}
+                                                </select>
+                                            </label>
+                                            <label className="grid gap-1 text-sm font-bold">Revenue received (USD)
+                                                <input name="revenue" type="number" min="0" max="100000000" step="0.01" defaultValue={request.revenue} className="w-36 border p-2" />
+                                            </label>
+                                            <button className="bg-secondary px-4 py-2 font-bold text-white">Save lead</button>
+                                        </form>}
+                                        {request.attribution?.utm_source && <p className="mt-3 text-sm">Source: {request.attribution.utm_source} · Campaign: {request.attribution.utm_campaign || "Unspecified"} · Medium: {request.attribution.utm_medium || "Unspecified"}</p>}
+                                        {request.attribution?.landingPage && <p className="mt-1 text-sm">Landing page: {request.attribution.landingPage}</p>}
                                         <h2 className="mt-3 text-2xl font-black text-secondary">
                                             {request.name || "Unnamed request"}
                                         </h2>

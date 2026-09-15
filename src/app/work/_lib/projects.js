@@ -4,16 +4,16 @@ export const projects = [
         name: "Rolleston Tinting",
         context: "Client website",
         headline:
-            "A service-led website built to turn local interest into confident quote requests.",
+            "A website that helps customers explore tinting services and request a quote.",
         summary:
-            "A modern website for a specialist automotive and architectural tinting business, with clear service journeys, trust-building content, completed-work galleries, and focused quote paths.",
+            "Rolleston Tinting needed a clear way to present its vehicle, home and commercial services online. The website brings service information, completed-work galleries and quote requests together.",
         role:
-            "Website strategy, interface design, full-stack development, content systems, local-search foundations, and ongoing technical improvements.",
+            "I planned and built the website, designed the pages and added content editing tools. My work also covers search setup and ongoing technical improvements.",
         outcomes: [
-            "Separate customer journeys for automotive, residential, and commercial services",
-            "Structured quote and contact paths designed around real buying intent",
-            "Editable content and media foundations for ongoing business updates",
-            "Responsive presentation across desktop and mobile",
+            "Separate pages for vehicle, home and commercial tinting",
+            "Clear contact forms and ways to request a quote",
+            "Tools for updating website content and images",
+            "Layouts for phones, tablets and desktop screens",
         ],
         capabilities: ["Next.js", "CMS", "Media delivery", "Local SEO", "Lead capture"],
         href: "https://www.rollestontinting.co.nz",
@@ -30,9 +30,9 @@ export const projects = [
             evidence: {
                 src: "/images/work/rolleston-tinting-detail.jpg",
                 alt: "Rolleston Tinting website section introducing its Canterbury window tinting and vehicle wrapping expertise",
-                title: "A service story built around trust",
-                description: "The public experience moves from clear service choices into experience, workmanship, and direct paths to a quote.",
-                focus: "Service clarity and local credibility",
+                title: "Show the services and the people behind them",
+                description: "Customers can explore the services, learn about the team and view examples of completed work before requesting a quote.",
+                focus: "Service information and team introduction",
                 position: "center center",
                 focusPosition: "18% center",
             },
@@ -43,14 +43,14 @@ export const projects = [
         name: "State Champs! Sports Network",
         context: "Professional software work",
         headline:
-            "Full-stack work across a live sports platform serving fans, athletes, schools, and sponsors.",
+            "Web and mobile development for a high school sports network.",
         summary:
-            "Ryno contributes as a full-stack developer to a connected web and mobile experience spanning editorial content, live events, athlete discovery, awards, voting, fan submissions, and sponsor experiences.",
+            "I contribute full-stack development to State Champs! Sports Network. The platform brings sports news, video, events, athlete profiles and awards to fans across web and mobile.",
         role:
-            "Full-stack application development, platform features, administration workflows, integrations, release support, and cross-device product delivery.",
+            "I contribute features across the website, mobile app, API and administration tools, and help test and release updates.",
         outcomes: [
             "Connected content, video, awards, voting, and athlete experiences",
-            "Public, administrative, API, and mobile workflows working as one platform",
+            "Connected website, mobile app, API and staff tools",
             "Sponsor and partner presentation built into the product experience",
             "Ongoing feature delivery for an active media network",
         ],
@@ -69,8 +69,8 @@ export const projects = [
             evidence: {
                 src: "/images/work/state-champs-detail.jpg",
                 alt: "State Champs Sports Network news interface with content filters and a featured Michigan high school football article",
-                title: "A connected sports publishing system",
-                description: "Live broadcasts, editorial content, events, awards, athletes, and sponsor experiences share one coherent public platform.",
+                title: "Sports news and video in one place",
+                description: "The site brings broadcasts, news, events and athlete content together, with tools for staff to manage the platform.",
                 focus: "Editorial discovery and live content",
                 position: "center 58%",
                 focusPosition: "76% 68%",
@@ -82,11 +82,11 @@ export const projects = [
         name: "EventBookr",
         context: "Independent product",
         headline:
-            "A two-market event marketplace connecting customers with venues and service providers.",
+            "An event marketplace for finding venues and service providers.",
         summary:
-            "Product engineering across a marketplace and planning ecosystem with provider listings, customer discovery, enquiries, accounts, regional experiences, and event-planning tools.",
+            "EventBookr is my independent product. I develop its venue and service listings, customer accounts, enquiries and event-planning tools, with regional support for South Africa and the US.",
         role:
-            "Product architecture, full-stack development, marketplace workflows, account experiences, payments and regional platform foundations.",
+            "I design the product and build its website, backend, accounts, listings and payment integrations.",
         outcomes: [
             "Marketplace discovery for venues, entertainers, and event services",
             "Provider listing and enquiry workflows",
@@ -108,8 +108,8 @@ export const projects = [
             evidence: {
                 src: "/images/work/eventbookr-detail.jpg",
                 alt: "EventBookr marketplace interface showing premium event venues and service-provider listing cards",
-                title: "Marketplace discovery made visual",
-                description: "Customers can browse real venues and providers while businesses gain structured, high-visibility listing and enquiry paths.",
+                title: "Find venues and event services",
+                description: "Customers can browse listings and contact providers. Businesses can present their services and receive enquiries.",
                 focus: "Listings, search, and provider discovery",
                 position: "center 60%",
                 focusPosition: "68% 72%",

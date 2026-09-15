@@ -26,8 +26,8 @@ export default function ProjectRail() {
             <div className="section-shell py-20 lg:sticky lg:top-[72px] lg:flex lg:h-[calc(100svh-72px)] lg:flex-col lg:justify-center lg:overflow-hidden lg:py-12">
                 <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
                     <div>
-                        <p className="text-sm font-black uppercase text-accent">Proof, not promises</p>
-                        <h2 className="mt-4 max-w-4xl text-4xl font-black leading-tight md:text-6xl">Real websites, apps, and platforms I have helped build.</h2>
+                        <p className="text-sm font-black uppercase text-accent">Selected work</p>
+                        <h2 className="mt-4 max-w-4xl text-4xl font-black leading-tight md:text-6xl">Explore my recent work.</h2>
                     </div>
                     <Link href="/work" className="inline-flex items-center gap-2 font-black text-accent hover:text-white">View all work <FiArrowRight aria-hidden="true" /></Link>
                 </div>
@@ -50,8 +50,8 @@ export default function ProjectRail() {
                                     <div className="mt-8">
                                         <p className="text-base font-semibold leading-7 text-white/72">{project.headline}</p>
                                         <div className="mt-6 flex flex-wrap items-center gap-5 border-t border-white/20 pt-5">
-                                            <Link href={`/work/${project.slug}`} className="inline-flex items-center gap-2 text-sm font-black text-white hover:text-accent">Case details <FiArrowRight aria-hidden="true" /></Link>
-                                            <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} website`} className="inline-flex items-center gap-2 text-sm font-bold text-white/55 hover:text-accent">Live site <FiExternalLink aria-hidden="true" /></a>
+                                            <Link href={`/work/${project.slug}`} className="inline-flex items-center gap-2 text-sm font-black text-white hover:text-accent">View case study <FiArrowRight aria-hidden="true" /></Link>
+                                            <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} website`} className="inline-flex items-center gap-2 text-sm font-bold text-white/55 hover:text-accent">Visit website <FiExternalLink aria-hidden="true" /></a>
                                         </div>
                                     </div>
                                 </div>

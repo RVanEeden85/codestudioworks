@@ -73,7 +73,7 @@ export default async function ProjectPage({ params }) {
     ]);
 
     return (
-        <main className="architectural-page bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <JsonLd data={pageSchema} />
             <section className="project-case-hero border-b border-white/10 py-12 text-white md:py-20">
                 <div className="section-shell grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
@@ -117,7 +117,7 @@ export default async function ProjectPage({ params }) {
 
                     <div className="project-evidence-grid mt-9 grid gap-4 lg:grid-cols-[1.42fr_0.58fr]">
                         <figure className="project-evidence-panel project-evidence-panel--wide">
-                            <Image
+                            <div className="evidence-image"><Image
                                 src={project.media.evidence.src}
                                 alt={project.media.evidence.alt}
                                 fill
@@ -125,14 +125,14 @@ export default async function ProjectPage({ params }) {
                                 sizes="(max-width: 1023px) 100vw, 70vw"
                                 style={{ objectPosition: project.media.evidence.position }}
                             />
-                            <span className="project-evidence-wash" aria-hidden="true" />
+                            </div>
                             <figcaption>
-                                <span>Public interface view</span>
+                                <span>Website detail</span>
                                 <strong>{project.media.evidence.focus}</strong>
                             </figcaption>
                         </figure>
                         <figure className="project-evidence-panel project-evidence-panel--crop" aria-hidden="true">
-                            <Image
+                            <div className="evidence-image"><Image
                                 src={project.media.evidence.src}
                                 alt=""
                                 fill
@@ -140,10 +140,10 @@ export default async function ProjectPage({ params }) {
                                 sizes="(max-width: 1023px) 100vw, 30vw"
                                 style={{ objectPosition: project.media.evidence.focusPosition }}
                             />
-                            <span className="project-evidence-wash" aria-hidden="true" />
+                            </div>
                             <figcaption>
                                 <span>Closer look</span>
-                                <strong>Focused content detail</strong>
+                                <strong>Page detail</strong>
                             </figcaption>
                         </figure>
                     </div>
@@ -154,8 +154,8 @@ export default async function ProjectPage({ params }) {
                 <div className="section-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
                     <aside className="lg:sticky lg:top-28 lg:self-start">
                         <div className="architectural-slab p-6">
-                            <p className="eyebrow">Nature of the work</p>
-                            <p className="mt-4 font-bold leading-7 text-secondary/76">
+                            <p className="eyebrow">My role</p>
+                            <p className="mt-4 font-bold leading-7 text-white/85">
                                 {project.role}
                             </p>
                             <a
@@ -171,11 +171,12 @@ export default async function ProjectPage({ params }) {
                     </aside>
 
                     <div>
+                        <h2 className="mb-4 text-3xl font-black text-secondary">The project</h2>
                         <p className="text-lg font-medium leading-8 text-black/66">
                             {project.summary}
                         </p>
                         <h2 className="mt-10 text-3xl font-black text-secondary">
-                            What the work includes
+                            {project.context === "Professional software work" ? "What I contributed to" : "What I built"}
                         </h2>
                         <div className="mt-6 grid gap-4 md:grid-cols-2">
                             {project.outcomes.map((item) => (
@@ -192,21 +193,19 @@ export default async function ProjectPage({ params }) {
                         </div>
                         <div className="monolith-cta mt-10 border border-white/10 p-6 text-white md:p-8">
                             <p className="text-sm font-black uppercase text-accent">
-                                Your project will be different
+                                Your project
                             </p>
                             <h2 className="mt-3 text-3xl font-black">
-                                Start with the business problem, not a technical feature list.
+                                Need something similar?
                             </h2>
                             <p className="mt-4 max-w-3xl font-medium leading-7 text-white/72">
-                                I&apos;ll help define the right scope, identify the
-                                riskiest assumptions, and shape a practical path
-                                from first release to ongoing improvement.
+                                Tell me what you need to build or improve. I’ll help you plan the work and the next step.
                             </p>
                             <Link
                                 href="/contact"
                                 className="mt-6 inline-flex rounded-md bg-accent px-5 py-3 text-sm font-black text-secondary transition hover:bg-white"
                             >
-                                Discuss Your Project
+                                Discuss your project
                             </Link>
                         </div>
                     </div>

@@ -41,7 +41,6 @@ export default function ProjectShowcaseVisual({ project, variant = "rail", prior
                             alt={project.media.alt}
                             fill
                             priority={priority}
-                            unoptimized
                             sizes={variant === "case" ? "(max-width: 1023px) 100vw, 58vw" : "(max-width: 1023px) 100vw, 52vw"}
                             style={{ objectPosition: project.media.position }}
                         />
@@ -61,7 +60,6 @@ export default function ProjectShowcaseVisual({ project, variant = "rail", prior
                         src={project.media.mobileSrc}
                         alt=""
                         fill
-                        unoptimized
                         sizes="180px"
                         style={{ objectPosition: "top center" }}
                     />

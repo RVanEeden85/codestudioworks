@@ -119,7 +119,7 @@ const pageSchema = graphSchema([
 
 export default function DetroitWebDevelopmentPage() {
     return (
-        <main className="architectural-page overflow-x-clip bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page overflow-x-clip bg-background pt-[72px]">
             <JsonLd data={pageSchema} />
 
             <section className="project-monolith-hero relative overflow-hidden border-b border-white/10 py-20 text-white md:py-28">
@@ -137,7 +137,7 @@ export default function DetroitWebDevelopmentPage() {
                         </p>
                         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                             <Link href="/contact?service=Business%20website" className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-4 font-black text-secondary transition hover:bg-white">
-                                Discuss Your Project <FiArrowRight aria-hidden="true" />
+                                Discuss your project <FiArrowRight aria-hidden="true" />
                             </Link>
                             <Link href="/services" className="inline-flex items-center justify-center rounded-md border border-white/20 px-6 py-4 font-black text-white transition hover:border-accent hover:text-accent">
                                 Explore Development Services

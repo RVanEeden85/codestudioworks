@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { sanitizeAttribution } from "../../_lib/leadAttribution";
 import { NextResponse } from "next/server";
 import { sendSubmissionEmails } from "../../_lib/emailService";
 import {
@@ -72,8 +73,7 @@ export async function POST(request) {
             : crypto.randomUUID();
 
         if (
-            !name || !isValidEmail(email) || !projectType || !preferredTime ||
-            !timeZone || !message || body.privacyAccepted !== true
+            !name || !isValidEmail(email) || !projectType || !message || body.privacyAccepted !== true
         ) {
             return errorResponse("Please complete all required fields.", 400);
         }
@@ -83,6 +83,7 @@ export async function POST(request) {
             type: "consultation",
             source: "consultation_modal",
             status: "new",
+            attribution: sanitizeAttribution(body.attribution),
             name,
             email,
             phone,

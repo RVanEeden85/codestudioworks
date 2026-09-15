@@ -12,6 +12,10 @@ const sections = [
         content: "When you send an enquiry or request a consultation, I may collect your name, email address, phone number, business or project details, budget range, preferred availability, and any other information you choose to provide. Basic technical logs may also be processed by the website host for security and reliability.",
     },
     {
+        title: "How you found the website",
+        content: "Campaign labels from links, such as the source and campaign name, may be kept in your browser for the current tab session. If you send an enquiry, those labels and the landing page are saved with it so I can understand which marketing brings relevant projects. This does not add third-party advertising trackers.",
+    },
+    {
         title: "How I use it",
         content: "I use this information to respond to you, assess and plan potential work, prepare proposals, deliver agreed services, keep business records, protect the website, and meet legal obligations. I do not sell personal information or use enquiry details for unrelated bulk marketing.",
     },
@@ -35,7 +39,7 @@ const sections = [
 
 export default function PrivacyPage() {
     return (
-        <main className="architectural-page bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <section className="concrete-image-section architectural-light border-b border-black/10 py-16 md:py-24">
                 <div className="section-shell max-w-4xl">
                     <p className="eyebrow">Privacy</p>

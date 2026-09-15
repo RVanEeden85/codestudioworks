@@ -82,6 +82,8 @@ export function serializeRequestSubmission(submission) {
         type: submission.type || "request",
         source: submission.source || "",
         status: submission.status || "new",
+        attribution: submission.attribution || {},
+        revenue: submission.revenue || 0,
         name: submission.name || "",
         email: submission.email || "",
         phone: submission.phone || submission.tel || "",
@@ -98,4 +100,24 @@ export function serializeRequestSubmission(submission) {
         emailDelivery: submission.emailDelivery || null,
         createdAt: submission.createdAt?.toISOString?.() || "",
     };
+}
+
+export async function updateLeadProgress(id, status, revenue) {
+    const db = await getDb();
+    return db.collection(COLLECTION_NAME).updateOne({ _id: new ObjectId(id), type: { $ne: "support" } }, { $set: { status, revenue, updatedAt: new Date() } });
+}
+
+export async function getLeadSummary() {
+    const db = await getDb();
+    return db.collection(COLLECTION_NAME).aggregate([
+        { $match: { type: { $in: ["contact", "project_planner", "consultation"] } } },
+        { $group: {
+            _id: { $ifNull: ["$attribution.utm_source", "Direct / unknown"] },
+            enquiries: { $sum: 1 },
+            qualified: { $sum: { $cond: [{ $in: ["$status", ["qualified", "consultation_held", "proposal_sent", "won"]] }, 1, 0] } },
+            won: { $sum: { $cond: [{ $eq: ["$status", "won"] }, 1, 0] } },
+            revenue: { $sum: { $ifNull: ["$revenue", 0] } }
+        } },
+        { $sort: { enquiries: -1 } }
+    ]).toArray();
 }

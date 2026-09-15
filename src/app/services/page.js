@@ -42,7 +42,7 @@ const pageSchema = graphSchema([
 
 export default function ServicesPage() {
     return (
-        <main className="architectural-page bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <JsonLd data={pageSchema} />
             <ServicesGalleryHero />
 

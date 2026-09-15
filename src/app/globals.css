@@ -39,7 +39,7 @@ body {
     background-image:
         linear-gradient(90deg, rgba(8, 9, 9, 0.97) 0%, rgba(8, 9, 9, 0.72) 54%, rgba(8, 9, 9, 0.88) 100%),
         radial-gradient(ellipse 42% 80% at 74% 36%, rgba(215, 244, 93, 0.08), transparent 70%),
-        url("/images/concrete-passage.png");
+        url("/images/concrete-passage.webp");
     background-position: center;
     background-size: cover;
     position: relative;
@@ -236,7 +236,7 @@ html {
     background-color: #b8b8b1;
     background-image:
         linear-gradient(90deg, rgba(184, 184, 177, 0.96) 0%, rgba(184, 184, 177, 0.9) 46%, rgba(184, 184, 177, 0.54) 100%),
-        url("/images/concrete-passage.png");
+        url("/images/concrete-passage.webp");
     background-position: center;
     background-size: cover;
 }
@@ -252,7 +252,7 @@ html {
     background-color: #b8b8b1;
     background-image:
         linear-gradient(rgba(190, 190, 183, 0.76), rgba(178, 179, 172, 0.8)),
-        url("/images/concrete-panel-wall.png");
+        url("/images/concrete-panel-wall.webp");
     background-blend-mode: normal;
     background-position: center;
     background-repeat: no-repeat;
@@ -327,7 +327,7 @@ html {
     background-color: #080909;
     background-image:
         linear-gradient(90deg, rgba(8, 9, 9, 0.98) 0%, rgba(8, 9, 9, 0.84) 58%, rgba(8, 9, 9, 0.3) 100%),
-        url("/images/concrete-sculpture.png");
+        url("/images/concrete-sculpture.webp");
     background-position: 86% center;
     background-repeat: no-repeat;
     background-size: auto 145%;
@@ -337,7 +337,7 @@ html {
     background-color: #080909;
     background-image:
         linear-gradient(90deg, rgba(8, 9, 9, 0.97), rgba(8, 9, 9, 0.82) 54%, rgba(8, 9, 9, 0.25)),
-        url("/images/architectural-hero.png");
+        url("/images/architectural-hero.webp");
     background-position: center;
     background-size: cover;
 }
@@ -507,7 +507,7 @@ html {
 }
 
 .hero-depth-foreground {
-    background-image: url("/images/architectural-hero.png");
+    background-image: url("/images/architectural-hero.webp");
     background-position: 64% center;
     background-size: cover;
     clip-path: polygon(67% 0, 100% 0, 100% 100%, 54% 100%);
@@ -1881,3 +1881,151 @@ textarea {
         display: none;
     }
 }
+
+/* Reading hierarchy: content stays visible and decorative effects stay behind it. */
+.architectural-page h1 {
+    font-size: clamp(3rem, 6vw, 5.35rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    font-weight: 750;
+    text-wrap: balance;
+}
+.architectural-page h2 {
+    font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    text-wrap: balance;
+}
+.architectural-page h3 { line-height: 1.25; letter-spacing: -0.02em; }
+.architectural-page .architectural-slab h2,
+.architectural-page form h2 { font-size: 1.5rem; }
+.architectural-page p { max-width: 68ch; }
+.architectural-page [class*="text-black/"],
+.architectural-page [class*="text-secondary/"],
+.architectural-page [class*="text-white/"] { color: #d1d5d2; }
+.architectural-page .architectural-light [class*="text-black/"],
+.architectural-page .architectural-light [class*="text-secondary/"] { color: #28342e; }
+.architectural-page .architectural-light .architectural-slab [class*="text-black/"],
+.architectural-page .architectural-light .architectural-slab [class*="text-secondary/"],
+.architectural-page .architectural-light .architectural-slab [class*="text-white/"] { color: #d1d5d2; }
+.architectural-page input::placeholder,
+.architectural-page textarea::placeholder { color: #aeb7b1; }
+.architectural-page label { font-size: 1rem; line-height: 1.5; }
+.architectural-page .eyebrow { font-size: .8rem; letter-spacing: .06em; }
+.architectural-page section[id] { scroll-margin-top: 90px; }
+
+.architectural-page .page-intro { background: #101211; }
+.architectural-page .page-intro img,
+.architectural-page .home-intro > img { filter: grayscale(1); }
+.architectural-page .pricing-introduction h2 { font-size: 1.5rem; }
+.architectural-page .pricing-introduction p { font-size: 1rem; line-height: 1.6; margin-top: .75rem; }
+
+.architectural-page .project-showcase img { filter: none; }
+.architectural-page .project-evidence-panel { min-height: 0; }
+.architectural-page .evidence-image { position: relative; height: 350px; overflow: hidden; }
+.architectural-page .project-evidence-panel figcaption { position: static; padding: 1rem 1.25rem; background: #141a16; }
+.architectural-page .project-evidence-panel figcaption span { font-size: .8rem; letter-spacing: .04em; text-transform: none; }
+.architectural-page .project-evidence-panel:hover img { transform: none; filter: none; }
+.architectural-page .project-evidence-panel--crop img { transform: none; }
+.architectural-page .project-showcase-caption { font-size: .8rem; color: #d1d5d2; }
+
+
+.architectural-page .text-red-700 { color: #fca5a5; }
+.skip-link { position: fixed; left: 1rem; top: -100px; z-index: 10000; padding: .75rem 1rem; background: #d7f45d; color: #080909; }
+.skip-link:focus { top: 1rem; }
+@media (max-width: 767px) {
+    .architectural-page .section-shell { width: calc(100% - 32px); }
+    .architectural-page .contact-options { margin-top: 1rem; gap: .25rem; }
+    .architectural-page .contact-options .architectural-rule { display: none; }
+    .architectural-page .support-details { display: none; }
+    .architectural-page .about-portrait { order: 2; max-height: 430px; }
+    .architectural-page .project-evidence-panel--crop { display: none; }
+    .architectural-page .evidence-image { height: 240px; }
+}
+
+/* Inside the studio: one architectural environment, four chapters. */
+.studio-journey { height: 440svh; position: relative; background: #141b1b; }
+.studio-stage { position: sticky; top: 72px; height: calc(100svh - 72px); min-height: 620px; overflow: hidden; isolation: isolate; }
+.studio-canvas,.studio-fallback,.studio-shade { position:absolute; inset:0; width:100%; height:100%; }
+.studio-canvas canvas { display:block; width:100%; height:100%; }
+.studio-fallback { object-fit:cover; }
+.studio-shade { pointer-events:none; background:linear-gradient(90deg,rgba(10,16,16,.97),rgba(10,16,16,.88) 25%,rgba(10,16,16,.26) 58%,transparent 85%),linear-gradient(0deg,rgba(10,16,16,.85),transparent 22%); }
+.studio-topline { position:absolute; left:4.5%; right:4.5%; top:32px; display:flex; justify-content:space-between; font-size:10px; letter-spacing:.18em; color:#c4cdc4; }
+.studio-story { position:absolute; left:4.5%; top:19%; width:min(49%,680px); bottom:110px; }
+.studio-chapter { position:absolute; inset:0; opacity:0; visibility:hidden; transform:translateY(18px); transition:opacity .45s ease,transform .65s ease,visibility .45s; pointer-events:none; }
+.studio-chapter.is-current { opacity:1; visibility:visible; transform:none; pointer-events:auto; }
+.architectural-page .studio-chapter h1,.architectural-page .studio-chapter h2,.architectural-page .studio-page-content h1 { color:#f2f1e9; font-size:clamp(3rem,4.7vw,5.4rem); font-weight:500; line-height:1.06; letter-spacing:-.055em; text-wrap:balance; margin:26px 0; }
+.studio-kicker { display:flex; align-items:center; gap:16px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#d6f367; }
+.studio-kicker span { border:1px solid #aeb49a66; padding:7px 9px; font-size:10px; }
+.architectural-page .studio-copy { max-width:49ch; color:#d2d7cf; font-size:17px; line-height:1.8; }
+.studio-actions { display:flex; gap:22px; align-items:center; flex-wrap:wrap; margin-top:28px; }
+.studio-primary { display:inline-flex; align-items:center; justify-content:space-between; gap:28px; padding:17px 22px; background:#d6f367; color:#162019; font-size:13px; font-weight:700; transition:background .2s,transform .2s; }
+.studio-primary:hover { background:#edf7c0; transform:translateY(-2px); }
+.studio-secondary { display:inline-flex; gap:12px; align-items:center; color:#e9ede2; font-size:13px; border-bottom:1px solid #6c776d; padding:12px 0; }
+.architectural-page .studio-note { margin-top:26px; font-size:11px; color:#9ea99f; line-height:1.7; }
+.studio-bottom { position:absolute; bottom:26px; left:4.5%; right:4.5%; border-top:1px solid #b9c3ad33; padding-top:22px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.studio-bottom button { cursor:pointer; }
+.studio-scroll,.studio-pause { display:flex; align-items:center; gap:10px; color:#cbd1c6; font-size:11px; }
+.studio-scroll svg { color:#d6f367; }
+.studio-bottom nav { display:flex; gap:24px; }
+.studio-bottom nav button { display:flex; gap:7px; align-items:center; color:#9aa69b; font-size:11px; }
+.studio-bottom nav button[aria-current] { color:#d6f367; }
+.studio-nav-label { font-size:10px; }
+.studio-page-hero { min-height:calc(100svh - 72px); position:relative; overflow:hidden; isolation:isolate; display:flex; align-items:center; padding:110px 4.5%; }
+.studio-page-content { position:relative; z-index:1; max-width:660px; width:54%; }
+.studio-page-content .studio-primary { margin-top:30px; }
+.studio-room-label { position:absolute; right:4.5%; bottom:32px; color:#c5cdbd; letter-spacing:.16em; font-size:10px; }
+.studio-stage button:focus-visible,.studio-stage a:focus-visible { outline:2px solid #d6f367; outline-offset:6px; }
+@media(min-width:1600px) { .studio-story { top:24%; } }
+@media(max-width:1023px) { .studio-nav-label,.studio-topline span:last-child { display:none; } .studio-story { width:60%; top:17%; } .studio-bottom nav { gap:18px; } }
+@media(max-width:767px) {
+ .studio-journey { height:380svh; }
+ .studio-stage { min-height:650px; }
+ .studio-topline { top:22px; }
+ .studio-story { left:6%; width:88%; top:14%; bottom:100px; }
+ .studio-shade { background:linear-gradient(90deg,rgba(10,16,16,.91),rgba(10,16,16,.48)),linear-gradient(0deg,#101818,transparent 60%); }
+ .architectural-page .studio-chapter h1,.architectural-page .studio-chapter h2,.architectural-page .studio-page-content h1 { font-size:clamp(2.7rem,9vw,3.6rem); margin:23px 0; }
+ .architectural-page .studio-copy { font-size:15px; line-height:1.75; }
+ .studio-actions { gap:15px; margin-top:22px; }
+ .studio-primary { padding:15px 17px; gap:15px; }
+ .studio-note { max-width:32ch; }
+ .studio-bottom { left:6%; right:6%; bottom:24px; gap:12px; }
+ .studio-scroll { display:none; }
+ .studio-pause { font-size:10px; }
+ .studio-page-hero { padding:100px 6%; min-height:780px; }
+ .studio-page-content { width:100%; }
+}
+@media(prefers-reduced-motion:reduce) { .studio-chapter { transition:none; } .studio-primary:hover { transform:none; } }
+
+.studio-pause { margin-right: 48px; }
+
+@property --portrait-x { syntax: '<percentage>'; inherits: true; initial-value: 54%; }
+@property --portrait-y { syntax: '<percentage>'; inherits: true; initial-value: 28%; }
+.spotlight-portrait { min-width:0; margin:0; }
+.spotlight-portrait-stage { position:relative; isolation:isolate; overflow:hidden; aspect-ratio:4/5; --portrait-x:54%; --portrait-y:28%; animation:portrait-limelight 14s ease-in-out infinite alternate; }
+.spotlight-portrait-stage[data-following] { animation:none; }
+.spotlight-portrait-stage img { width:100%; height:100%; object-fit:contain; object-position:center bottom; }
+.spotlight-portrait-stage .portrait-monochrome { position:relative; z-index:2; filter:grayscale(1) brightness(.7); }
+.spotlight-portrait-stage .portrait-colour { z-index:3; filter:brightness(1.04) saturate(1.04); mask-image:radial-gradient(ellipse 43% 42% at var(--portrait-x) var(--portrait-y),#000 12%,#000 35%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse 43% 42% at var(--portrait-x) var(--portrait-y),#000 12%,#000 35%,transparent 100%); }
+.portrait-light-halo { position:absolute; inset:0; z-index:0; background:radial-gradient(ellipse 43% 40% at var(--portrait-x) var(--portrait-y),#d6f36730, #b4d04b0e 55%,transparent 80%); filter:blur(20px); }
+.portrait-light-beam { position:absolute; inset:-20% -15% 0; z-index:1; opacity:.65; background:conic-gradient(from 155deg at var(--portrait-x) 0%,transparent 0deg,#d6f36705 3deg,#d6f36726 15deg,#d6f36708 29deg,transparent 35deg); filter:blur(14px); mask-image:linear-gradient(#000,transparent 85%); }
+.portrait-floor-fade { position:absolute; z-index:4; inset:75% 0 0; background:linear-gradient(transparent,#101211); pointer-events:none; }
+.portrait-signature { border-top:1px solid #d6f36738; padding-top:20px; display:flex; flex-direction:column; gap:8px; }
+.portrait-signature span { font-size:11px; color:#d6f367; letter-spacing:.12em; text-transform:uppercase; }
+.portrait-signature strong { font-size:23px; font-weight:600; color:#eef0e9; }
+@keyframes portrait-limelight { 0%,15% { --portrait-x:46%; --portrait-y:25%; } 55% { --portrait-x:65%; --portrait-y:43%; } 100% { --portrait-x:50%; --portrait-y:29%; } }
+@media(prefers-reduced-motion:reduce) { .spotlight-portrait-stage { animation:none; } }
+
+/* Real daylight crosses shallow concrete panels as these sections scroll. */
+.daylight-section { position:relative; isolation:isolate; overflow:hidden; background:#bbb8ae; }
+.daylight-wall { position:absolute; inset:0; z-index:-2; background:repeating-linear-gradient(90deg,#b8b5ab 0,#cac7bd 19.7%,#85877c 20%,#b8b5ab 20.3%); }
+.daylight-wall canvas { display:block; width:100%; height:100%; }
+.daylight-section::after { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; background:linear-gradient(90deg,#eee9db22,transparent 70%); }
+.daylight-section > .section-shell { position:relative; }
+.architectural-page .daylight-process .text-center { background:#d8d5cbeF; border:1px solid #ffffff38; padding:24px 30px; box-shadow:0 12px 32px #1a25151a; }
+.architectural-page .daylight-process .process-slab { background:#dedbd2; }
+.architectural-page .daylight-morning > .section-shell > .grid:first-child { padding:24px; background:#d8d5cbef; border:1px solid #ffffff38; }
+.daylight-evening { background:#17201b; }
+.daylight-evening .daylight-wall { background:repeating-linear-gradient(90deg,#17201b 0,#323c30 19.7%,#101812 20%,#17201b 20.3%); }
+.daylight-evening::after { background:linear-gradient(90deg,#0b1510d9,#0b15107a); }

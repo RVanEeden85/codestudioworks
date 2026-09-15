@@ -43,7 +43,7 @@ const pageSchema = graphSchema([
 
 export default function WorkPage() {
     return (
-        <main className="architectural-page bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <JsonLd data={pageSchema} />
             <WorkArchiveHero />
 
@@ -88,7 +88,7 @@ export default function WorkPage() {
                                         href={`/work/${project.slug}`}
                                         className="inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-5 py-3 text-sm font-black text-white transition hover:bg-primary"
                                     >
-                                        View Project Details
+                                        View case study
                                         <FiArrowRight aria-hidden="true" />
                                     </Link>
                                     <a
@@ -121,7 +121,7 @@ export default function WorkPage() {
                         href="/contact"
                         className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-4 font-black text-secondary transition hover:bg-white"
                     >
-                        Discuss Your Project
+                        Discuss your project
                         <FiArrowRight aria-hidden="true" />
                     </Link>
                 </div>

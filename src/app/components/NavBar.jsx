@@ -66,7 +66,7 @@ const Navbar = () => {
 
                 <div className="flex items-center gap-2">
                     <Link href="/contact" className="hidden items-center gap-2 rounded-sm bg-accent px-4 py-3 text-sm font-black text-[#080909] transition hover:bg-white sm:inline-flex">
-                        Start a Project
+                        Discuss your project
                         <FiArrowUpRight aria-hidden="true" />
                     </Link>
                     <button
@@ -107,7 +107,7 @@ const Navbar = () => {
                             </motion.div>
                         ))}
                         <Link href="/contact" onClick={() => setIsOpen(false)} className="mt-2 inline-flex items-center justify-between rounded-sm bg-accent px-4 py-3 font-black text-[#080909] sm:hidden">
-                            Start a Project
+                            Discuss your project
                             <FiArrowUpRight aria-hidden="true" />
                         </Link>
                     </div>

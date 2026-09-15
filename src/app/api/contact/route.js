@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { sanitizeAttribution } from "../../_lib/leadAttribution";
 import { NextResponse } from "next/server";
 import { sendSubmissionEmails } from "../../_lib/emailService";
 import {
@@ -80,6 +81,7 @@ export async function POST(request) {
             type,
             source,
             status: "new",
+            attribution: sanitizeAttribution(body.attribution),
             name,
             email,
             phone,

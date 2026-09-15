@@ -30,7 +30,7 @@ export default async function ContactPage({ searchParams }) {
     const params = await searchParams;
 
     return (
-        <main className="architectural-page bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <JsonLd data={pageSchema} />
             <Contact initialService={params?.service || ""} />
         </main>

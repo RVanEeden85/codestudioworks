@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { projectTypes } from "../_lib/projectTypes";
+import { getLeadAttribution } from "../_lib/leadAttribution";
 import { useEffect, useRef, useState } from "react";
 import { FiX } from "react-icons/fi";
 import TurnstileWidget, { getInitialTurnstileToken } from "./TurnstileWidget";
@@ -72,6 +74,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
         data.privacyAccepted = data.privacyAccepted === "on";
         data.turnstileToken = turnstileToken;
         data.submissionId = submissionId;
+        data.attribution = getLeadAttribution();
 
         try {
             const response = await fetch("/api/consultation", {
@@ -145,19 +148,13 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                         <label className="grid gap-2 text-sm font-black">
                             Project type
                             <select name="projectType" defaultValue="" className={fieldClass} required>
-                                <option value="" disabled>Select one</option>
-                                <option>Business website</option>
-                                <option>Website redesign</option>
-                                <option>New business launch</option>
-                                <option>Web or mobile application</option>
-                                <option>Custom business tool or integration</option>
-                                <option>Ongoing development support</option>
-                                <option>Website support or takeover</option>
-                            </select>
+                                    <option value="" disabled>Select one</option>
+                                    {projectTypes.map(type => <option key={type}>{type}</option>)}
+                                </select>
                         </label>
                         <label className="grid gap-2 text-sm font-black">
-                            Preferred window
-                            <select name="preferredTime" defaultValue="" className={fieldClass} required>
+                            Preferred time (optional)
+                            <select name="preferredTime" defaultValue="" className={fieldClass}>
                                 <option value="" disabled>Select one</option>
                                 <option>Weekday morning</option>
                                 <option>Weekday afternoon</option>
@@ -166,13 +163,13 @@ const ConsultationModal = ({ isOpen, onClose }) => {
                             </select>
                         </label>
                         <label className="grid gap-2 text-sm font-black">
-                            Your timezone
-                            <input name="timeZone" placeholder="Example: Eastern Time" className={fieldClass} required />
+                            Your timezone (optional)
+                            <input name="timeZone" placeholder="Example: Eastern Time" className={fieldClass} />
                         </label>
                     </div>
 
                     <label className="grid gap-2 text-sm font-black">
-                        What should the project help the business achieve?
+                        What would you like help with?
                         <textarea name="message" className={`${fieldClass} min-h-28`} required />
                     </label>
 

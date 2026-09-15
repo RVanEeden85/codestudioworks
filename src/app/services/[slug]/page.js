@@ -92,7 +92,7 @@ export default async function ServiceDetailPage({ params }) {
     ]);
 
     return (
-        <main className="architectural-page bg-background pt-[72px]">
+        <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <JsonLd data={serviceSchema} />
             <section className="concrete-image-section architectural-light border-b border-black/10 py-16 md:py-24">
                 <div className="section-shell">
@@ -125,7 +125,7 @@ export default async function ServiceDetailPage({ params }) {
                                 href={`/contact?service=${encodeURIComponent(service.name)}`}
                                 className="mt-7 inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-black text-secondary transition hover:bg-white"
                             >
-                                Discuss This Service
+                                Discuss this service
                                 <FiArrowRight aria-hidden="true" />
                             </Link>
                         </div>
@@ -145,14 +145,14 @@ export default async function ServiceDetailPage({ params }) {
                         </section>
 
                         <section className="project-monolith-hero mt-6 border border-white/10 p-6 text-white md:p-8">
-                            <p className="text-sm font-black uppercase text-accent">Engagement</p>
-                            <h2 className="mt-3 text-3xl font-black">A clear working model before development starts.</h2>
+                            <p className="text-sm font-black uppercase text-accent">Working together</p>
+                            <h2 className="mt-3 text-3xl font-black">How we’ll work together.</h2>
                             <p className="mt-4 max-w-3xl font-medium leading-7 text-white/74">{service.engagement}</p>
                         </section>
 
                         <section className="mt-10">
                             <p className="eyebrow">Common questions</p>
-                            <h2 className="mt-3 text-3xl font-black text-secondary">Before we scope the work</h2>
+                            <h2 className="mt-3 text-3xl font-black text-secondary">Common questions</h2>
                             <div className="mt-6 grid gap-4">
                                 {service.faqs.map((faq) => (
                                     <article key={faq.question} className="border-t border-white/16 py-6">

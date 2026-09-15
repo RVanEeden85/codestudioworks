@@ -59,22 +59,22 @@ export default function SupportForm() {
     }
 
     return (
-        <section className="support-void-hero min-h-[calc(100svh-72px)] py-20 md:py-28">
+        <section className="support-void-hero py-10 md:py-16">
             <div className="section-shell grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
                 <div className="lg:sticky lg:top-28">
                     <p className="eyebrow">Existing client support</p>
                     <h1 className="mt-4 text-5xl font-black leading-[0.98] text-secondary md:text-7xl">
-                        Give the issue a clear path forward.
+                        Get help with your website or app.
                     </h1>
                     <p className="mt-6 max-w-xl text-lg font-medium leading-8 text-black/64">
-                        Tell me what changed, what is affected, and how urgent it is. Your request is stored first, given a reference, and reviewed personally.
+                        Describe the issue and how it affects your business. I’ll review your request personally.
                     </p>
 
-                    <div className="mt-9 grid gap-px overflow-hidden border border-white/14 bg-white/14">
+                    <div className="support-details mt-9 grid gap-px overflow-hidden border border-white/14 bg-white/14">
                         {[
-                            [FiCheckCircle, "Stored before email delivery", "The request remains available even if an email provider is delayed."],
-                            [FiLifeBuoy, "One accountable contact", "You deal directly with the developer who understands the work."],
-                            [FiAlertTriangle, "Urgency without false promises", "Choose the impact level; response time follows the active support agreement."],
+                            [FiCheckCircle, "Keep your reference number", "Use the reference shown after sending if you need to follow up."],
+                            [FiLifeBuoy, "Direct support", "You deal directly with the developer who understands the work."],
+                            [FiAlertTriangle, "Response times", "I respond according to the priority and terms in your support agreement."],
                         ].map(([Icon, title, copy]) => (
                             <div key={title} className="bg-[#111412]/92 p-5 backdrop-blur-md">
                                 <div className="flex gap-4">
@@ -89,15 +89,15 @@ export default function SupportForm() {
                     </div>
 
                     <p className="mt-6 border-l-2 border-accent pl-4 text-sm font-semibold leading-6 text-white/58">
-                        This form is not a guaranteed 24/7 emergency channel. Critical-response commitments are governed by your current support agreement.
+                        For urgent issues, use the contact method in your support agreement. Response times depend on your plan.
                     </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="architectural-slab bg-[#111412]/96 p-6 backdrop-blur-xl md:p-9">
                     <div className="border-b border-white/12 pb-6">
-                        <p className="text-xs font-black uppercase tracking-[0.14em] text-accent">Support intake</p>
+                        <p className="text-xs font-black uppercase tracking-[0.14em] text-accent">Support request</p>
                         <h2 className="mt-3 text-3xl font-black text-white">What needs attention?</h2>
-                        <p className="mt-2 text-sm font-medium leading-6 text-white/58">Required fields help me assess impact without a long back-and-forth.</p>
+                        <p className="mt-2 text-sm font-medium leading-6 text-white/58">Include the page affected, any error message and what you expected to happen.</p>
                     </div>
 
                     <div className="mt-7 grid gap-5 sm:grid-cols-2">
@@ -149,13 +149,13 @@ export default function SupportForm() {
 
                     <div aria-live="polite" className="mt-4 min-h-6 text-sm font-bold">
                         {status === "success" && (
-                            <p className="text-accent">Your support request is stored.{requestReference && <> Reference: {requestReference}</>}</p>
+                            <p className="text-accent">Your support request was received.{requestReference && <> Reference: {requestReference}</>}</p>
                         )}
                         {status === "error" && <p className="text-red-300">{errorMessage} Please try again or use WhatsApp.</p>}
                     </div>
 
                     <button type="submit" disabled={status === "sending" || !turnstileToken} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-accent px-6 py-4 font-black text-[#071312] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-50">
-                        {status === "sending" ? "Storing Request…" : "Submit Support Request"}
+                        {status === "sending" ? "Sending…" : "Submit Support Request"}
                         <FiArrowRight aria-hidden="true" />
                     </button>
 
