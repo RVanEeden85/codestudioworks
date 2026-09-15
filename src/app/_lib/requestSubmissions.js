@@ -10,6 +10,12 @@ export function isRequestStorageConfigured() {
 export async function createRequestSubmission(payload) {
     const db = await getDb();
     const now = new Date();
+    const collection = db.collection(COLLECTION_NAME);
+
+    await collection.createIndex(
+        { submissionId: 1 },
+        { unique: true, sparse: true }
+    );
 
     const document = {
         ...payload,
@@ -18,12 +24,20 @@ export async function createRequestSubmission(payload) {
         updatedAt: now,
     };
 
-    const result = await db.collection(COLLECTION_NAME).insertOne(document);
+    try {
+        const result = await collection.insertOne(document);
 
-    return {
-        ...document,
-        _id: result.insertedId,
-    };
+        return {
+            ...document,
+            _id: result.insertedId,
+            created: true,
+        };
+    } catch (error) {
+        if (error?.code !== 11000 || !payload.submissionId) throw error;
+
+        const existing = await collection.findOne({ submissionId: payload.submissionId });
+        return { ...existing, created: false };
+    }
 }
 
 export async function listRequestSubmissions({ limit = 50 } = {}) {
@@ -37,7 +51,13 @@ export async function listRequestSubmissions({ limit = 50 } = {}) {
         .toArray();
 }
 
-export async function updateRequestSubmissionEmailStatus(id, emailStatus) {
+export async function getRequestSubmissionById(id) {
+    const db = await getDb();
+    const objectId = id instanceof ObjectId ? id : new ObjectId(id);
+    return db.collection(COLLECTION_NAME).findOne({ _id: objectId });
+}
+
+export async function updateRequestSubmissionEmailStatus(id, emailStatus, emailDelivery) {
     const db = await getDb();
     const objectId = id instanceof ObjectId ? id : new ObjectId(id);
 
@@ -46,6 +66,7 @@ export async function updateRequestSubmissionEmailStatus(id, emailStatus) {
         {
             $set: {
                 emailStatus,
+                ...(emailDelivery ? { emailDelivery } : {}),
                 updatedAt: new Date(),
             },
         }
@@ -70,7 +91,11 @@ export function serializeRequestSubmission(submission) {
         preferredTime: submission.preferredTime || "",
         timeZone: submission.timeZone || "",
         estimate: submission.estimate || "",
+        clientOrProject: submission.clientOrProject || "",
+        urgency: submission.urgency || "",
+        affectedUrl: submission.affectedUrl || "",
         emailStatus: submission.emailStatus || "not_sent",
+        emailDelivery: submission.emailDelivery || null,
         createdAt: submission.createdAt?.toISOString?.() || "",
     };
 }

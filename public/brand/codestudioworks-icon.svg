@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">CodeStudioWorks icon</title>
+  <desc id="desc">The CodeStudioWorks interwoven path symbol on a forest green tile.</desc>
+  <rect width="120" height="120" rx="24" fill="#0c1f1d"/>
+  <g transform="translate(12 12)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="14">
+    <path stroke="#fffdf7" d="M77 20H42C25 20 15 30 15 44s10 24 26 24c8 0 14-3 21-10l16-16"/>
+    <path stroke="#fffdf7" d="M18 57l16-16c7-7 13-10 21-10 16 0 26 10 26 24S71 80 54 80H21"/>
+    <path stroke="#d7f45d" d="M77 20h5"/>
+  </g>
+</svg>

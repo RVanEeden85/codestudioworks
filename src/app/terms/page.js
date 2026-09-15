@@ -13,6 +13,7 @@ const sections = [
     ["Intellectual property", "CodeStudioWorks owns this website's original branding, text, design, and code except for third-party material and identified client or platform brands. Project ownership and licensing are determined by the applicable client agreement, not by these website terms."],
     ["Third-party services and links", "This website may link to client work, communication services, or other third-party websites. CodeStudioWorks does not control their availability, security, content, or privacy practices and is not responsible for your use of those services."],
     ["Availability and liability", "I aim to keep website information accurate and available, but it is provided without a guarantee that it will always be complete, current, uninterrupted, or error-free. To the extent allowed by law, CodeStudioWorks is not liable for indirect loss resulting solely from use of this informational website."],
+    ["Support requests", "The support form creates a traceable request but is not a guaranteed 24/7 emergency service. Response targets, after-hours availability, included work, and charges are governed by the active support agreement or an agreed scope."],
     ["Changes and governing law", "These terms may change as the website or studio services evolve. The current version is shown here. Unless a project agreement states otherwise, these website terms are governed by the laws applicable in Michigan, United States."],
 ];
 
@@ -23,7 +24,7 @@ export default function TermsPage() {
                 <div className="section-shell max-w-4xl">
                     <p className="eyebrow">Terms</p>
                     <h1 className="mt-4 text-5xl font-black leading-tight text-secondary md:text-7xl">Website Terms</h1>
-                    <p className="mt-5 text-sm font-bold text-black/50">Effective September 14, 2026</p>
+                    <p className="mt-5 text-sm font-bold text-black/50">Effective September 15, 2026</p>
                     <p className="mt-6 max-w-3xl text-lg font-medium leading-8 text-black/64">These terms cover use of the public CodeStudioWorks website. A signed project agreement takes priority for any paid engagement.</p>
                 </div>
             </section>

@@ -1,32 +1,19 @@
+import crypto from "crypto";
 import { NextResponse } from "next/server";
-import * as postmark from "postmark";
+import { sendSubmissionEmails } from "../../_lib/emailService";
 import {
     createRequestSubmission,
     isRequestStorageConfigured,
     updateRequestSubmissionEmailStatus,
 } from "../../_lib/requestSubmissions";
+import { consumeDurableRateLimit } from "../../_lib/requestRateLimit";
 import {
     cleanText,
-    consumeRateLimit,
     getRequestIp,
     isSameOriginRequest,
     isValidEmail,
 } from "../../_lib/formSecurity";
-
-function escapeHtml(value) {
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-function getMissingPostmarkEnv() {
-    return ["POSTMARK_API_KEY", "POSTMARK_FROM_EMAIL", "POSTMARK_TO_EMAIL"].filter(
-        (key) => !process.env[key]
-    );
-}
+import { verifyTurnstileToken } from "../../_lib/turnstile";
 
 function errorResponse(message, status, headers) {
     return NextResponse.json({ error: message }, { status, headers });
@@ -38,7 +25,13 @@ export async function POST(request) {
             return errorResponse("Request origin not allowed", 403);
         }
 
-        const rateLimit = consumeRateLimit("consultation", getRequestIp(request), {
+        if (!isRequestStorageConfigured()) {
+            console.error("Consultation storage is not configured");
+            return errorResponse("Request storage not configured", 503);
+        }
+
+        const requestIp = getRequestIp(request);
+        const rateLimit = await consumeDurableRateLimit("consultation", requestIp, {
             limit: 4,
             windowMs: 10 * 60 * 1000,
         });
@@ -55,6 +48,17 @@ export async function POST(request) {
             return NextResponse.json({ success: true });
         }
 
+        const turnstile = await verifyTurnstileToken({
+            token: body.turnstileToken,
+            remoteIp: requestIp,
+            expectedAction: "consultation",
+        });
+
+        if (!turnstile.success) {
+            console.warn("Turnstile rejected consultation request:", turnstile.errorCodes);
+            return errorResponse("Please complete the security check and try again.", 400);
+        }
+
         const name = cleanText(body.name, 100);
         const email = cleanText(body.email, 254).toLowerCase();
         const phone = cleanText(body.phone, 50);
@@ -62,25 +66,20 @@ export async function POST(request) {
         const preferredTime = cleanText(body.preferredTime, 120);
         const timeZone = cleanText(body.timeZone, 120);
         const message = cleanText(body.message, 5000, { multiline: true });
+        const submittedId = cleanText(body.submissionId, 100);
+        const submissionId = /^[a-zA-Z0-9-]{8,100}$/.test(submittedId)
+            ? submittedId
+            : crypto.randomUUID();
 
         if (
-            !name ||
-            !isValidEmail(email) ||
-            !projectType ||
-            !preferredTime ||
-            !timeZone ||
-            !message ||
-            body.privacyAccepted !== true
+            !name || !isValidEmail(email) || !projectType || !preferredTime ||
+            !timeZone || !message || body.privacyAccepted !== true
         ) {
             return errorResponse("Please complete all required fields.", 400);
         }
 
-        if (!isRequestStorageConfigured()) {
-            console.error("Consultation storage is not configured");
-            return errorResponse("Request storage not configured", 503);
-        }
-
         const submission = await createRequestSubmission({
+            submissionId,
             type: "consultation",
             source: "consultation_modal",
             status: "new",
@@ -92,68 +91,24 @@ export async function POST(request) {
             timeZone,
             message,
             privacyAcceptedAt: new Date(),
-            consentVersion: "2026-09-14",
+            consentVersion: "2026-09-15",
             emailStatus: "pending",
         });
 
-        const missingEnv = getMissingPostmarkEnv();
-
-        if (missingEnv.length > 0) {
-            console.error(`Missing Postmark environment variables: ${missingEnv.join(", ")}`);
-            await updateRequestSubmissionEmailStatus(submission._id, "not_configured");
-            return NextResponse.json({ success: true, requestId: submission._id.toString() });
+        if (!submission.created) {
+            return NextResponse.json({
+                success: true,
+                requestId: submission._id.toString(),
+                duplicate: true,
+            });
         }
 
-        const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
-
-        try {
-            await client.sendEmail({
-                From: process.env.POSTMARK_FROM_EMAIL,
-                To: process.env.POSTMARK_TO_EMAIL,
-                ReplyTo: email,
-                Subject: `Consultation request from ${name}`,
-                HtmlBody: `
-                    <h2>New consultation request</h2>
-                    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-                    <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-                    <p><strong>Phone:</strong> ${escapeHtml(phone || "Not provided")}</p>
-                    <p><strong>Project type:</strong> ${escapeHtml(projectType)}</p>
-                    <p><strong>Preferred window:</strong> ${escapeHtml(preferredTime)}</p>
-                    <p><strong>Timezone:</strong> ${escapeHtml(timeZone)}</p>
-                    <p><strong>Project goal:</strong><br>${escapeHtml(message).replaceAll("\n", "<br>")}</p>
-                `,
-                TextBody: [
-                    "New consultation request",
-                    `Name: ${name}`,
-                    `Email: ${email}`,
-                    `Phone: ${phone || "Not provided"}`,
-                    `Project type: ${projectType}`,
-                    `Preferred window: ${preferredTime}`,
-                    `Timezone: ${timeZone}`,
-                    "",
-                    message,
-                ].join("\n"),
-                MessageStream: "outbound",
-            });
-
-            await client.sendEmail({
-                From: process.env.POSTMARK_FROM_EMAIL,
-                To: email,
-                Subject: "CodeStudioWorks received your consultation request",
-                HtmlBody: `<p>Hi ${escapeHtml(name)},</p><p>Thanks for getting in touch. I received your consultation request and will reply personally to confirm the next step.</p><p>— Ryno at CodeStudioWorks</p>`,
-                TextBody: `Hi ${name},\n\nThanks for getting in touch. I received your consultation request and will reply personally to confirm the next step.\n\n— Ryno at CodeStudioWorks`,
-                MessageStream: "outbound",
-            });
-
-            await updateRequestSubmissionEmailStatus(submission._id, "sent");
-        } catch (emailError) {
-            console.error("Postmark consultation notification failed:", emailError);
-            await updateRequestSubmissionEmailStatus(submission._id, "failed");
-        }
+        const delivery = await sendSubmissionEmails(submission);
+        await updateRequestSubmissionEmailStatus(submission._id, delivery.status, delivery);
 
         return NextResponse.json({ success: true, requestId: submission._id.toString() });
     } catch (error) {
-        console.error("Consultation request failed:", error);
+        console.error("Consultation request failed:", error?.message || error);
         return errorResponse("Request failed to submit", 500);
     }
 }

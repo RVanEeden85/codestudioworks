@@ -34,6 +34,17 @@ body {
     min-height: 100vh;
 }
 
+.support-void-hero {
+    background-color: #0d100e;
+    background-image:
+        linear-gradient(90deg, rgba(8, 9, 9, 0.97) 0%, rgba(8, 9, 9, 0.72) 54%, rgba(8, 9, 9, 0.88) 100%),
+        radial-gradient(ellipse 42% 80% at 74% 36%, rgba(215, 244, 93, 0.08), transparent 70%),
+        url("/images/concrete-passage.png");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
 html {
     background-color: var(--background);
     scroll-behavior: smooth;
@@ -1131,45 +1142,31 @@ html {
 }
 
 .work-gallery-visual {
-    background-color: #080909;
-    background-position: center;
-    background-size: cover;
+    background:
+        linear-gradient(145deg, rgba(35, 38, 36, 0.96), rgba(7, 8, 8, 0.98)),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='stone'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.08' numOctaves='3' seed='8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23stone)' opacity='.14'/%3E%3C/svg%3E");
     isolation: isolate;
-    min-height: 330px;
-    transition: background-position 1000ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.work-gallery-card:nth-child(1) .work-gallery-visual {
-    background-image: linear-gradient(155deg, rgba(8, 9, 9, 0.22), rgba(8, 9, 9, 0.92)), url("/images/architectural-hero.png");
-}
-
-.work-gallery-card:nth-child(2) .work-gallery-visual {
-    background-image: linear-gradient(155deg, rgba(8, 9, 9, 0.18), rgba(8, 9, 9, 0.94)), url("/images/concrete-sculpture.png");
-}
-
-.work-gallery-card:nth-child(3) .work-gallery-visual {
-    background-image: linear-gradient(155deg, rgba(8, 9, 9, 0.32), rgba(8, 9, 9, 0.94)), url("/images/concrete-passage.png");
-}
-
-.work-gallery-card:hover .work-gallery-visual {
-    background-position: 58% 48%;
 }
 
 .work-gallery-card .work-gallery-visual::after {
-    background: linear-gradient(115deg, transparent 35%, rgba(238, 236, 229, 0.17) 49%, transparent 62%);
+    background:
+        linear-gradient(135deg, rgba(7, 8, 8, 0.82) 0%, rgba(7, 8, 8, 0.18) 42%, transparent 66%),
+        linear-gradient(0deg, rgba(7, 8, 8, 0.84) 0%, transparent 45%);
     content: "";
-    inset: -30%;
-    mix-blend-mode: screen;
-    opacity: 0;
+    inset: 0;
+    pointer-events: none;
     position: absolute;
-    transform: translateX(-55%);
-    transition: opacity 400ms ease, transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
-    z-index: 0;
+    z-index: 3;
 }
 
-.work-gallery-card:hover .work-gallery-visual::after {
-    opacity: 0.68;
-    transform: translateX(48%);
+.work-gallery-identity,
+.work-gallery-capabilities {
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.92);
+}
+
+.work-gallery-capabilities span {
+    backdrop-filter: blur(12px);
+    background: rgba(8, 9, 9, 0.74);
 }
 
 .work-card,
@@ -1182,33 +1179,354 @@ html {
 }
 
 .project-rail-card {
-    background-position: center;
-    background-size: cover;
+    background:
+        linear-gradient(145deg, rgba(31, 35, 33, 0.98), rgba(11, 13, 12, 0.99)),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='stone'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.08' numOctaves='3' seed='8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23stone)' opacity='.14'/%3E%3C/svg%3E");
     isolation: isolate;
 }
 
-.project-rail-card.project-visual-hero {
-    background-image: url("/images/architectural-hero.png");
+.project-rail-card::after {
+    z-index: 5;
 }
 
-.project-rail-card.project-visual-sculpture {
-    background-image: url("/images/concrete-sculpture.png");
-    background-position: center 45%;
+.project-showcase {
+    --project-glow: 215, 244, 93;
+    height: 100%;
+    isolation: isolate;
+    min-height: 300px;
+    overflow: hidden;
+    position: relative;
 }
 
-.project-rail-card.project-visual-passage {
-    background-image: url("/images/concrete-passage.png");
+.project-showcase--ember {
+    --project-glow: 191, 35, 45;
 }
 
-.project-card-shade {
-    background: linear-gradient(105deg, rgba(8, 9, 9, 0.97) 0%, rgba(8, 9, 9, 0.82) 48%, rgba(8, 9, 9, 0.22) 100%);
+.project-showcase--signal {
+    --project-glow: 224, 35, 49;
+}
+
+.project-showcase--aqua {
+    --project-glow: 36, 171, 190;
+}
+
+.project-showcase-void {
+    background:
+        radial-gradient(circle at 72% 46%, rgba(var(--project-glow), 0.2), transparent 36%),
+        linear-gradient(118deg, rgba(255, 255, 255, 0.065), transparent 32% 68%, rgba(0, 0, 0, 0.46));
     inset: 0;
     position: absolute;
-    z-index: 0;
 }
 
-.project-rail-card::after {
+.project-showcase-void::before,
+.project-showcase-void::after {
+    background: rgba(238, 236, 229, 0.075);
+    content: "";
+    position: absolute;
+}
+
+.project-showcase-void::before {
+    height: 1px;
+    left: 0;
+    right: 0;
+    top: 18%;
+}
+
+.project-showcase-void::after {
+    bottom: 0;
+    right: 18%;
+    top: 0;
+    width: 1px;
+}
+
+.project-showcase-frame {
+    background: #0b0d0c;
+    border: 1px solid rgba(238, 236, 229, 0.2);
+    box-shadow:
+        0 32px 72px rgba(0, 0, 0, 0.58),
+        -18px 18px 0 rgba(0, 0, 0, 0.15),
+        0 0 54px rgba(var(--project-glow), 0.08);
+    overflow: hidden;
+    position: absolute;
+}
+
+.project-showcase-frame--desktop {
+    inset: 7% 6% auto 1%;
+    transform: perspective(1200px) rotateY(-2.5deg) rotateX(0.6deg);
+    transform-origin: left center;
+    z-index: 1;
+}
+
+.project-browser-bar {
+    align-items: center;
+    background: linear-gradient(180deg, #202321, #121412);
+    border-bottom: 1px solid rgba(238, 236, 229, 0.13);
+    color: rgba(238, 236, 229, 0.52);
+    display: flex;
+    font-size: 0.61rem;
+    font-weight: 800;
+    height: 32px;
+    justify-content: space-between;
+    letter-spacing: 0.06em;
+    padding: 0 12px;
+    text-transform: uppercase;
+}
+
+.project-browser-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.project-browser-dots i {
+    background: rgba(238, 236, 229, 0.25);
+    border-radius: 999px;
+    display: block;
+    height: 5px;
+    width: 5px;
+}
+
+.project-browser-dots i:first-child {
+    background: rgb(var(--project-glow));
+}
+
+.project-browser-domain {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-browser-live {
+    color: #d7f45d;
+}
+
+.project-showcase-screen {
+    background: #090a09;
+    height: calc(100% - 32px);
+    overflow: hidden;
+    position: relative;
+}
+
+.project-showcase-image {
+    inset: 0;
+    position: absolute;
+}
+
+.project-showcase-frame--desktop .project-showcase-screen {
+    aspect-ratio: 16 / 9;
+    height: auto;
+}
+
+.project-showcase-image img {
+    object-fit: contain;
+    transition: filter 700ms ease, transform 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-showcase-glass {
+    background:
+        linear-gradient(115deg, rgba(255, 255, 255, 0.12), transparent 22% 72%, rgba(255, 255, 255, 0.05)),
+        linear-gradient(0deg, rgba(8, 9, 9, 0.16), transparent 32%);
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+.project-showcase-glass::after {
+    background: linear-gradient(112deg, transparent 36%, rgba(255, 255, 255, 0.22) 49%, transparent 61%);
+    content: "";
+    inset: -45%;
+    opacity: 0;
+    position: absolute;
+    transform: translateX(-55%);
+    transition: opacity 400ms ease, transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-showcase-frame--detail {
+    aspect-ratio: 390 / 844;
+    border: 4px solid #0b0d0c;
+    border-radius: 16px;
+    bottom: 1.5%;
+    box-shadow:
+        0 30px 62px rgba(0, 0, 0, 0.72),
+        -10px 12px 0 rgba(0, 0, 0, 0.18),
+        0 0 40px rgba(var(--project-glow), 0.08);
+    height: auto;
+    right: 0;
+    width: 22%;
     z-index: 2;
+}
+
+.project-phone-speaker {
+    background: rgba(7, 8, 8, 0.88);
+    border-radius: 999px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12);
+    height: 5px;
+    left: 50%;
+    position: absolute;
+    top: 7px;
+    transform: translateX(-50%);
+    width: 31%;
+    z-index: 3;
+}
+
+.project-showcase-frame--detail .project-showcase-screen {
+    height: 100%;
+}
+
+.project-showcase-frame--detail img {
+    object-fit: contain;
+    transition: filter 700ms ease;
+}
+
+.project-showcase-caption {
+    align-items: center;
+    bottom: 1.5%;
+    color: rgba(238, 236, 229, 0.58);
+    display: flex;
+    font-size: 0.58rem;
+    font-weight: 900;
+    gap: 6px;
+    left: 2%;
+    letter-spacing: 0.12em;
+    position: absolute;
+    text-transform: uppercase;
+}
+
+.project-showcase:hover .project-showcase-image img {
+    filter: saturate(1.07) contrast(1.03);
+}
+
+.project-showcase:hover .project-showcase-glass::after {
+    opacity: 0.72;
+    transform: translateX(48%);
+}
+
+.project-showcase--archive {
+    height: auto;
+    inset: 0;
+    min-height: 100%;
+    position: absolute;
+}
+
+.project-showcase--archive .project-showcase-frame--desktop {
+    inset: 15% 4% auto 4%;
+}
+
+.project-showcase--archive .project-showcase-frame--detail {
+    bottom: 5%;
+    right: 1%;
+}
+
+.project-showcase--case {
+    height: clamp(430px, 48vw, 620px);
+}
+
+.project-showcase--case .project-showcase-frame--desktop {
+    inset: 9% 5% auto 0;
+}
+
+.project-showcase--case .project-showcase-frame--detail {
+    bottom: 4%;
+    right: 0;
+    width: 22%;
+}
+
+.project-case-hero {
+    background:
+        radial-gradient(circle at 82% 45%, rgba(215, 244, 93, 0.07), transparent 31%),
+        linear-gradient(115deg, #080909 0%, #111412 54%, #070808 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.project-case-hero::before {
+    background:
+        linear-gradient(90deg, transparent 0 49.9%, rgba(238, 236, 229, 0.045) 50%, transparent 50.1%),
+        linear-gradient(rgba(238, 236, 229, 0.035) 1px, transparent 1px);
+    background-size: 120px 100%, 100% 120px;
+    content: "";
+    inset: 0;
+    opacity: 0.55;
+    pointer-events: none;
+    position: absolute;
+}
+
+.project-evidence-section {
+    background:
+        linear-gradient(90deg, rgba(238, 236, 229, 0.025) 1px, transparent 1px),
+        linear-gradient(145deg, #111412, #080909 68%);
+    background-size: min(25vw, 310px) 100%, 100% 100%;
+}
+
+.project-evidence-panel {
+    background: #080909;
+    border: 1px solid rgba(238, 236, 229, 0.16);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    min-height: 390px;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-evidence-panel::before {
+    background: linear-gradient(90deg, #d7f45d 0 44px, transparent 44px);
+    content: "";
+    height: 2px;
+    left: -1px;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    z-index: 3;
+}
+
+.project-evidence-panel img {
+    object-fit: cover;
+    transition: filter 700ms ease, transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-evidence-panel:hover img {
+    filter: saturate(1.06) contrast(1.03);
+    transform: scale(1.025);
+}
+
+.project-evidence-wash {
+    background:
+        linear-gradient(0deg, rgba(7, 8, 8, 0.9) 0%, rgba(7, 8, 8, 0.08) 44%),
+        linear-gradient(115deg, rgba(255, 255, 255, 0.08), transparent 28% 72%, rgba(0, 0, 0, 0.26));
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.project-evidence-panel figcaption {
+    bottom: 0;
+    display: grid;
+    gap: 6px;
+    left: 0;
+    padding: 24px;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+}
+
+.project-evidence-panel figcaption span {
+    color: #d7f45d;
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.project-evidence-panel figcaption strong {
+    color: var(--arch-mineral);
+    font-size: 1rem;
+}
+
+.project-evidence-panel--crop img {
+    transform: scale(1.26);
+}
+
+.project-evidence-panel--crop:hover img {
+    transform: scale(1.3);
 }
 
 @media (min-width: 1024px) {
@@ -1473,6 +1791,43 @@ html {
 
     .work-gallery-card {
         min-height: auto;
+    }
+
+    .project-card-layout {
+        grid-template-rows: auto minmax(310px, 1fr);
+    }
+
+    .project-showcase-frame--desktop {
+        inset: 6% 4% auto 0;
+    }
+
+    .project-showcase-frame--detail {
+        height: auto;
+        width: 28%;
+    }
+
+    .project-browser-domain {
+        max-width: 48%;
+    }
+
+    .project-showcase--archive .project-showcase-frame--desktop {
+        inset: 26% 3% auto 3%;
+    }
+
+    .project-showcase--case {
+        height: min(112vw, 500px);
+    }
+
+    .project-evidence-panel {
+        min-height: 300px;
+    }
+
+    .project-evidence-panel--crop {
+        min-height: 240px;
+    }
+
+    .project-evidence-panel figcaption {
+        padding: 18px;
     }
 }
 

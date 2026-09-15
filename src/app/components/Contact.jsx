@@ -5,6 +5,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { FiArrowRight, FiClock, FiMapPin, FiMessageSquare } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import TurnstileWidget, { getInitialTurnstileToken } from "./TurnstileWidget";
 
 const fieldClass =
     "w-full rounded-md border border-black/12 bg-background px-4 py-3 text-secondary outline-none transition focus:border-primary focus-visible:ring-2 focus-visible:ring-primary/25";
@@ -23,6 +24,10 @@ const serviceOptions = [
 
 export default function Contact({ initialService = "" }) {
     const [status, setStatus] = useState("idle");
+    const [turnstileToken, setTurnstileToken] = useState(getInitialTurnstileToken);
+    const [turnstileReset, setTurnstileReset] = useState(0);
+    const [submissionId, setSubmissionId] = useState(() => crypto.randomUUID());
+    const [requestReference, setRequestReference] = useState("");
     const serviceAliases = {
         "Business Websites": "Business website",
         "Apps & Business Tools": "App or custom business tool",
@@ -55,17 +60,26 @@ export default function Contact({ initialService = "" }) {
                     ].join("\n"),
                     privacyAccepted: formData.get("privacyAccepted") === "on",
                     website: formData.get("website"),
+                    turnstileToken,
+                    submissionId,
                 }),
             });
 
-            if (!response.ok) throw new Error("Request failed");
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.error || "Request failed");
 
             setStatus("success");
+            setRequestReference(result.requestId || "");
             toast.success("Your enquiry was received");
             form.reset();
-        } catch {
+            setSubmissionId(crypto.randomUUID());
+            setTurnstileToken(getInitialTurnstileToken());
+            setTurnstileReset((value) => value + 1);
+        } catch (error) {
             setStatus("error");
-            toast.error("Something went wrong. Please try again.");
+            setTurnstileToken(getInitialTurnstileToken());
+            setTurnstileReset((value) => value + 1);
+            toast.error(error.message || "Something went wrong. Please try again.");
         }
     }
 
@@ -99,6 +113,9 @@ export default function Contact({ initialService = "" }) {
                             <FiClock className="text-2xl text-primary" aria-hidden="true" />
                             Replies are personal, not automated sales handoffs
                         </div>
+                        <Link href="/support" className="inline-flex items-center gap-2 pt-3 text-sm font-black text-accent hover:text-white">
+                            Already a client? Open a support request <FiArrowRight aria-hidden="true" />
+                        </Link>
                     </div>
                 </div>
 
@@ -159,12 +176,18 @@ export default function Contact({ initialService = "" }) {
                         <span>I agree that CodeStudioWorks may use these details to respond to my enquiry. See the <Link href="/privacy" className="font-black text-primary underline">Privacy Policy</Link>.</span>
                     </label>
 
+                    <TurnstileWidget
+                        action="contact"
+                        onVerify={setTurnstileToken}
+                        resetSignal={turnstileReset}
+                    />
+
                     <div aria-live="polite" className="mt-4 min-h-6 text-sm font-bold">
-                        {status === "success" && <p className="text-primary">Your enquiry was received. I&apos;ll reply personally with the next step.</p>}
+                        {status === "success" && <p className="text-primary">Your enquiry was received. I&apos;ll reply personally with the next step.{requestReference && <> Reference: {requestReference}</>}</p>}
                         {status === "error" && <p className="text-red-700">The request could not be sent. Please try again or message me on WhatsApp.</p>}
                     </div>
 
-                    <button disabled={status === "sending"} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md bg-secondary px-6 py-4 text-base font-black text-white transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60" type="submit">
+                    <button disabled={status === "sending" || !turnstileToken} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md bg-secondary px-6 py-4 text-base font-black text-white transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60" type="submit">
                         {status === "sending" ? "Sending..." : "Send Enquiry"}
                         <FiArrowRight aria-hidden="true" />
                     </button>

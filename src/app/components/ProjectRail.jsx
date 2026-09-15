@@ -5,8 +5,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "fr
 import { useRef } from "react";
 import { FiArrowRight, FiExternalLink } from "react-icons/fi";
 import { projects } from "../work/_lib/projects";
-
-const visualClasses = ["project-visual-hero", "project-visual-sculpture", "project-visual-passage"];
+import ProjectShowcaseVisual from "./ProjectShowcaseVisual";
 
 export default function ProjectRail() {
     const sectionRef = useRef(null);
@@ -15,7 +14,7 @@ export default function ProjectRail() {
         target: sectionRef,
         offset: ["start start", "end end"],
     });
-    const trackX = useTransform(scrollYProgress, [0.16, 0.86], ["0%", "-48%"]);
+    const trackX = useTransform(scrollYProgress, [0.16, 0.86], ["0%", "-58%"]);
     const smoothProgress = useSpring(scrollYProgress, {
         stiffness: 120,
         damping: 28,
@@ -40,19 +39,23 @@ export default function ProjectRail() {
                     {projects.map((project, index) => (
                         <article
                             key={project.slug}
-                            className={`architectural-slab project-rail-card ${visualClasses[index]} flex min-h-[390px] flex-col justify-between overflow-hidden p-7 lg:h-[430px] lg:w-[min(68vw,760px)] lg:p-9`}
+                            className="architectural-slab project-rail-card min-h-[560px] overflow-hidden p-6 md:p-8 lg:h-[480px] lg:min-h-0 lg:w-[min(76vw,960px)]"
                         >
-                            <div className="project-card-shade" />
-                            <div className="relative z-[1]">
-                                <p className="text-xs font-black uppercase tracking-[0.14em] text-accent">0{index + 1} · {project.context}</p>
-                                <h3 className="mt-5 max-w-xl text-4xl font-black leading-[0.95] md:text-6xl">{project.name}</h3>
-                            </div>
-                            <div className="relative z-[1] max-w-xl">
-                                <p className="text-lg font-semibold leading-7 text-white/72">{project.headline}</p>
-                                <div className="mt-6 flex flex-wrap items-center gap-5 border-t border-white/20 pt-5">
-                                    <Link href={`/work/${project.slug}`} className="inline-flex items-center gap-2 text-sm font-black text-white hover:text-accent">Case details <FiArrowRight aria-hidden="true" /></Link>
-                                    <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} website`} className="inline-flex items-center gap-2 text-sm font-bold text-white/55 hover:text-accent">Live site <FiExternalLink aria-hidden="true" /></a>
+                            <div className="project-card-layout relative z-[3] grid h-full gap-7 lg:grid-cols-[0.76fr_1.24fr] lg:items-stretch">
+                                <div className="flex min-w-0 flex-col justify-between">
+                                    <div>
+                                        <p className="text-xs font-black uppercase tracking-[0.14em] text-accent">0{index + 1} · {project.context}</p>
+                                        <h3 className="mt-5 text-4xl font-black leading-[0.95] md:text-5xl">{project.name}</h3>
+                                    </div>
+                                    <div className="mt-8">
+                                        <p className="text-base font-semibold leading-7 text-white/72">{project.headline}</p>
+                                        <div className="mt-6 flex flex-wrap items-center gap-5 border-t border-white/20 pt-5">
+                                            <Link href={`/work/${project.slug}`} className="inline-flex items-center gap-2 text-sm font-black text-white hover:text-accent">Case details <FiArrowRight aria-hidden="true" /></Link>
+                                            <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} website`} className="inline-flex items-center gap-2 text-sm font-bold text-white/55 hover:text-accent">Live site <FiExternalLink aria-hidden="true" /></a>
+                                        </div>
+                                    </div>
                                 </div>
+                                <ProjectShowcaseVisual project={project} priority={index === 0} />
                             </div>
                         </article>
                     ))}

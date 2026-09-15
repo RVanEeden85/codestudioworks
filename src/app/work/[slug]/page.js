@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FiArrowLeft, FiCheck, FiExternalLink } from "react-icons/fi";
 import JsonLd from "../../components/JsonLd";
+import ProjectShowcaseVisual from "../../components/ProjectShowcaseVisual";
 import { absoluteUrl, breadcrumbSchema, buildMetadata, graphSchema } from "../../_lib/seo";
 import { getProjectBySlug, projects } from "../_lib/projects";
 
@@ -50,6 +52,7 @@ export default async function ProjectPage({ params }) {
             headline: project.headline,
             description: project.summary,
             url: absoluteUrl(path),
+            image: absoluteUrl(project.media.src),
             creator: { "@id": `${absoluteUrl("/")}#ryno-van-eeden` },
             provider: { "@id": `${absoluteUrl("/")}#organization` },
             keywords: project.capabilities.join(", "),
@@ -72,24 +75,78 @@ export default async function ProjectPage({ params }) {
     return (
         <main className="architectural-page bg-background pt-[72px]">
             <JsonLd data={pageSchema} />
-            <section className="project-monolith-hero border-b border-white/10 py-16 text-white md:py-24">
+            <section className="project-case-hero border-b border-white/10 py-12 text-white md:py-20">
+                <div className="section-shell grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+                    <div className="relative z-[2]">
+                        <Link
+                            href="/work"
+                            className="inline-flex items-center gap-2 text-sm font-black text-white/70 transition hover:text-accent"
+                        >
+                            <FiArrowLeft aria-hidden="true" />
+                            Back to Selected Work
+                        </Link>
+                        <p className="mt-12 text-sm font-black uppercase text-accent">
+                            {project.context}
+                        </p>
+                        <h1 className="mt-4 text-5xl font-black leading-[1.02] md:text-7xl">
+                            {project.name}
+                        </h1>
+                        <p className="mt-6 max-w-3xl text-xl font-bold leading-8 text-white/78 md:text-2xl md:leading-9">
+                            {project.headline}
+                        </p>
+                    </div>
+                    <ProjectShowcaseVisual project={project} variant="case" priority />
+                </div>
+            </section>
+
+            <section className="project-evidence-section border-b border-white/10 py-14 md:py-20">
                 <div className="section-shell">
-                    <Link
-                        href="/work"
-                        className="inline-flex items-center gap-2 text-sm font-black text-white/70 transition hover:text-accent"
-                    >
-                        <FiArrowLeft aria-hidden="true" />
-                        Back to Selected Work
-                    </Link>
-                    <p className="mt-12 text-sm font-black uppercase text-accent">
-                        {project.context}
-                    </p>
-                    <h1 className="mt-4 max-w-5xl text-5xl font-black leading-[1.02] md:text-7xl">
-                        {project.name}
-                    </h1>
-                    <p className="mt-6 max-w-4xl text-2xl font-bold leading-9 text-white/78">
-                        {project.headline}
-                    </p>
+                    <div className="grid gap-5 lg:grid-cols-[0.62fr_1.38fr] lg:items-end">
+                        <div>
+                            <p className="text-sm font-black uppercase tracking-[0.14em] text-accent">
+                                Inside the project
+                            </p>
+                            <h2 className="mt-3 text-3xl font-black text-white md:text-4xl">
+                                {project.media.evidence.title}
+                            </h2>
+                        </div>
+                        <p className="max-w-3xl text-base font-medium leading-7 text-white/62 lg:justify-self-end">
+                            {project.media.evidence.description}
+                        </p>
+                    </div>
+
+                    <div className="project-evidence-grid mt-9 grid gap-4 lg:grid-cols-[1.42fr_0.58fr]">
+                        <figure className="project-evidence-panel project-evidence-panel--wide">
+                            <Image
+                                src={project.media.evidence.src}
+                                alt={project.media.evidence.alt}
+                                fill
+                                unoptimized
+                                sizes="(max-width: 1023px) 100vw, 70vw"
+                                style={{ objectPosition: project.media.evidence.position }}
+                            />
+                            <span className="project-evidence-wash" aria-hidden="true" />
+                            <figcaption>
+                                <span>Public interface view</span>
+                                <strong>{project.media.evidence.focus}</strong>
+                            </figcaption>
+                        </figure>
+                        <figure className="project-evidence-panel project-evidence-panel--crop" aria-hidden="true">
+                            <Image
+                                src={project.media.evidence.src}
+                                alt=""
+                                fill
+                                unoptimized
+                                sizes="(max-width: 1023px) 100vw, 30vw"
+                                style={{ objectPosition: project.media.evidence.focusPosition }}
+                            />
+                            <span className="project-evidence-wash" aria-hidden="true" />
+                            <figcaption>
+                                <span>Closer look</span>
+                                <strong>Focused content detail</strong>
+                            </figcaption>
+                        </figure>
+                    </div>
                 </div>
             </section>
 

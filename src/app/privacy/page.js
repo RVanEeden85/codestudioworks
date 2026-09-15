@@ -17,7 +17,7 @@ const sections = [
     },
     {
         title: "Services involved",
-        content: "The website and enquiry process may use service providers for hosting, database storage, transactional email, and communications. These can include Vercel, MongoDB, Postmark, and WhatsApp when you choose to contact me there. Each provider processes information under its own terms and privacy practices.",
+        content: "The website and enquiry process may use service providers for hosting, database storage, transactional email, communications, and abuse prevention. These can include Vercel, MongoDB, Postmark, Cloudflare Turnstile, and WhatsApp when you choose to contact me there. Cloudflare may process limited technical information to distinguish genuine visitors from automated abuse. Each provider processes information under its own terms and privacy practices.",
     },
     {
         title: "Retention and security",
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
                 <div className="section-shell max-w-4xl">
                     <p className="eyebrow">Privacy</p>
                     <h1 className="mt-4 text-5xl font-black leading-tight text-secondary md:text-7xl">Privacy Policy</h1>
-                    <p className="mt-5 text-sm font-bold text-black/50">Effective September 14, 2026</p>
+                    <p className="mt-5 text-sm font-bold text-black/50">Effective September 15, 2026</p>
                     <p className="mt-6 max-w-3xl text-lg font-medium leading-8 text-black/64">This policy explains how CodeStudioWorks, an independent studio operated by Ryno van Eeden, handles information submitted through this website.</p>
                 </div>
             </section>

@@ -28,6 +28,9 @@ const CopyrightBar = () => {
                     <Link href="/contact" className="hover:text-accent">
                         Contact
                     </Link>
+                    <Link href="/support" className="hover:text-accent">
+                        Client Support
+                    </Link>
                     <Link href="/privacy" className="hover:text-accent">Privacy</Link>
                     <Link href="/terms" className="hover:text-accent">Terms</Link>
                 </div>

@@ -56,6 +56,12 @@ export default function sitemap() {
             priority: 0.6,
         },
         {
+            url: `${siteUrl}/support`,
+            lastModified,
+            changeFrequency: "monthly",
+            priority: 0.5,
+        },
+        {
             url: `${siteUrl}/privacy`,
             lastModified,
             changeFrequency: "yearly",

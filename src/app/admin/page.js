@@ -41,14 +41,15 @@ function badgeClass(status) {
         return "border-red-600/20 bg-red-50 text-red-700";
     }
 
-    if (status === "not_configured") {
+    if (status === "not_configured" || status === "partial") {
         return "border-amber-600/20 bg-amber-50 text-amber-700";
     }
 
     return "border-black/10 bg-white text-secondary/70";
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({ searchParams }) {
+    const params = await searchParams;
     const cookieStore = await cookies();
     const sessionValue = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
 
@@ -111,17 +112,25 @@ export default async function AdminPage() {
                         </p>
                     </div>
 
-                    <form action="/api/admin/logout" method="post">
-                        <button
-                            type="submit"
-                            className="rounded-md border border-black/10 bg-white px-4 py-3 text-sm font-black text-secondary transition hover:border-primary"
-                        >
-                            Sign out
-                        </button>
-                    </form>
+                    <div className="flex flex-wrap gap-2">
+                        <a href="/api/admin/email-preview?type=contact&audience=requester" target="_blank" className="rounded-md border border-black/10 bg-white px-4 py-3 text-sm font-black text-secondary transition hover:border-primary">
+                            Preview email design
+                        </a>
+                        <form action="/api/admin/logout" method="post">
+                            <button type="submit" className="rounded-md border border-black/10 bg-white px-4 py-3 text-sm font-black text-secondary transition hover:border-primary">
+                                Sign out
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
-                <div className="mt-6 grid gap-4 md:grid-cols-3">
+                {params?.email && (
+                    <p className="mt-5 border border-primary/20 bg-primary/10 p-4 text-sm font-bold text-primary">
+                        Email delivery update: {String(params.email).replaceAll("-", " ")}.
+                    </p>
+                )}
+
+                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <div className="rounded-lg border border-black/10 bg-[#fffdf7] p-5">
                         <p className="text-sm font-black uppercase text-black/45">
                             Total requests
@@ -145,14 +154,20 @@ export default async function AdminPage() {
                     </div>
                     <div className="rounded-lg border border-black/10 bg-[#fffdf7] p-5">
                         <p className="text-sm font-black uppercase text-black/45">
-                            Contact messages
+                            Project enquiries
                         </p>
                         <p className="mt-2 text-4xl font-black text-secondary">
                             {
                                 requests.filter(
-                                    (request) => request.type === "contact"
+                                    (request) => ["contact", "project_planner"].includes(request.type)
                                 ).length
                             }
+                        </p>
+                    </div>
+                    <div className="rounded-lg border border-black/10 bg-[#fffdf7] p-5">
+                        <p className="text-sm font-black uppercase text-black/45">Support requests</p>
+                        <p className="mt-2 text-4xl font-black text-secondary">
+                            {requests.filter((request) => request.type === "support").length}
                         </p>
                     </div>
                 </div>
@@ -189,6 +204,11 @@ export default async function AdminPage() {
                                             <span className="text-sm font-bold text-black/45">
                                                 {formatDate(request.createdAt)}
                                             </span>
+                                            {request.emailDelivery && (
+                                                <span className="text-xs font-bold text-black/45">
+                                                    Owner: {request.emailDelivery.owner?.status || "unknown"} · Receipt: {request.emailDelivery.requester?.status || "unknown"}
+                                                </span>
+                                            )}
                                         </div>
 
                                         <h2 className="mt-3 text-2xl font-black text-secondary">
@@ -217,7 +237,15 @@ export default async function AdminPage() {
                                                     {request.projectType}
                                                 </span>
                                             )}
+                                            {request.clientOrProject && <span>{request.clientOrProject}</span>}
+                                            {request.urgency && <span className="font-black text-primary">{request.urgency}</span>}
                                         </div>
+
+                                        {request.affectedUrl && (
+                                            <a href={request.affectedUrl} target="_blank" rel="noreferrer" className="mt-3 block break-all text-sm font-bold text-primary underline">
+                                                {request.affectedUrl}
+                                            </a>
+                                        )}
 
                                         {(request.preferredDay ||
                                             request.preferredTime ||
@@ -252,6 +280,13 @@ export default async function AdminPage() {
                                         <p className="mt-1 break-all font-mono text-xs">
                                             {request.id}
                                         </p>
+                                        {["failed", "partial", "not_configured"].includes(request.emailStatus) && (
+                                            <form action={`/api/admin/requests/${request.id}/retry-email`} method="post" className="mt-4">
+                                                <button type="submit" className="rounded-sm bg-secondary px-4 py-2 text-xs font-black text-white hover:bg-primary">
+                                                    Retry email
+                                                </button>
+                                            </form>
+                                        )}
                                     </div>
                                 </article>
                             ))}
