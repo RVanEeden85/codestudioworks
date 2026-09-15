@@ -1,7 +1,18 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft, FiCheck, FiExternalLink } from "react-icons/fi";
+import JsonLd from "../../components/JsonLd";
+import { absoluteUrl, breadcrumbSchema, buildMetadata, graphSchema } from "../../_lib/seo";
 import { getProjectBySlug, projects } from "../_lib/projects";
+
+const seoDescriptions = {
+    "rolleston-tinting":
+        "A service-led website for Rolleston Tinting, with clear automotive and architectural tinting journeys, local SEO foundations, galleries, and quote paths.",
+    "state-champs-network":
+        "Full-stack web and mobile development for State Champs! Sports Network across content, live events, athletes, awards, voting, fan, and sponsor experiences.",
+    eventbookr:
+        "Full-stack product engineering for EventBookr, an event marketplace with provider listings, customer discovery, enquiries, accounts, and planning tools.",
+};
 
 export function generateStaticParams() {
     return projects.map((project) => ({ slug: project.slug }));
@@ -11,18 +22,17 @@ export async function generateMetadata({ params }) {
     const { slug } = await params;
     const project = getProjectBySlug(slug);
 
-    if (!project) return { title: "Selected Work" };
+    if (!project) return buildMetadata({
+        title: "Selected Development Work",
+        description: "Explore selected website, application, and software work by CodeStudioWorks.",
+        path: "/work",
+    });
 
-    return {
-        title: project.name,
-        description: project.summary,
-        alternates: { canonical: `/work/${project.slug}` },
-        openGraph: {
-            title: `${project.name} | CodeStudioWorks Selected Work`,
-            description: project.summary,
-            url: `/work/${project.slug}`,
-        },
-    };
+    return buildMetadata({
+        title: `${project.name} Web Development Case Study`,
+        description: seoDescriptions[project.slug] || project.summary,
+        path: `/work/${project.slug}`,
+    });
 }
 
 export default async function ProjectPage({ params }) {
@@ -31,8 +41,37 @@ export default async function ProjectPage({ params }) {
 
     if (!project) notFound();
 
+    const path = `/work/${project.slug}`;
+    const pageSchema = graphSchema([
+        {
+            "@type": "CreativeWork",
+            "@id": `${absoluteUrl(path)}#project`,
+            name: project.name,
+            headline: project.headline,
+            description: project.summary,
+            url: absoluteUrl(path),
+            creator: { "@id": `${absoluteUrl("/")}#ryno-van-eeden` },
+            provider: { "@id": `${absoluteUrl("/")}#organization` },
+            keywords: project.capabilities.join(", "),
+        },
+        {
+            "@type": "WebPage",
+            "@id": `${absoluteUrl(path)}#webpage`,
+            url: absoluteUrl(path),
+            name: `${project.name} Web Development Case Study`,
+            mainEntity: { "@id": `${absoluteUrl(path)}#project` },
+            inLanguage: "en-US",
+        },
+        breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Selected Work", path: "/work" },
+            { name: project.name, path },
+        ]),
+    ]);
+
     return (
         <main className="architectural-page bg-background pt-[72px]">
+            <JsonLd data={pageSchema} />
             <section className="project-monolith-hero border-b border-white/10 py-16 text-white md:py-24">
                 <div className="section-shell">
                     <Link

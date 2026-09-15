@@ -4,7 +4,7 @@ import { projects } from "./work/_lib/projects";
 
 export default function sitemap() {
     const siteUrl = getSiteUrl();
-    const lastModified = new Date("2026-09-14T00:00:00.000Z");
+    const lastModified = new Date("2026-09-15T00:00:00.000Z");
 
     const staticRoutes = [
         {
@@ -15,6 +15,12 @@ export default function sitemap() {
         },
         {
             url: `${siteUrl}/start-a-business`,
+            lastModified,
+            changeFrequency: "monthly",
+            priority: 0.9,
+        },
+        {
+            url: `${siteUrl}/detroit-web-development`,
             lastModified,
             changeFrequency: "monthly",
             priority: 0.9,

@@ -1,18 +1,49 @@
 import Link from "next/link";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
 import ServicesGalleryHero from "../components/ServicesGalleryHero";
+import JsonLd from "../components/JsonLd";
+import { absoluteUrl, breadcrumbSchema, buildMetadata, graphSchema } from "../_lib/seo";
 import { services } from "./_lib/services";
 
-export const metadata = {
-    title: "Services",
+export const metadata = buildMetadata({
+    title: "Web, App & Software Development Services",
     description:
-        "Explore website, app, custom business tool, ongoing development, and technical support services from CodeStudioWorks.",
-    alternates: { canonical: "/services" },
-};
+        "Explore Detroit-based website, web and mobile app, custom software, technical SEO, and ongoing development services available to businesses worldwide.",
+    path: "/services",
+});
+
+const pageSchema = graphSchema([
+    {
+        "@type": "CollectionPage",
+        "@id": `${absoluteUrl("/services")}#webpage`,
+        url: absoluteUrl("/services"),
+        name: "Web, App and Software Development Services",
+        description:
+            "Website, app, custom software, technical support, and fractional development services from a Detroit-based independent studio.",
+        mainEntity: { "@id": `${absoluteUrl("/services")}#services` },
+        about: { "@id": `${absoluteUrl("/")}#organization` },
+        inLanguage: "en-US",
+    },
+    {
+        "@type": "ItemList",
+        "@id": `${absoluteUrl("/services")}#services`,
+        itemListElement: services.map((service, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: service.name,
+            url: absoluteUrl(`/services/${service.slug}`),
+        })),
+    },
+    breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" },
+    ]),
+]);
 
 export default function ServicesPage() {
     return (
         <main className="architectural-page bg-background pt-[72px]">
+            <JsonLd data={pageSchema} />
             <ServicesGalleryHero />
 
             <section id="service-catalog" className="bg-[#101211] py-20 md:py-28">

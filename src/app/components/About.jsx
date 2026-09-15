@@ -52,9 +52,11 @@ const About = () => {
                     <div className="mt-6 space-y-5 text-lg font-medium leading-8 text-black/64">
                         <p>
                             CodeStudioWorks is my independent development studio,
-                            based in Michigan and working remotely. I bring more
-                            than 15 years in software to websites, applications,
-                            and online business tools for small businesses, startups,
+                            based in Detroit, Michigan. I work with businesses
+                            across Metro Detroit and worldwide through online
+                            meetings and digital delivery. I bring more than 15
+                            years in software to websites, applications, and
+                            online business tools for small businesses, startups,
                             and established teams.
                         </p>
                         <p>
@@ -75,6 +77,7 @@ const About = () => {
                     <div className="mt-8 grid gap-3">
                         {[
                             "15+ years of professional software experience",
+                            "Detroit based, with worldwide online delivery",
                             "Web, mobile, integrations, and operational systems",
                             "Clear scope, regular communication, and launch support",
                         ].map((item) => (

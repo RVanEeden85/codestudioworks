@@ -1,7 +1,34 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
+import JsonLd from "../../components/JsonLd";
+import {
+    SERVICE_AREAS,
+    absoluteUrl,
+    breadcrumbSchema,
+    buildMetadata,
+    faqSchema,
+    graphSchema,
+} from "../../_lib/seo";
 import { getServiceBySlug, services } from "../_lib/services";
+
+const seoTitles = {
+    "business-website-launch": "Small Business Website Design & Development",
+    "custom-web-apps": "Custom Web & Mobile App Development",
+    "fractional-development-partner": "Fractional & Freelance Development Support",
+    "care-maintenance": "Website Maintenance & Technical SEO Support",
+};
+
+const seoDescriptions = {
+    "business-website-launch":
+        "Professional small business website design and development for Detroit, Metro Detroit, Michigan, and worldwide—built for trust, leads, bookings, and sales.",
+    "custom-web-apps":
+        "Custom web and mobile app development for startups and businesses in Detroit and worldwide, including portals, dashboards, booking systems, and business tools.",
+    "fractional-development-partner":
+        "Fractional and freelance development support for Detroit and worldwide teams needing reliable feature delivery, integrations, fixes, and technical guidance.",
+    "care-maintenance":
+        "Website maintenance, technical SEO, updates, integrations, and support from a Detroit-based developer serving businesses locally and worldwide.",
+};
 
 export function generateStaticParams() {
     return services.map((service) => ({ slug: service.slug }));
@@ -11,18 +38,17 @@ export async function generateMetadata({ params }) {
     const { slug } = await params;
     const service = getServiceBySlug(slug);
 
-    if (!service) return { title: "Service", alternates: { canonical: "/services" } };
+    if (!service) return buildMetadata({
+        title: "Development Services",
+        description: "Explore web, app, software, and ongoing development services from CodeStudioWorks.",
+        path: "/services",
+    });
 
-    return {
-        title: service.name,
-        description: service.summary,
-        alternates: { canonical: `/services/${service.slug}` },
-        openGraph: {
-            title: `${service.name} | CodeStudioWorks`,
-            description: service.summary,
-            url: `/services/${service.slug}`,
-        },
-    };
+    return buildMetadata({
+        title: seoTitles[service.slug] || service.name,
+        description: seoDescriptions[service.slug] || service.summary,
+        path: `/services/${service.slug}`,
+    });
 }
 
 export default async function ServiceDetailPage({ params }) {
@@ -31,25 +57,43 @@ export default async function ServiceDetailPage({ params }) {
 
     if (!service) notFound();
 
-    const serviceSchema = {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        name: service.name,
-        description: service.summary,
-        provider: {
-            "@type": "ProfessionalService",
-            name: "CodeStudioWorks",
-            url: "https://www.codestudioworks.com",
+    const path = `/services/${service.slug}`;
+    const serviceSchema = graphSchema([
+        {
+            "@type": "Service",
+            "@id": `${absoluteUrl(path)}#service`,
+            name: seoTitles[service.slug] || service.name,
+            alternateName: service.name,
+            description: service.summary,
+            url: absoluteUrl(path),
+            provider: { "@id": `${absoluteUrl("/")}#organization` },
+            areaServed: SERVICE_AREAS,
+            serviceType: service.name,
+            audience: {
+                "@type": "Audience",
+                audienceType: service.bestFor,
+            },
         },
-        areaServed: "Worldwide",
-    };
+        {
+            "@type": "WebPage",
+            "@id": `${absoluteUrl(path)}#webpage`,
+            url: absoluteUrl(path),
+            name: seoTitles[service.slug] || service.name,
+            mainEntity: { "@id": `${absoluteUrl(path)}#service` },
+            about: { "@id": `${absoluteUrl("/")}#organization` },
+            inLanguage: "en-US",
+        },
+        breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: service.name, path },
+        ]),
+        faqSchema(service.faqs),
+    ]);
 
     return (
         <main className="architectural-page bg-background pt-[72px]">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-            />
+            <JsonLd data={serviceSchema} />
             <section className="concrete-image-section architectural-light border-b border-black/10 py-16 md:py-24">
                 <div className="section-shell">
                     <nav aria-label="Breadcrumb" className="text-sm font-bold text-black/55">

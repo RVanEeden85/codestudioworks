@@ -93,7 +93,7 @@ export default function Contact({ initialService = "" }) {
                         </a>
                         <div className="architectural-rule flex items-center gap-3 py-4 font-bold text-white/76">
                             <FiMapPin className="text-2xl text-primary" aria-hidden="true" />
-                            Michigan based, working remotely
+                            Based in Detroit—serving Metro Detroit and clients worldwide
                         </div>
                         <div className="architectural-rule flex items-center gap-3 py-4 font-bold text-white/76">
                             <FiClock className="text-2xl text-primary" aria-hidden="true" />

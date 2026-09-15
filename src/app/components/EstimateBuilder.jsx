@@ -121,7 +121,7 @@ function EstimateBuilder() {
                             <p className="mt-5 font-medium leading-7 text-black/64">{item.description}</p>
                             <ul className="mt-6 grid flex-1 gap-3">
                                 {item.includes.map((included) => (
-                                    <li key={included} className="flex gap-2 text-sm font-bold leading-6 text-secondary/76">
+                                    <li key={included} className="flex gap-2 text-sm font-bold leading-6 text-white/72">
                                         <FiCheck className="mt-1 shrink-0 text-primary" aria-hidden="true" />
                                         {included}
                                     </li>

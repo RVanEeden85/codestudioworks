@@ -24,6 +24,8 @@ import {
 import ConsultationModal from "./components/ConsultationModal";
 import CountUp from "./components/CountUp";
 import ProjectRail from "./components/ProjectRail";
+import JsonLd from "./components/JsonLd";
+import { absoluteUrl, faqSchema, graphSchema } from "./_lib/seo";
 
 const audiences = [
     {
@@ -126,6 +128,21 @@ const faqs = [
     },
 ];
 
+const homeSchema = graphSchema([
+    {
+        "@type": "WebPage",
+        "@id": `${absoluteUrl("/")}#webpage`,
+        url: absoluteUrl("/"),
+        name: "Detroit Web Developer & Software Studio | CodeStudioWorks",
+        description:
+            "Detroit-based web, app, and software development for small businesses, startups, and established teams worldwide.",
+        isPartOf: { "@id": `${absoluteUrl("/")}#website` },
+        about: { "@id": `${absoluteUrl("/")}#organization` },
+        inLanguage: "en-US",
+    },
+    faqSchema(faqs),
+]);
+
 export default function Home() {
     const [isConsultationOpen, setIsConsultationOpen] = useState(false);
     const heroRef = useRef(null);
@@ -159,6 +176,7 @@ export default function Home() {
 
     return (
         <main className="architectural-page overflow-x-clip bg-background pt-[72px]">
+            <JsonLd data={homeSchema} />
             <section
                 ref={heroRef}
                 className="hero-architecture relative overflow-hidden border-b border-white/10 bg-black text-white"
@@ -264,11 +282,12 @@ export default function Home() {
             </section>
 
             <section aria-label="Studio facts" className="border-b border-white/10 bg-[#080909]">
-                <div className="section-shell grid divide-y divide-white/10 py-2 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+                <div className="section-shell grid divide-y divide-white/10 py-2 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
                     {[
                         [<><CountUp key="experience" end={15} />+ years</>, "Professional software experience"],
                         ["1:1", "Direct access to the developer"],
-                        ["Websites + apps", "Planning, building, and launch help"],
+                        ["Detroit based", "Serving Metro Detroit and Michigan"],
+                        ["Worldwide", "Online meetings and digital delivery"],
                     ].map(([value, label]) => (
                         <div key={label} className="motion-reveal-item px-4 py-5 text-center">
                             <p className="text-2xl font-black text-white">{value}</p>

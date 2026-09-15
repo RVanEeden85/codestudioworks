@@ -10,12 +10,16 @@ const CopyrightBar = () => {
                 <div>
                     <BrandMark inverted className="h-14 w-auto" />
                     <p className="mt-5 max-w-sm leading-6">
-                        © {year} CodeStudioWorks. Independent web, app, and software development.
+                        © {year} CodeStudioWorks. Detroit-based independent web,
+                        app, and software development—available worldwide.
                     </p>
                 </div>
                 <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-white/12 pt-5 font-semibold md:justify-end">
                     <Link href="/services" className="hover:text-accent">
                         Services
+                    </Link>
+                    <Link href="/detroit-web-development" className="hover:text-accent">
+                        Detroit Web Development
                     </Link>
                     <Link href="/work" className="hover:text-accent">Work</Link>
                     <Link href="/pricing" className="hover:text-accent">

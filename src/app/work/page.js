@@ -1,18 +1,49 @@
 import Link from "next/link";
 import { FiArrowRight, FiExternalLink } from "react-icons/fi";
 import WorkArchiveHero from "../components/WorkArchiveHero";
+import JsonLd from "../components/JsonLd";
+import { absoluteUrl, breadcrumbSchema, buildMetadata, graphSchema } from "../_lib/seo";
 import { projects } from "./_lib/projects";
 
-export const metadata = {
-    title: "Selected Work",
+export const metadata = buildMetadata({
+    title: "Web Development Portfolio & Software Case Studies",
     description:
-        "Explore selected CodeStudioWorks client delivery, product engineering, and professional full-stack platform work.",
-    alternates: { canonical: "/work" },
-};
+        "See selected website, web app, mobile, and platform work by CodeStudioWorks, a Detroit-based independent developer serving businesses worldwide.",
+    path: "/work",
+});
+
+const pageSchema = graphSchema([
+    {
+        "@type": "CollectionPage",
+        "@id": `${absoluteUrl("/work")}#webpage`,
+        url: absoluteUrl("/work"),
+        name: "Web Development Portfolio and Software Case Studies",
+        description:
+            "Selected website, app, mobile, and platform work by CodeStudioWorks.",
+        mainEntity: { "@id": `${absoluteUrl("/work")}#projects` },
+        about: { "@id": `${absoluteUrl("/")}#organization` },
+        inLanguage: "en-US",
+    },
+    {
+        "@type": "ItemList",
+        "@id": `${absoluteUrl("/work")}#projects`,
+        itemListElement: projects.map((project, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: project.name,
+            url: absoluteUrl(`/work/${project.slug}`),
+        })),
+    },
+    breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Selected Work", path: "/work" },
+    ]),
+]);
 
 export default function WorkPage() {
     return (
         <main className="architectural-page bg-background pt-[72px]">
+            <JsonLd data={pageSchema} />
             <WorkArchiveHero />
 
             <section id="selected-work" className="scroll-mt-24 py-16 md:py-20">

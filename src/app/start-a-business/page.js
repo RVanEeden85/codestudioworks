@@ -5,13 +5,15 @@ import {
     FiGlobe,
 } from "react-icons/fi";
 import BusinessThresholdHero from "../components/BusinessThresholdHero";
+import JsonLd from "../components/JsonLd";
+import { absoluteUrl, breadcrumbSchema, buildMetadata, faqSchema, graphSchema } from "../_lib/seo";
 
-export const metadata = {
-    title: "Starting a Business",
+export const metadata = buildMetadata({
+    title: "Small Business Website & Online Launch Help",
     description:
-        "Get practical help planning, building, and launching the website and online tools your new business needs.",
-    alternates: { canonical: "/start-a-business" },
-};
+        "Launch a new business with a professional website, bookings, payments, email, and online tools from a Detroit-based developer serving clients worldwide.",
+    path: "/start-a-business",
+});
 
 const launchSteps = [
     ["Tell me about the idea", "You explain the business, the customer, what you plan to sell, and what success should look like. No technical document is required."],
@@ -41,9 +43,28 @@ const faqs = [
     ["Will I be able to update the website?", "If regular editing is important, I can include suitable website editing tools and show you how to use them."],
 ];
 
+const pageSchema = graphSchema([
+    {
+        "@type": "WebPage",
+        "@id": `${absoluteUrl("/start-a-business")}#webpage`,
+        url: absoluteUrl("/start-a-business"),
+        name: "Small Business Website and Online Launch Help",
+        description:
+            "Practical planning, website development, and online launch help for new businesses in Detroit, Michigan, and worldwide.",
+        about: { "@id": `${absoluteUrl("/")}#organization` },
+        inLanguage: "en-US",
+    },
+    breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Starting a Business", path: "/start-a-business" },
+    ]),
+    faqSchema(faqs),
+]);
+
 export default function StartABusinessPage() {
     return (
         <main className="architectural-page bg-background pt-[72px]">
+            <JsonLd data={pageSchema} />
             <BusinessThresholdHero />
 
             <section className="bg-[#101211] py-20 md:py-28">

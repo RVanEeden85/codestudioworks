@@ -33,7 +33,7 @@ export default function TwitterImage() {
                     <div style={{ display: "flex", width: 76, background: "linear-gradient(90deg,#202321,#6f736e,#161918)", transform: "skewY(-4deg)" }} />
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", position: "relative", width: 760 }}>
-                    <div style={{ color: "#d7f45d", fontSize: 22, fontWeight: 800, letterSpacing: "4px" }}>FOUNDER-LED DEVELOPMENT</div>
+                    <div style={{ color: "#d7f45d", fontSize: 22, fontWeight: 800, letterSpacing: "4px" }}>DETROIT-BASED · AVAILABLE WORLDWIDE</div>
                     <div style={{ fontSize: 78, fontWeight: 800, lineHeight: 0.98, marginTop: 28 }}>Working digital products, built around the business.</div>
                     <div style={{ display: "flex", marginTop: 42, paddingTop: 22, borderTop: "1px solid rgba(238,236,229,.28)", fontSize: 26, letterSpacing: "0", opacity: 0.72 }}>
                         CodeStudioWorks&nbsp;&nbsp;·&nbsp;&nbsp;{hostname}
