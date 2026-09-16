@@ -16,7 +16,7 @@ export default function StudioScene({ progress, paused, station = 0, onReady }) 
             let renderer;
             try { renderer = new T.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "low-power" }); }
             catch { return; }
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.25 : 1.75));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.25 : 2));
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.outputColorSpace = T.SRGBColorSpace;
             renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -50,7 +50,18 @@ export default function StudioScene({ progress, paused, station = 0, onReady }) 
             const warm = new T.MeshBasicMaterial({ color: "#ffe1ad" });
             const mesh = (w,h,d,x,y,z,mat=concrete) => { const m=new T.Mesh(new T.BoxGeometry(w,h,d),mat); m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true; scene.add(m);return m; };
             scene.add(new T.HemisphereLight("#dce8e2", "#27281e", 2.6));
-            const sun = new T.DirectionalLight("#ffe4b7", 4); sun.position.set(-8,15,8); sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-28;sun.shadow.camera.right=28;sun.shadow.camera.top=28;sun.shadow.camera.bottom=-28;sun.shadow.camera.far=90;sun.shadow.bias=-.001;sun.target.position.set(0,0,-15);scene.add(sun.target);scene.add(sun);
+            const sun = new T.DirectionalLight("#ffe4b7", 4);
+            sun.position.set(-8,15,8);
+            sun.castShadow=true;
+            // One stable, high-resolution map covers every walkthrough chapter.
+            // Keep the full bounds so distant portals never lose their shadows.
+            const shadowSize=Math.min(4096,renderer.capabilities.maxTextureSize);
+            sun.shadow.mapSize.set(shadowSize,shadowSize);
+            Object.assign(sun.shadow.camera,{left:-28,right:28,top:28,bottom:-28,far:90});
+            sun.shadow.bias=-.0001;
+            sun.shadow.normalBias=.015;
+            sun.target.position.set(0,0,-15);
+            scene.add(sun.target);scene.add(sun);
             const fill = new T.DirectionalLight("#acc7cd",1.7);fill.position.set(12,7,-22);scene.add(fill);
             mesh(32,.4,75,0,-.3,-12,floor);
             // Repeated portal frames create genuine perspective as the camera travels.

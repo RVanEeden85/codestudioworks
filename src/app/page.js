@@ -1,5 +1,7 @@
 "use client";
 
+import ProcessDrawing from "./components/ProcessDrawing";
+import CourtyardWall from "./components/CourtyardWall";
 import DaylightWall from "./components/DaylightWall";
 import SpotlightPortrait from "./components/SpotlightPortrait";
 import Link from "next/link";
@@ -137,8 +139,8 @@ export default function Home() {
 
             <ProjectRail />
 
-            <section id="services" className="daylight-section daylight-morning architectural-light py-20 md:py-28">
-                <DaylightWall mood="morning"/>
+            <section id="services" className="daylight-section daylight-morning courtyard-section architectural-light py-20 md:py-28">
+                <CourtyardWall/>
                 <div className="section-shell">
                     <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
                         <div>
@@ -185,17 +187,17 @@ export default function Home() {
                 </div>
             </section>
 
-            <section id="process" className="daylight-section daylight-process architectural-light py-20 md:py-28">
-                <DaylightWall/>
+            <section id="process" className="drafting-process py-20 md:py-28">
                 <div className="section-shell">
-                    <div className="mx-auto max-w-3xl text-center">
+                    <div className="drafting-heading">
                         <p className="eyebrow">The process</p>
                         <h2 className="mt-4 text-4xl font-black leading-tight text-secondary md:text-6xl">How your project works.</h2>
                     </div>
-                    <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-black/10 bg-black/10 md:grid-cols-2 lg:grid-cols-4">
+                    <div className="drafting-stages mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
                         {process.map(([title, text], index) => (
-                            <article key={title} className="process-slab motion-reveal-item bg-[#cfccc4] p-7">
-                                <p className="text-sm font-black text-[#263c33]">0{index + 1}</p>
+                            <article key={title} className="drafting-card motion-reveal-item">
+                                <div className="drafting-number"><span>0{index + 1}</span><span aria-hidden="true">{["Sketch", "Plan", "Build", "Launch"][index]}</span></div>
+                                <ProcessDrawing stage={index}/>
                                 <h3 className="mt-8 text-2xl font-black text-secondary">{title}</h3>
                                 <p className="mt-3 font-medium leading-7 text-black/62">{text}</p>
                             </article>

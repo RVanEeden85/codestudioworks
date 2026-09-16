@@ -1,3 +1,4 @@
+import PlanningDesk from "../components/PlanningDesk";
 import Link from "next/link";
 import {
     FiArrowRight,
@@ -85,20 +86,20 @@ export default function StartABusinessPage() {
                 </div>
             </section>
 
-            <section className="concrete-panel-wall architectural-light py-20 md:py-28">
-                <div aria-hidden="true" className="concrete-cast-shadows" />
-                <div className="section-shell grid gap-10 lg:grid-cols-[0.68fr_1.32fr]">
+            <section className="launch-studio py-20 md:py-28">
+                <div className="section-shell grid gap-10 lg:grid-cols-[1fr_1.15fr]">
                     <div>
-                        <p className="eyebrow">From idea to launch</p>
+                        <p className="eyebrow">At the planning desk</p>
                         <h2 className="mt-4 text-4xl font-black leading-tight text-secondary md:text-5xl">From idea to launch.</h2>
-                        <div className="architectural-slab mt-7 p-6 text-white">
+                        <PlanningDesk />
+                        <div className="launch-outcome mt-7 p-6 text-white">
                             <FiGlobe className="text-3xl text-accent" aria-hidden="true" />
                             <p className="mt-4 font-bold leading-7 text-white/76">You’ll receive a working website, access to your accounts and guidance on keeping everything up to date.</p>
                         </div>
                     </div>
                     <ol className="grid gap-4 md:grid-cols-2">
                         {launchSteps.map(([title, text], index) => (
-                            <li key={title} className="border-t border-black/20 bg-[#cbc8c0] p-6">
+                            <li key={title} className="launch-step p-6">
                                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#101211] text-sm font-black text-accent">{index + 1}</span>
                                 <h3 className="mt-5 text-xl font-black text-secondary">{title}</h3>
                                 <p className="mt-3 font-medium leading-7 text-black/62">{text}</p>
