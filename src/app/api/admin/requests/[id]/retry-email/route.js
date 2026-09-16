@@ -33,8 +33,11 @@ export async function POST(request, { params }) {
         const only = ["owner", "requester"].filter(
             (key) => submission.emailDelivery?.[key]?.status !== "sent"
         );
+        if (only.length === 0) {
+            return NextResponse.redirect(new URL("/admin?email=sent", request.url), 303);
+        }
         const delivery = await sendSubmissionEmails(submission, {
-            only: only.length > 0 ? only : undefined,
+            only,
         });
         await updateRequestSubmissionEmailStatus(submission._id, delivery.status, delivery);
 

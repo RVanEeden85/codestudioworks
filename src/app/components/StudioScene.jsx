@@ -202,10 +202,16 @@ export default function StudioScene({ progress, paused, station = 0, onReady }) 
                 scanMaterial.opacity=animateProjection ? Math.sin(Math.PI*projectionElapsed/2.6)*.55 : 0;
                 projectionScan.position.y=6.8-4.8*Math.min(1,projectionElapsed/2.6);
                 last=smoothed;dirty=false;
-                poses[0].p = container.clientWidth < 768 ? [1,4.5,24] : [15,6.2,23];
+                const mobile = container.clientWidth < 768;
+                const activePoses = mobile ? [
+                    {p:[0,4.5,25],t:[0,4,-3]},
+                    {p:[3.4,4,2],t:[3.4,3,-8]},
+                    {p:[5,5,-17],t:[0,2,-26]},
+                    {p:[2,5,-25],t:[1,3.3,-38]},
+                ] : poses;
                 const n=Math.max(0,Math.min(3,smoothed)),i=Math.min(2,Math.floor(n)),f=n-i,e=f*f*(3-2*f);
-                a.fromArray(poses[i].p);b.fromArray(poses[i+1].p);camera.position.lerpVectors(a,b,e);
-                a.fromArray(poses[i].t);b.fromArray(poses[i+1].t);look.lerpVectors(a,b,e);camera.lookAt(look);
+                a.fromArray(activePoses[i].p);b.fromArray(activePoses[i+1].p);camera.position.lerpVectors(a,b,e);
+                a.fromArray(activePoses[i].t);b.fromArray(activePoses[i+1].t);look.lerpVectors(a,b,e);camera.lookAt(look);
                 blocks.forEach((block,j)=>{block.position.y=2+Math.max(0,1-Math.abs(n-2))*j*.28;});
                 renderer.render(scene,camera);
                 if(!ready){ready=true;settings.current.onReady?.();}

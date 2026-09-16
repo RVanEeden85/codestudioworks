@@ -2094,3 +2094,24 @@ textarea {
 }
 @media(max-width:767px) { .planning-desk-surface { height:340px; } }
 @media(prefers-reduced-motion:reduce) { .planning-desk-surface { animation:none; transform:none; } }
+
+.studio-mobile-top,.studio-mobile-copy { display:none; }
+@media(max-width:767px) {
+ .studio-stage { min-height:0; height:calc(100svh - 72px); display:grid; grid-template-rows:minmax(150px,1fr) auto 52px; }
+ .studio-stage .studio-canvas,.studio-stage .studio-fallback { height:calc(100% - 282px); }
+ .studio-stage .studio-shade { height:calc(100% - 282px); background:linear-gradient(#07110b55,transparent 22%); }
+ .studio-stage .studio-topline,.studio-stage .studio-kicker,.studio-stage .studio-note,.studio-stage .studio-secondary,.studio-desktop-copy { display:none; }
+ .studio-mobile-copy { display:inline; }
+ .studio-mobile-top { position:absolute; top:10px; left:16px; right:16px; display:flex; align-items:center; justify-content:space-between; gap:8px; color:#f0f2e8; font-size:10px; text-transform:uppercase; letter-spacing:.08em; z-index:2; }
+ .studio-mobile-top button { min-height:44px; padding:0 10px; background:#101a16b3; }
+ .studio-stage .studio-story { position:relative; grid-row:2; top:auto; bottom:auto; left:auto; width:100%; height:230px; background:#101a16; padding:16px 20px; border-top:1px solid #d6f36735; }
+ .studio-stage .studio-chapter { inset:16px 20px; }
+ .architectural-page .studio-stage .studio-chapter h1,.architectural-page .studio-stage .studio-chapter h2 { font-size:26px; line-height:1.12; letter-spacing:-.035em; margin:0 0 10px; max-width:36ch; text-wrap:initial; }
+ .architectural-page .studio-stage .studio-copy { font-size:13px; line-height:1.5; margin:0; }
+ .studio-stage .studio-actions { margin-top:12px; }
+ .studio-stage .studio-primary { min-height:44px; padding:10px 14px; font-size:12px; }
+ .studio-stage .studio-bottom { position:relative; grid-row:3; left:auto; right:auto; bottom:auto; padding:0 16px; gap:8px; background:#101a16; }
+ .studio-stage .studio-bottom nav { gap:0; }
+ .studio-stage .studio-bottom nav button { min-width:40px; min-height:44px; justify-content:center; }
+ .studio-stage .studio-pause { margin-right:0; min-height:44px; font-size:10px; }
+}

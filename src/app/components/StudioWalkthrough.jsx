@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowDown, FiArrowUpRight, FiPause, FiPlay } from "react-icons/fi";
 const StudioScene = dynamic(() => import("./StudioScene"), { ssr: false });
+const mobileCopy = ["I’m Ryno, your independent developer. Let’s build your website, app or software.","Explore selected projects and the work behind them.","Clear priorities, regular updates and a plan from start to launch.","Tell me what you’d like to build. I’ll reply personally."];
 const chapters = [
     {label:"The entrance", title:"Websites, apps and software for your business.", copy:"I’m Ryno. I help businesses launch websites, build custom apps and improve existing software. You work directly with me from the first conversation through launch and ongoing support.",link:"Discuss your project",href:"/contact",note:"Independent full-stack developer · Detroit, Michigan"},
     {label:"The gallery",title:"Explore my recent work.",copy:"Explore client projects, my professional contributions and an independent product. Each case study explains my role and the work involved.",link:"View case studies",href:"/work",note:"Client websites · Professional contributions · Independent products"},
@@ -26,12 +27,13 @@ export default function StudioWalkthrough(){
             <Image src="/images/architectural-hero.webp" fill priority alt="" sizes="100vw" className="studio-fallback" />
             <StudioScene progress={progress} paused={paused} station={frozen} onReady={()=>setReady(true)} />
             <div className="studio-shade" />
+            <div className="studio-mobile-top"><span>0{chapter+1} / {chapters[chapter].label}</span><button onClick={()=>{const el=section.current;window.scrollTo({top:window.scrollY+el.getBoundingClientRect().bottom-72,behavior:"instant"});}}>Skip tour ↓</button></div>
             <div className="studio-topline"><span>CSW / DIGITAL ATELIER</span><span>DETROIT · AVAILABLE WORLDWIDE</span></div>
             <div className="studio-story">
                 {chapters.map((item,index)=><div key={item.label} className={`studio-chapter ${chapter===index?'is-current':''}`} aria-hidden={chapter!==index} inert={chapter!==index}>
                     <p className="studio-kicker"><span>0{index+1}</span> {item.label}</p>
                     {index===0?<h1>{item.title}</h1>:<h2>{item.title}</h2>}
-                    <p className="studio-copy">{item.copy}</p>
+                    <p className="studio-copy"><span className="studio-desktop-copy">{item.copy}</span><span className="studio-mobile-copy">{mobileCopy[index]}</span></p>
                     <div className="studio-actions"><Link href={item.href} className="studio-primary">{item.link}<FiArrowUpRight /></Link>{index===0&&<Link href="/work" className="studio-secondary">View my work <FiArrowUpRight /></Link>}</div>
                     <p className="studio-note">{item.note}</p>
                 </div>)}
