@@ -223,6 +223,8 @@ export default function Home() {
                 </div>
             </section>
 
+            <section className="drafting-process py-16"><div className="section-shell"><p className="eyebrow">Before you build</p><h2 className="mt-4 text-3xl md:text-5xl font-bold text-secondary">Make your next decision with confidence.</h2><p className="mt-5 max-w-2xl leading-7 text-white/75">Explore practical guides to website costs, choosing between a website and an app, and preparing your project brief.</p><Link href="/guides" className="studio-primary mt-7">Explore the planning guides <FiArrowRight aria-hidden="true"/></Link></div></section>
+
             <section className="daylight-section daylight-evening border-t border-white/10 py-20 text-white md:py-28">
                 <DaylightWall mood="evening"/>
                 <div className="section-shell grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">

@@ -175,6 +175,7 @@ export default async function ProjectPage({ params }) {
                         <p className="text-lg font-medium leading-8 text-black/66">
                             {project.summary}
                         </p>
+                        <section className="drafting-card mt-8"><p className="eyebrow">A closer look</p><h2 className="mt-4 text-2xl font-bold text-secondary">{project.media.evidence.title}</h2><p className="mt-4 leading-7 text-white/75">{project.media.evidence.description}</p><p className="mt-4 text-sm leading-6 text-white/60">{project.context === "Professional software work" ? "This case study describes my contribution to the wider platform." : project.context === "Independent product" ? "This is my independent product, rather than a commissioned client project." : "This case study shows the website and features delivered."} The examples describe functionality; no traffic or revenue uplift is claimed.</p><Link href={project.slug === "rolleston-tinting" ? "/services/business-website-launch" : "/services/custom-web-apps"} className="mt-5 inline-block text-accent underline">Explore this type of development ↗</Link></section>
                         <h2 className="mt-10 text-3xl font-black text-secondary">
                             {project.context === "Professional software work" ? "What I contributed to" : "What I built"}
                         </h2>

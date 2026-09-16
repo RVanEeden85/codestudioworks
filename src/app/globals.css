@@ -2115,3 +2115,10 @@ textarea {
  .studio-stage .studio-bottom nav button { min-width:40px; min-height:44px; justify-content:center; }
  .studio-stage .studio-pause { margin-right:0; min-height:44px; font-size:10px; }
 }
+
+.guide-body { max-width:760px; min-width:0; }
+.guide-body h2 { color:#eff1e8; font-size:clamp(1.5rem,3vw,2rem); line-height:1.25; font-weight:700; }
+.guide-body p,.guide-body li { color:#c6d0c8; font-size:17px; line-height:1.85; margin-top:16px; }
+.guide-body ul { list-style:disc; padding-left:22px; }
+.guide-card { display:block; }
+.guide-card:focus-visible { outline:2px solid #d6f367; outline-offset:5px; }

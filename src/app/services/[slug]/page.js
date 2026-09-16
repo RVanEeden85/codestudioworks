@@ -1,3 +1,4 @@
+import { guides } from "../../guides/guides";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
@@ -150,6 +151,7 @@ export default async function ServiceDetailPage({ params }) {
                             <p className="mt-4 max-w-3xl font-medium leading-7 text-white/74">{service.engagement}</p>
                         </section>
 
+                        <section className="drafting-card mt-10"><h2 className="text-3xl font-bold text-secondary">Before we start</h2><p className="mt-4 leading-7 text-white/75">Bring your main business goal, any existing website or tools, and the date and budget you have in mind. We’ll confirm deliverables, content responsibilities, revisions and access before work begins.</p><h3 className="mt-6 text-xl font-bold text-secondary">What affects the quote?</h3><p className="mt-3 leading-7 text-white/75">Custom workflows, integrations, content preparation and migration can change the scope. Hosting, subscriptions and ongoing support are agreed separately. The written proposal confirms what is included.</p><Link href="/pricing" className="mt-5 inline-block text-accent underline">See pricing and engagement options</Link><div className="mt-5">{guides.filter(g=>g.service===service.slug || service.slug==="care-maintenance" && g.slug==="prepare-to-hire-a-freelance-developer").map(g=><Link key={g.slug} href={`/guides/${g.slug}`} className="block py-2 text-accent underline">{g.title} ↗</Link>)}</div></section>
                         <section className="mt-10">
                             <p className="eyebrow">Common questions</p>
                             <h2 className="mt-3 text-3xl font-black text-secondary">Common questions</h2>

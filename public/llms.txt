@@ -1,44 +1,49 @@
 # CodeStudioWorks
 
-> CodeStudioWorks is a Detroit-based, founder-led development studio building websites, web and mobile apps, custom software, and business systems for clients in Metro Detroit, Michigan, and worldwide.
+> CodeStudioWorks is Ryno van Eeden's independent development studio in Detroit, Michigan. Ryno builds business websites, web and mobile apps, and custom software for clients in Metro Detroit and worldwide.
 
-## Core facts
+Clients work directly with Ryno, who brings more than 15 years of professional software experience, from planning through development, launch and optional ongoing support. Remote projects use online meetings, shared reviews and digital delivery.
 
-- Founder and developer: Ryno van Eeden
-- Experience: More than 15 years of professional software experience
-- Location: Detroit, Michigan, United States
-- Local service area: Detroit, Metro Detroit, and Michigan
-- Wider service area: United States and worldwide
-- Delivery model: Direct online meetings, shared project reviews, documented decisions, and digital delivery
-- Phone and WhatsApp: +1-313-213-5404
+A written proposal confirms the scope, price, timeline, responsibilities and ownership. Third-party costs are identified separately. Use the pricing and service pages for current engagement details; published starting prices are not quotes for every project.
 
-## Services
+Business email: info@codestudioworks.com. Phone and WhatsApp: +1-313-213-5404. New enquiries can be submitted through the contact page; existing clients can use the support page.
 
-- Business website strategy, design, development, redesign, and launch
-- Web applications, mobile applications, customer portals, dashboards, and business tools
-- Custom software, integrations, payments, accounts, permissions, and administration systems
-- Fractional and freelance development support for businesses without a full internal development team
-- Website maintenance, technical support, technical SEO, analytics, and local-search foundations
+The work pages distinguish client projects, professional contributions and an independently developed product. They describe Ryno's role; they should not be read as claims that he solely created every platform. Search and visibility work does not include guaranteed rankings.
 
-## Important pages
+## Studio and getting started
 
-- Home: https://www.codestudioworks.com/
-- Detroit web development: https://www.codestudioworks.com/detroit-web-development
-- Services: https://www.codestudioworks.com/services
-- Starting a business: https://www.codestudioworks.com/start-a-business
-- Selected work: https://www.codestudioworks.com/work
-- Pricing and engagements: https://www.codestudioworks.com/pricing
-- About Ryno van Eeden: https://www.codestudioworks.com/about
-- Contact: https://www.codestudioworks.com/contact
+- [CodeStudioWorks home](https://www.codestudioworks.com/): Overview of the studio, services and approach.
+- [About Ryno van Eeden](https://www.codestudioworks.com/about): Developer background and how clients work directly with Ryno.
+- [Detroit web development](https://www.codestudioworks.com/detroit-web-development): Website and software services for Detroit and Metro Detroit businesses.
+- [Starting a business](https://www.codestudioworks.com/start-a-business): Help planning and launching a new business website and its connected tools.
+- [Pricing and engagements](https://www.codestudioworks.com/pricing): Current starting prices, engagement options and scope considerations.
+- [Discuss your project](https://www.codestudioworks.com/contact): Send a new project enquiry.
 
-## Working model
+## Development services
 
-Clients work directly with Ryno from planning through design, development, launch, and optional ongoing support. A written proposal confirms scope, responsibilities, timeline, ownership, and price. Third-party costs are identified separately where relevant.
+- [All services](https://www.codestudioworks.com/services): Compare the available development and support services.
+- [Business websites](https://www.codestudioworks.com/services/business-website-launch): Website planning, design, development, redesign and launch.
+- [Web and mobile apps](https://www.codestudioworks.com/services/custom-web-apps): Custom applications, portals, dashboards and connected business tools.
+- [Ongoing development](https://www.codestudioworks.com/services/fractional-development-partner): Regular development help for features, improvements and integrations.
+- [Website maintenance](https://www.codestudioworks.com/services/care-maintenance): Ongoing updates, fixes and technical care.
 
-## Search and visibility policy
+## Work and experience
 
-Projects can include crawlable information architecture, metadata, structured data, performance work, analytics, technical SEO, and local-search foundations. CodeStudioWorks does not promise or guarantee a particular organic-search ranking.
+- [Selected work](https://www.codestudioworks.com/work): Client projects, professional contributions and an independent product.
+- [Rolleston Tinting](https://www.codestudioworks.com/work/rolleston-tinting): Client website case study describing Ryno's design and development work.
+- [State Champs Network](https://www.codestudioworks.com/work/state-champs-network): Professional contributions across the platform; read the case study for the specific role and scope.
+- [EventBookr](https://www.codestudioworks.com/work/eventbookr): Independently developed event-planning product and its development scope.
 
-## Contact
+## Planning guides
 
-Use https://www.codestudioworks.com/contact to send a project enquiry or use the WhatsApp link on the website.
+- [Planning guides](https://www.codestudioworks.com/guides): Practical guidance for planning a website or software project.
+- [What does a small-business website cost?](https://www.codestudioworks.com/guides/small-business-website-cost): What affects a quote, ongoing costs and how to compare proposals.
+- [Do you need a website, a web app or a mobile app?](https://www.codestudioworks.com/guides/website-web-app-or-mobile-app): Choose an appropriate starting point for your customers and workflows.
+- [What to prepare before hiring a freelance developer](https://www.codestudioworks.com/guides/prepare-to-hire-a-freelance-developer): Prepare goals, content, access, budget and handover expectations.
+
+## Optional
+
+- [Client support](https://www.codestudioworks.com/support): Submit an existing-project support request.
+- [Privacy policy](https://www.codestudioworks.com/privacy): How information submitted to the website is handled.
+- [Terms](https://www.codestudioworks.com/terms): Website terms and conditions.
+- [Sitemap](https://www.codestudioworks.com/sitemap.xml): Machine-readable index of public pages.

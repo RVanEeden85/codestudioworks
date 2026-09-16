@@ -118,14 +118,26 @@ export default function StudioScene({ progress, paused, station = 0, onReady }) 
             const projectionGlow = new T.Mesh(new T.PlaneGeometry(10,8),new T.MeshBasicMaterial({map:glowTexture,transparent:true,depthWrite:false,blending:T.AdditiveBlending}));
             projectionGlow.position.set(2,4.4,-41.73);scene.add(projectionGlow);
             mesh(2.2,.025,.02,2,2.3,-41.54,lime);
-            mesh(4,.16,2.3,2,1.15,-35,floor);mesh(.3,1.1,.3,.5,.55,-35,dark);mesh(.3,1.1,.3,3.5,.55,-35,dark);
+            const paleStone=new T.MeshStandardMaterial({color:'#eeeae0',map:concreteMap,roughness:.38,bumpMap:concreteMap,bumpScale:.008});
+            mesh(4,.16,2.3,2,1.15,-35,paleStone);mesh(.3,1.1,.3,.5,.55,-35,dark);mesh(.3,1.1,.3,3.5,.55,-35,dark);
             [-1,5].forEach(x=>{
-                mesh(1.3,.2,1.3,x,.65,-35,dark);
-                mesh(1.3,1.2,.2,x,1.1,-35.6,dark);
+                const chair=new T.Group();chair.position.set(x,0,-35);
+                chair.rotation.y=x<2?Math.PI/2:-Math.PI/2;scene.add(chair);
+                const part=(w,h,d,px,py,pz)=>{const m=new T.Mesh(new T.BoxGeometry(w,h,d),dark);m.position.set(px,py,pz);m.castShadow=true;m.receiveShadow=true;chair.add(m);};
+                part(1.3,.2,1.3,0,.65,0);
+                part(1.3,1.2,.2,0,1.1,-.6);
                 for (const dx of [-.49,.49]) for (const dz of [-.49,.49]) {
-                    mesh(.11,.65,.11,x+dx,.225,-35+dz,dark);
+                    part(.11,.65,.11,dx,.225,dz);
                 }
             });
+            // Quiet charcoal textile, with fine weave and a restrained inset seam.
+            const rugCanvas=document.createElement('canvas');rugCanvas.width=1024;rugCanvas.height=640;
+            const rc=rugCanvas.getContext('2d');rc.fillStyle='#455456';rc.fillRect(0,0,1024,640);rc.lineWidth=1;
+            for(let y=0;y<640;y+=3){rc.strokeStyle=y%2?'#ffffff09':'#00000012';rc.beginPath();rc.moveTo(0,y);rc.lineTo(1024,y);rc.stroke();}
+            for(let x=0;x<1024;x+=4){rc.strokeStyle='#e6e5da08';rc.beginPath();rc.moveTo(x,0);rc.lineTo(x,640);rc.stroke();}
+            rc.strokeStyle='#64716e';rc.lineWidth=2;rc.strokeRect(25,25,974,590);
+            const rugTexture=new T.CanvasTexture(rugCanvas);rugTexture.colorSpace=T.SRGBColorSpace;rugTexture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());textures.push(rugTexture);
+            const rug=new T.Mesh(new T.BoxGeometry(9.2,.026,5.4),new T.MeshStandardMaterial({map:rugTexture,roughness:1}));rug.position.set(2,-.074,-35);rug.receiveShadow=true;scene.add(rug);
             // Tabletop objects rest on the table's top surface at y = 1.23.
             const ceramic = new T.MeshStandardMaterial({color:'#c5baa4',roughness:.78});
             const pot = new T.Mesh(new T.CylinderGeometry(.28,.22,.48,24),ceramic);
@@ -133,17 +145,24 @@ export default function StudioScene({ progress, paused, station = 0, onReady }) 
             const soil = new T.Mesh(new T.CylinderGeometry(.245,.245,.018,24),new T.MeshStandardMaterial({color:'#28251d',roughness:1}));
             soil.position.set(1.1,1.715,-35.25);scene.add(soil);
             const stemMaterial = new T.MeshStandardMaterial({color:'#526540',roughness:.9});
-            const leafMaterial = new T.MeshStandardMaterial({color:'#718d51',roughness:.72});
-            for(let j=0;j<7;j++) {
-                const angle=j*2.4, height=.35+(j%3)*.12;
-                const stem=new T.Mesh(new T.CylinderGeometry(.013,.016,height,6),stemMaterial);
-                stem.position.set(1.1+Math.cos(angle)*.07,1.72+height/2,-35.25+Math.sin(angle)*.07);scene.add(stem);
-                const leaf=new T.Mesh(new T.SphereGeometry(1,12,8),leafMaterial);
-                leaf.scale.set(.12,.24,.035);
-                leaf.rotation.set(.35,angle,.5);
-                leaf.position.set(1.1+Math.cos(angle)*.17,1.72+height,-35.25+Math.sin(angle)*.17);
-                leaf.castShadow=true;scene.add(leaf);
+            const leafMaterial = new T.MeshStandardMaterial({color:'#568044',roughness:.88,side:T.DoubleSide});
+            // Arching fern fronds; all 288 paired leaflets share one draw call.
+            const leafletShape=new T.Shape();leafletShape.moveTo(0,0);leafletShape.quadraticCurveTo(.055,.06,0,.23);leafletShape.quadraticCurveTo(-.045,.07,0,0);
+            const fernLeaves=new T.InstancedMesh(new T.ShapeGeometry(leafletShape,4),leafMaterial,288);
+            const leafPose=new T.Object3D();let leafIndex=0;
+            for(let j=0;j<12;j++) {
+                const angle=j*Math.PI*2/12,reach=.46+(j%3)*.13,rise=.42+(j%4)*.065;
+                const radial=new T.Vector3(Math.cos(angle),0,Math.sin(angle)),side=new T.Vector3(-Math.sin(angle),0,Math.cos(angle));
+                const point=t=>new T.Vector3(1.1+radial.x*reach*t,1.72+rise*Math.sin(t*Math.PI*.82),-35.25+radial.z*reach*t);
+                const curve=new T.CatmullRomCurve3(Array.from({length:9},(_,k)=>point(k/8)));
+                scene.add(new T.Mesh(new T.TubeGeometry(curve,16,.007,4,false),stemMaterial));
+                for(let k=0;k<12;k++)for(const direction of [-1,1]){
+                    const t=.13+k*.069;leafPose.position.copy(point(t));
+                    const tip=side.clone().multiplyScalar(direction).addScaledVector(radial,.35).add(new T.Vector3(0,.23,0)).normalize();
+                    leafPose.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),tip);leafPose.scale.setScalar((1-t)*1.2+.12);leafPose.updateMatrix();fernLeaves.setMatrixAt(leafIndex++,leafPose.matrix);
+                }
             }
+            fernLeaves.instanceMatrix.needsUpdate=true;fernLeaves.castShadow=true;scene.add(fernLeaves);
             // Thin, rounded aluminium iPad Pro with a dark bezel and lit display.
             const tablet = new T.Group();tablet.position.set(2.75,1.23,-34.65);tablet.rotation.y=-.22;scene.add(tablet);
             function roundedRect(width,height,radius) {
@@ -169,10 +188,50 @@ export default function StudioScene({ progress, paused, station = 0, onReady }) 
             display.rotation.x=-Math.PI/2;display.position.y=.031;tablet.add(display);
             const tabletCamera=new T.Mesh(new T.SphereGeometry(.009,8,6),new T.MeshBasicMaterial({color:'#27333d'}));
             tabletCamera.position.set(0,.032,-.354);tablet.add(tabletCamera);
-            // Geometric planting softens the concrete without external model downloads.
+            // Arc lamps illuminate nearby surfaces without extra shadow maps.
+            const lampMetal=new T.MeshStandardMaterial({color:'#343b38',metalness:.75,roughness:.3});
+            const lampInner=new T.MeshStandardMaterial({color:'#f1dfb8',emissive:'#ffda91',emissiveIntensity:1.4,roughness:.6,side:T.DoubleSide});
             for(const [x,z] of [[-5,-5],[5,-33],[-5,-39]]){
-                mesh(.8,.8,.8,x,.35,z,dark);
-                for(let j=0;j<5;j++) { const leaf=new T.Mesh(new T.ConeGeometry(.35,2.4,5),new T.MeshStandardMaterial({color:j%2?'#67735a':'#475d4b',roughness:1}));leaf.position.set(x+(j-2)*.12,1.8,z);leaf.rotation.z=(j-2)*.18;scene.add(leaf); }
+                const inward=x<0?1:-1;
+                const base=new T.Mesh(new T.CylinderGeometry(.48,.52,.12,32),lampMetal);base.position.set(x,-.035,z);base.castShadow=true;scene.add(base);
+                const arc=new T.CatmullRomCurve3([new T.Vector3(x,.02,z),new T.Vector3(x,2.4,z),new T.Vector3(x+inward*.35,3.65,z),new T.Vector3(x+inward*1.25,4.05,z),new T.Vector3(x+inward*2.05,3.7,z)]);
+                const stem=new T.Mesh(new T.TubeGeometry(arc,40,.035,8,false),lampMetal);stem.castShadow=true;scene.add(stem);
+                const lx=x+inward*2.05;
+                const shade=new T.Mesh(new T.SphereGeometry(.4,24,12,0,Math.PI*2,0,Math.PI/2),lampMetal);shade.position.set(lx,3.48,z);shade.castShadow=true;scene.add(shade);
+                const diffuser=new T.Mesh(new T.CircleGeometry(.35,24),lampInner);diffuser.rotation.x=-Math.PI/2;diffuser.position.set(lx,3.48,z);scene.add(diffuser);
+                const bulb=new T.SpotLight('#ffe0a3',28,8,Math.PI/3,.8,2);bulb.position.set(lx,3.43,z);bulb.target.position.set(lx,0,z);scene.add(bulb,bulb.target);
+            }
+            // Broad banana leaves frame the entrance and meeting area.
+            const bananaLeaf=new T.Shape();
+            bananaLeaf.moveTo(0,0);
+            bananaLeaf.bezierCurveTo(-.38,.25,-.59,1.14,-.18,1.72);
+            bananaLeaf.quadraticCurveTo(-.05,1.91,0,2.05);
+            bananaLeaf.bezierCurveTo(.5,1.63,.55,.48,0,0);
+            const bananaGeometry=new T.ShapeGeometry(bananaLeaf,12);
+            // Curve the blade out of its plane for a soft, drooping silhouette.
+            const bladePositions=bananaGeometry.attributes.position;
+            for(let i=0;i<bladePositions.count;i++){
+                const y=bladePositions.getY(i),x=bladePositions.getX(i);
+                bladePositions.setZ(i,-.23*y*y+.22*Math.abs(x));
+            }
+            bananaGeometry.computeVertexNormals();
+            const bananaMaterials=['#355c37','#467447','#587f43'].map(color=>new T.MeshStandardMaterial({color,roughness:.76,side:T.DoubleSide}));
+            const bananaStem=new T.MeshStandardMaterial({color:'#66804b',roughness:.9});
+            const treePot=new T.MeshStandardMaterial({color:'#b8afa0',roughness:.9});
+            for(const [x,z] of [[6,7],[-4.3,-36.7]]){
+                const planter=new T.Mesh(new T.CylinderGeometry(.62,.46,.92,32),treePot);
+                planter.position.set(x,.36,z);planter.castShadow=true;planter.receiveShadow=true;scene.add(planter);
+                const dirt=new T.Mesh(new T.CylinderGeometry(.56,.56,.025,24),soil.material);
+                dirt.position.set(x,.825,z);scene.add(dirt);
+                for(let j=0;j<9;j++){
+                    const angle=j*2.4,height=1.25+(j%4)*.35,spread=.32+(j%3)*.17;
+                    const tip=new T.Vector3(x+Math.cos(angle)*spread,.82+height,z+Math.sin(angle)*spread);
+                    const stalkCurve=new T.CatmullRomCurve3([new T.Vector3(x,.8,z),new T.Vector3(x+Math.cos(angle)*.1,1.4,z+Math.sin(angle)*.1),tip]);
+                    const stalk=new T.Mesh(new T.TubeGeometry(stalkCurve,12,.025,5,false),bananaStem);stalk.castShadow=true;scene.add(stalk);
+                    const leaf=new T.Mesh(bananaGeometry,bananaMaterials[j%3]);
+                    leaf.position.copy(tip);leaf.rotation.set(-.3-(j%3)*.19,angle,(j%2?1:-1)*.25);
+                    leaf.scale.setScalar(.7+(j%3)*.12);leaf.castShadow=true;leaf.receiveShadow=true;scene.add(leaf);
+                }
             }
             const poses = [
                 {p:[15,6.2,23],t:[1.5,3.7,1]},

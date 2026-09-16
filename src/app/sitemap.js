@@ -1,3 +1,4 @@
+import { guides } from "./guides/guides";
 import { getSiteUrl } from "./_lib/siteUrl";
 import { services } from "./services/_lib/services";
 import { projects } from "./work/_lib/projects";
@@ -89,5 +90,5 @@ export default function sitemap() {
         priority: 0.5,
     }));
 
-    return [...staticRoutes, ...serviceRoutes, ...projectRoutes];
+    return [...staticRoutes, ...serviceRoutes, ...projectRoutes, {url: `${siteUrl}/guides`}, ...guides.map(g=>({url:`${siteUrl}/guides/${g.slug}`}))];
 }

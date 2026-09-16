@@ -21,6 +21,7 @@ const CopyrightBar = () => {
                     <Link href="/detroit-web-development" className="hover:text-accent">
                         Detroit Web Development
                     </Link>
+                    <Link href="/guides" className="hover:text-accent">Planning guides</Link>
                     <Link href="/work" className="hover:text-accent">Work</Link>
                     <Link href="/pricing" className="hover:text-accent">
                         Pricing
