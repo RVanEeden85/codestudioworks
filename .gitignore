@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Private search exports, analytics screenshots and audit evidence
+/outputs/growth-audit/
