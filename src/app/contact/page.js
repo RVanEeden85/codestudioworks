@@ -1,11 +1,12 @@
-import Contact from "../components/Contact";
+import { Suspense } from "react";
+import ContactFromQuery from "../components/ContactFromQuery";
 import JsonLd from "../components/JsonLd";
 import { absoluteUrl, breadcrumbSchema, buildMetadata, graphSchema } from "../_lib/seo";
 
 export const metadata = buildMetadata({
-    title: "Contact a Detroit Web & App Developer",
+    title: "Request a Website, Software or SEO Quote",
     description:
-        "Tell CodeStudioWorks about your website, app, software, or development-support needs. Based in Detroit and available worldwide through online delivery.",
+        "Request a quote for website design, apps, custom software, SEO or digital marketing. Westland-based, serving Metro Detroit and clients worldwide.",
     path: "/contact",
 });
 
@@ -16,7 +17,7 @@ const pageSchema = graphSchema([
         url: absoluteUrl("/contact"),
         name: "Contact CodeStudioWorks",
         description:
-            "Contact a Detroit-based web, app, and software developer for local or worldwide project delivery.",
+            "Contact a Westland-based website and software developer serving Metro Detroit and clients worldwide.",
         mainEntity: { "@id": `${absoluteUrl("/")}#organization` },
         inLanguage: "en-US",
     },
@@ -26,13 +27,11 @@ const pageSchema = graphSchema([
     ]),
 ]);
 
-export default async function ContactPage({ searchParams }) {
-    const params = await searchParams;
-
+export default function ContactPage() {
     return (
         <main id="main-content" className="architectural-page bg-background pt-[72px]">
             <JsonLd data={pageSchema} />
-            <Contact initialService={params?.service || ""} />
+            <Suspense fallback={<section className="section-shell py-20"><h1 className="text-4xl font-bold">Request a project quote</h1><p className="mt-6">Loading the enquiry form. You can also <a href="mailto:info@codestudioworks.com" className="text-accent underline">email info@codestudioworks.com</a> or <a href="tel:+13132135404" className="text-accent underline">call +1 (313) 213-5404</a>.</p></section>}><ContactFromQuery /></Suspense>
         </main>
     );
 }

@@ -20,7 +20,7 @@ import {
 export const metadata = buildMetadata({
     title: "Detroit Web Developer for Websites, Apps & Software",
     description:
-        "Detroit web developer building business websites, web and mobile apps, and custom software for Metro Detroit, Michigan, and clients worldwide.",
+        "Westland web developer building business websites, web and mobile apps, and custom software for Metro Detroit, Michigan, and clients worldwide.",
     path: "/detroit-web-development",
 });
 
@@ -56,7 +56,7 @@ const faqs = [
     {
         question: "Do you work with businesses outside Detroit?",
         answer:
-            "Yes. CodeStudioWorks is based in Detroit and serves businesses across Metro Detroit and Michigan, but projects can be delivered worldwide through online meetings, shared reviews, documented decisions, and digital delivery.",
+            "Yes. CodeStudioWorks is based in Westland and serves businesses across Metro Detroit and Michigan, with worldwide delivery through online meetings, shared reviews, documented decisions, and digital delivery.",
     },
     {
         question: "What kinds of Detroit businesses do you work with?",
@@ -76,7 +76,7 @@ const faqs = [
     {
         question: "Do we need to meet in person?",
         answer:
-            "No. The working model is designed for efficient online collaboration. Detroit-area clients receive the same direct access, clear reviews, and documented delivery as clients elsewhere in the United States or internationally.",
+            "No. The working model is designed for efficient online collaboration. Local clients can also arrange an in-person meeting after 5pm or on weekends; clients elsewhere receive the same direct access and documented delivery.",
     },
 ];
 
@@ -88,7 +88,7 @@ const pageSchema = graphSchema([
         url: absoluteUrl(path),
         name: "Detroit Web Developer for Websites, Apps and Software",
         description:
-            "Detroit-based website, app, custom software, and ongoing development services for Metro Detroit, Michigan, and businesses worldwide.",
+            "Westland-based website, app, custom software, and ongoing development services for Metro Detroit, Michigan, and businesses worldwide.",
         mainEntity: { "@id": `${absoluteUrl(path)}#service` },
         about: { "@id": `${absoluteUrl("/")}#organization` },
         inLanguage: "en-US",
@@ -98,7 +98,7 @@ const pageSchema = graphSchema([
         "@id": `${absoluteUrl(path)}#service`,
         name: "Detroit Web, App and Software Development",
         description:
-            "Founder-led website, app, custom software, and ongoing development services based in Detroit and delivered locally or worldwide.",
+            "Founder-led website, app, custom software, and ongoing development services based in Westland and delivered locally or worldwide.",
         url: absoluteUrl(path),
         provider: { "@id": `${absoluteUrl("/")}#organization` },
         areaServed: SERVICE_AREAS,
@@ -133,7 +133,7 @@ export default function DetroitWebDevelopmentPage() {
                             A Detroit web developer for websites, apps and business software.
                         </h1>
                         <p className="mt-7 max-w-3xl text-xl font-medium leading-9 text-white/72">
-                            CodeStudioWorks is based in Detroit and works directly with small businesses, startups, and established teams across Metro Detroit, Michigan, and worldwide. Tell me the business outcome; I&apos;ll help shape, build, and launch the right digital solution.
+                            CodeStudioWorks is based in Westland and works directly with small businesses, startups, and established teams across Metro Detroit, Michigan, and worldwide. Local clients can arrange an in-person meeting after 5pm or on weekends. Tell me the business outcome; I&apos;ll help shape, build, and launch the right digital solution.
                         </p>
                         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                             <Link href="/contact?service=Business%20website" className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-4 font-black text-secondary transition hover:bg-white">
@@ -150,7 +150,7 @@ export default function DetroitWebDevelopmentPage() {
             <section aria-label="Service area" className="border-b border-white/10 bg-[#080909] text-white">
                 <div className="section-shell grid divide-y divide-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                     {[
-                        ["Detroit based", "Direct, founder-led development"],
+                        ["Westland based", "Direct, founder-led development"],
                         ["Metro Detroit + Michigan", "Local-market focus and support"],
                         ["Worldwide delivery", "Online meetings and shared reviews"],
                     ].map(([title, text]) => (
@@ -202,7 +202,7 @@ export default function DetroitWebDevelopmentPage() {
                             Close to Detroit businesses. Built to work across distance.
                         </h2>
                         <p className="mt-6 font-medium leading-8 text-white/66">
-                            Being Detroit based creates useful local context, but it does not limit the work. Planning, demonstrations, feedback, source control, account handoff, and launch can all happen securely online.
+                            Being based in Westland provides useful local context for Metro Detroit clients. Planning, demonstrations, feedback, source control, account handoff, and launch can happen online, with local in-person meetings available by arrangement after 5pm or on weekends.
                         </p>
                         <Link href="/about" className="mt-7 inline-flex items-center gap-2 font-black text-accent hover:text-white">
                             Meet the developer <FiArrowRight aria-hidden="true" />
@@ -245,7 +245,7 @@ export default function DetroitWebDevelopmentPage() {
             <section className="monolith-cta border-t border-white/10 py-20 text-white md:py-28">
                 <div className="section-shell grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
                     <div>
-                        <p className="text-sm font-black uppercase text-accent">Detroit based. Available worldwide.</p>
+                            <p className="text-sm font-black uppercase text-accent">Westland based. Available worldwide.</p>
                         <h2 className="mt-3 max-w-4xl text-4xl font-black leading-tight md:text-6xl">
                             Bring the business goal. I&apos;ll help define the right digital next step.
                         </h2>

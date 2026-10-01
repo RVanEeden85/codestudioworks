@@ -10,7 +10,7 @@ const CopyrightBar = () => {
                 <div>
                     <BrandMark inverted className="h-14 w-auto" />
                     <p className="mt-5 max-w-sm leading-6">
-                        © {year} CodeStudioWorks. Detroit-based independent web,
+                        © {year} CodeStudioWorks. Westland-based independent web,
                         app, and software development—available worldwide.
                     </p>
                 </div>
@@ -21,6 +21,7 @@ const CopyrightBar = () => {
                     <Link href="/detroit-web-development" className="hover:text-accent">
                         Detroit Web Development
                     </Link>
+                    <Link href="/westland-web-design" className="hover:text-accent">Westland Web Design</Link>
                     <Link href="/guides" className="hover:text-accent">Planning guides</Link>
                     <Link href="/work" className="hover:text-accent">Work</Link>
                     <Link href="/pricing" className="hover:text-accent">

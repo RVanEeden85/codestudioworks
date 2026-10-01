@@ -1,9 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import BrandMark from "./BrandMark";
+import { useEffect } from "react";
 
 export default function MotionExperience() {
     const pathname = usePathname();
@@ -14,23 +13,6 @@ export default function MotionExperience() {
         damping: 28,
         mass: 0.28,
     });
-    const [showIntro, setShowIntro] = useState(true);
-
-    useEffect(() => {
-        if (pathname !== "/" || sessionStorage.getItem("csw-intro-seen")) {
-            const frame = window.requestAnimationFrame(() => setShowIntro(false));
-            return () => window.cancelAnimationFrame(frame);
-        }
-
-        sessionStorage.setItem("csw-intro-seen", "true");
-        const timer = window.setTimeout(
-            () => setShowIntro(false),
-            prefersReducedMotion ? 120 : 1650
-        );
-
-        return () => window.clearTimeout(timer);
-    }, [pathname, prefersReducedMotion]);
-
     useEffect(() => {
         const root = document.documentElement;
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -220,32 +202,7 @@ export default function MotionExperience() {
             <div aria-hidden="true" className="ambient-grain" />
             <div aria-hidden="true" className="cursor-light" />
 
-            <AnimatePresence>
-                {showIntro && (
-                    <motion.div
-                        aria-hidden="true"
-                        className="intro-curtain"
-                        initial={{ clipPath: "inset(0 0 0 0)" }}
-                        exit={{ clipPath: "inset(0 0 100% 0)" }}
-                        transition={{ duration: 0.86, ease: [0.76, 0, 0.24, 1] }}
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.94 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, y: -24 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                        >
-                            <BrandMark inverted className="h-auto w-44 sm:w-56" />
-                            <motion.span
-                                className="intro-line"
-                                initial={{ scaleX: 0 }}
-                                animate={{ scaleX: 1 }}
-                                transition={{ delay: 0.28, duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
-                            />
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+
         </>
     );
 }

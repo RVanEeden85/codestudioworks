@@ -19,6 +19,7 @@ export default function TurnstileWidget({ action, onVerify, resetSignal = 0 }) {
     const onVerifyRef = useRef(onVerify);
     const [scriptReady, setScriptReady] = useState(false);
     const [message, setMessage] = useState("Security check loading…");
+    const [slowCheck, setSlowCheck] = useState(false);
     const siteKey =
         process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
         (process.env.NODE_ENV !== "production" ? DEVELOPMENT_TEST_SITE_KEY : "");
@@ -54,6 +55,12 @@ export default function TurnstileWidget({ action, onVerify, resetSignal = 0 }) {
     useEffect(() => {
         onVerifyRef.current = onVerify;
     }, [onVerify]);
+
+    useEffect(() => {
+        if (message !== "Security check loading…") return;
+        const timer = setTimeout(() => setSlowCheck(true), 15000);
+        return () => clearTimeout(timer);
+    }, [message]);
 
     useEffect(() => {
         if (scriptReady) renderWidget();
@@ -101,6 +108,7 @@ export default function TurnstileWidget({ action, onVerify, resetSignal = 0 }) {
             <div ref={containerRef} className="min-h-1 w-full overflow-hidden" />
             <p className="mt-2 text-sm text-white/85" aria-live="polite">{message}</p>
             {message.includes("unavailable") && <a href="mailto:info@codestudioworks.com" className="mt-2 inline-block text-sm font-bold text-accent underline">Email me instead</a>}
+            {slowCheck && message === "Security check loading…" && <p className="mt-3 text-sm text-white/85">Security check taking too long? <a href="mailto:info@codestudioworks.com" className="font-bold text-accent underline">Email your project details instead</a> or refresh this page.</p>}
         </div>
     );
 }

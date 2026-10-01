@@ -7,7 +7,7 @@ export default function manifest() {
         name: "CodeStudioWorks",
         short_name: "CodeStudioWorks",
         description:
-            "Detroit-based websites, apps, custom software, and development support for businesses locally and worldwide.",
+            "Westland-based websites, apps, custom software, and development support for Metro Detroit and worldwide businesses.",
         start_url: "/",
         display: "standalone",
         background_color: "#080909",

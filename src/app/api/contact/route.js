@@ -15,6 +15,7 @@ import {
     isValidEmail,
 } from "../../_lib/formSecurity";
 import { verifyTurnstileToken } from "../../_lib/turnstile";
+import { notifyPersistedSubmission, readJsonBody, RequestBodyError } from "../../_lib/requestHandling";
 
 function errorResponse(message, status, headers) {
     return NextResponse.json({ error: message }, { status, headers });
@@ -24,6 +25,12 @@ export async function POST(request) {
     try {
         if (!isSameOriginRequest(request)) {
             return errorResponse("Request origin not allowed", 403);
+        }
+
+        let body;
+        try { body = await readJsonBody(request); } catch (error) {
+            if (error instanceof RequestBodyError) return errorResponse(error.message, error.status);
+            throw error;
         }
 
         if (!isRequestStorageConfigured()) {
@@ -42,8 +49,6 @@ export async function POST(request) {
                 "Retry-After": String(rateLimit.retryAfter),
             });
         }
-
-        const body = await request.json();
 
         if (cleanText(body.website || body.taxNumber, 200)) {
             return NextResponse.json({ success: true });
@@ -100,8 +105,10 @@ export async function POST(request) {
             });
         }
 
-        const delivery = await sendSubmissionEmails(submission);
-        await updateRequestSubmissionEmailStatus(submission._id, delivery.status, delivery);
+        await notifyPersistedSubmission(submission, {
+            sendEmails: sendSubmissionEmails,
+            updateEmailStatus: updateRequestSubmissionEmailStatus,
+        });
 
         return NextResponse.json({
             success: true,

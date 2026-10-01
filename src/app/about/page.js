@@ -5,7 +5,7 @@ import { absoluteUrl, breadcrumbSchema, buildMetadata, graphSchema } from "../_l
 export const metadata = buildMetadata({
     title: "About Ryno van Eeden, Detroit Full-Stack Developer",
     description:
-        "Meet Ryno van Eeden, a Detroit-based full-stack developer with 15+ years of experience building websites, apps, software, and business systems.",
+        "Meet Ryno van Eeden, a Westland-based full-stack developer with 15+ years of experience building websites, apps, software, and business systems for Metro Detroit and worldwide clients.",
     path: "/about",
 });
 

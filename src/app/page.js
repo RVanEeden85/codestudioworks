@@ -1,12 +1,8 @@
-"use client";
-
 import ProcessDrawing from "./components/ProcessDrawing";
 import CourtyardWall from "./components/CourtyardWall";
 import DaylightWall from "./components/DaylightWall";
 import SpotlightPortrait from "./components/SpotlightPortrait";
 import Link from "next/link";
-import { useState } from "react";
-import CountUp from "./components/CountUp";
 import {
     FiArrowRight,
     FiCheck,
@@ -16,38 +12,14 @@ import {
     FiRefreshCw,
     FiSmartphone,
 } from "react-icons/fi";
-import ConsultationModal from "./components/ConsultationModal";
+import { services } from "./services/_lib/services";
 import StudioWalkthrough from "./components/StudioWalkthrough";
 import ProjectRail from "./components/ProjectRail";
 import JsonLd from "./components/JsonLd";
 import { absoluteUrl, faqSchema, graphSchema } from "./_lib/seo";
 
-const offers = [
-    {
-        icon: <FiMonitor aria-hidden="true" />,
-        title: "Business websites",
-        text: "New websites, redesigns and online stores that help customers understand your business and get in touch.",
-        href: "/services/business-website-launch",
-    },
-    {
-        icon: <FiLayers aria-hidden="true" />,
-        title: "Web and mobile apps",
-        text: "Customer apps, mobile apps, booking systems, portals, dashboards, and tools that replace repetitive manual work.",
-        href: "/services/custom-web-apps",
-    },
-    {
-        icon: <FiCode aria-hidden="true" />,
-        title: "Ongoing development",
-        text: "Regular development time for new features, fixes and connections to other tools.",
-        href: "/services/fractional-development-partner",
-    },
-    {
-        icon: <FiRefreshCw aria-hidden="true" />,
-        title: "Website maintenance",
-        text: "Routine updates, fixes, backups and technical checks to keep your website working.",
-        href: "/services/care-maintenance",
-    },
-];
+const offerIcons = { "business-website-launch": FiMonitor, "custom-web-apps": FiSmartphone, "custom-software-development": FiCode, "seo-local-presence": FiLayers, "digital-marketing": FiLayers, "fractional-development-partner": FiCode, "care-maintenance": FiRefreshCw };
+const offers = services.map(service => ({ title: service.name, text: service.summary, href: `/services/${service.slug}`, Icon: offerIcons[service.slug] }));
 
 const process = [
     ["Tell me about the business", "Explain what you sell, who you want to reach, and what customers should be able to do online."],
@@ -104,9 +76,9 @@ const homeSchema = graphSchema([
         "@type": "WebPage",
         "@id": `${absoluteUrl("/")}#webpage`,
         url: absoluteUrl("/"),
-        name: "Detroit Web Developer & Software Studio | CodeStudioWorks",
+        name: "Westland Website Design & Development | CodeStudioWorks",
         description:
-            "Detroit-based web, app, and software development for small businesses, startups, and established teams worldwide.",
+            "Westland-based website design, web development, custom software, SEO and digital marketing for Metro Detroit and clients worldwide.",
         isPartOf: { "@id": `${absoluteUrl("/")}#website` },
         about: { "@id": `${absoluteUrl("/")}#organization` },
         inLanguage: "en-US",
@@ -115,7 +87,6 @@ const homeSchema = graphSchema([
 ]);
 
 export default function Home() {
-    const [isConsultationOpen, setIsConsultationOpen] = useState(false);
     return (
         <main id="main-content" className="architectural-page overflow-x-clip bg-background pt-[72px]">
             <JsonLd data={homeSchema} />
@@ -124,9 +95,9 @@ export default function Home() {
             <section aria-label="Studio facts" className="border-b border-white/10 bg-[#080909]">
                 <div className="section-shell grid divide-y divide-white/10 py-2 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
                     {[
-                        [<><CountUp key="experience" end={15} />+ years</>, "Professional software experience"],
+                        ["15+ years", "Professional software experience"],
                         ["1:1", "Direct access to the developer"],
-                        ["Detroit based", "Serving Metro Detroit and Michigan"],
+                        ["Westland based", "Serving Metro Detroit and Michigan"],
                         ["Worldwide", "Online meetings and digital delivery"],
                     ].map(([value, label]) => (
                         <div key={label} className="motion-reveal-item px-4 py-5 text-center">
@@ -155,7 +126,7 @@ export default function Home() {
                         {offers.map((offer) => (
                             <Link key={offer.title} href={offer.href} className="architectural-slab service-motion-card group p-7 text-white transition hover:border-accent/50">
                                 <div className="flex items-start justify-between gap-6">
-                                    <span className="flex h-12 w-12 items-center justify-center rounded-md bg-accent text-2xl text-[#080909]">{offer.icon}</span>
+                                    <span className="flex h-12 w-12 items-center justify-center rounded-md bg-accent text-2xl text-[#080909]"><offer.Icon aria-hidden="true" /></span>
                                     <FiArrowRight className="text-xl text-accent transition group-hover:translate-x-1" aria-hidden="true" />
                                 </div>
                                 <h3 className="mt-7 text-2xl font-black text-white">{offer.title}</h3>
@@ -233,15 +204,12 @@ export default function Home() {
                         <h2 className="mt-4 max-w-4xl text-4xl font-black leading-tight md:text-6xl">Let&apos;s discuss your project.</h2>
                     </div>
                     <div className="flex flex-col gap-3 lg:pr-10">
-                        <button type="button" onClick={() => setIsConsultationOpen(true)} className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-4 font-black text-secondary transition hover:bg-white">
-                            Request a Consultation <FiArrowRight aria-hidden="true" />
-                        </button>
+                        <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-4 font-black text-secondary transition hover:bg-white">Request a quote <FiArrowRight aria-hidden="true" /></Link>
                         <Link href="/pricing" className="inline-flex items-center justify-center rounded-md border border-white/20 px-6 py-4 font-black text-white transition hover:bg-white/10">View pricing</Link>
                     </div>
                 </div>
             </section>
 
-            <ConsultationModal isOpen={isConsultationOpen} onClose={() => setIsConsultationOpen(false)} />
         </main>
     );
 }

@@ -12,12 +12,16 @@ import {
     graphSchema,
 } from "../../_lib/seo";
 import { getServiceBySlug, services } from "../_lib/services";
+import { getProjectBySlug } from "../../work/_lib/projects";
 
 const seoTitles = {
     "business-website-launch": "Small Business Website Design & Development",
     "custom-web-apps": "Custom Web & Mobile App Development",
     "fractional-development-partner": "Fractional & Freelance Development Support",
     "care-maintenance": "Website Maintenance & Technical SEO Support",
+    "custom-software-development": "Custom Software Development for Business Workflows",
+    "seo-local-presence": "Westland & Metro Detroit Local SEO Services",
+    "digital-marketing": "Digital Marketing Foundations & Campaign Support",
 };
 
 const seoDescriptions = {
@@ -28,7 +32,10 @@ const seoDescriptions = {
     "fractional-development-partner":
         "Fractional and freelance development support for Detroit and worldwide teams needing reliable feature delivery, integrations, fixes, and technical guidance.",
     "care-maintenance":
-        "Website maintenance, technical SEO, updates, integrations, and support from a Detroit-based developer serving businesses locally and worldwide.",
+        "Website maintenance, technical SEO, updates, integrations, and support from a Westland-based developer serving Metro Detroit and worldwide businesses.",
+    "custom-software-development": "Custom software development for business workflows, internal tools, integrations, permissions, and reporting from a Westland-based developer.",
+    "seo-local-presence": "Technical SEO, service pages, local search and measurement from a Westland-based developer serving Metro Detroit and businesses worldwide.",
+    "digital-marketing": "Digital marketing planning, landing pages, campaign measurement, and implementation support, with advertising spend agreed separately.",
 };
 
 export function generateStaticParams() {
@@ -109,6 +116,11 @@ export default async function ServiceDetailPage({ params }) {
                     <p className="mt-6 max-w-3xl text-xl font-medium leading-8 text-black/64">
                         {service.summary}
                     </p>
+                    <p className="mt-4 text-sm font-bold text-white/70">Based in Westland, Michigan. Serving Metro Detroit and remote clients worldwide.</p>
+                    <div className="mt-8 flex flex-wrap items-center gap-4">
+                        <Link href={`/contact?service=${encodeURIComponent(service.name)}`} className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 font-black text-secondary transition hover:bg-white">Discuss your project <FiArrowRight aria-hidden="true" /></Link>
+                        <span className="text-sm font-bold text-black/55">{service.priceGuide}</span>
+                    </div>
                 </div>
             </section>
 
@@ -151,6 +163,10 @@ export default async function ServiceDetailPage({ params }) {
                             <p className="mt-4 max-w-3xl font-medium leading-7 text-white/74">{service.engagement}</p>
                         </section>
 
+                        {service.workflow?.length > 0 && <section className="mt-10"><p className="eyebrow">A clear path</p><h2 className="mt-3 text-3xl font-black text-secondary">How the work is shaped.</h2><div className="mt-6 grid gap-4 md:grid-cols-2">{service.workflow.map((step, index) => <div key={step} className="drafting-card"><p className="text-sm font-black text-accent">0{index + 1}</p><p className="mt-3 font-bold text-white">{step}</p></div>)}</div></section>}
+
+                        {service.caseStudies?.map((slug) => getProjectBySlug(slug)).filter(Boolean).length > 0 && <section className="mt-10"><p className="eyebrow">Relevant experience</p><h2 className="mt-3 text-3xl font-black text-secondary">Related project context.</h2><div className="mt-6 grid gap-4 md:grid-cols-2">{service.caseStudies.map((slug) => { const project = getProjectBySlug(slug); return project ? <Link key={project.slug} href={`/work/${project.slug}`} className="drafting-card block transition hover:border-accent"><p className="text-sm font-black text-accent">{project.context}</p><h3 className="mt-2 text-xl font-black text-secondary">{project.name}</h3><p className="mt-2 text-sm leading-6 text-white/70">{project.role}</p></Link> : null; })}</div></section>}
+
                         <section className="drafting-card mt-10"><h2 className="text-3xl font-bold text-secondary">Before we start</h2><p className="mt-4 leading-7 text-white/75">Bring your main business goal, any existing website or tools, and the date and budget you have in mind. We’ll confirm deliverables, content responsibilities, revisions and access before work begins.</p><h3 className="mt-6 text-xl font-bold text-secondary">What affects the quote?</h3><p className="mt-3 leading-7 text-white/75">Custom workflows, integrations, content preparation and migration can change the scope. Hosting, subscriptions and ongoing support are agreed separately. The written proposal confirms what is included.</p><Link href="/pricing" className="mt-5 inline-block text-accent underline">See pricing and engagement options</Link><div className="mt-5">{guides.filter(g=>g.service===service.slug || service.slug==="care-maintenance" && g.slug==="prepare-to-hire-a-freelance-developer").map(g=><Link key={g.slug} href={`/guides/${g.slug}`} className="block py-2 text-accent underline">{g.title} ↗</Link>)}</div></section>
                         <section className="mt-10">
                             <p className="eyebrow">Common questions</p>
@@ -164,6 +180,8 @@ export default async function ServiceDetailPage({ params }) {
                                 ))}
                             </div>
                         </section>
+                        <section className="mt-12 border-t border-white/15 pt-10 text-center"><h2 className="text-3xl font-black text-secondary">Ready to talk through the next step?</h2><p className="mx-auto mt-3 max-w-2xl text-white/70">Tell me what you are trying to improve and I’ll help shape an appropriate scope.</p><Link href={`/contact?service=${encodeURIComponent(service.name)}`} className="studio-primary mt-6 inline-flex">Start a conversation <FiArrowRight aria-hidden="true" /></Link></section>
+                        <nav aria-label="Related services" className="mt-10 border-t border-white/15 pt-6"><h2 className="text-xl font-bold text-secondary">Explore other services</h2><div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">{services.filter(other => other.slug !== service.slug).map(other => <Link key={other.slug} href={`/services/${other.slug}`} className="text-accent underline">{other.shortName}</Link>)}</div></nav>
                     </div>
                 </div>
             </section>

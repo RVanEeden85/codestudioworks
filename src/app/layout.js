@@ -5,6 +5,7 @@ import CopyrightBar from "./components/Copyright-bar";
 import WhatsAppButton from "./components/WaButton";
 import MotionExperience from "./components/MotionExperience";
 import CampaignAttribution from "./components/CampaignAttribution";
+import OptionalAnalytics from "./components/OptionalAnalytics";
 import JsonLd from "./components/JsonLd";
 import {
     BUSINESS_PHONE,
@@ -26,11 +27,11 @@ const verification = {
 export const metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: "Detroit Web Developer & Software Studio | CodeStudioWorks",
+        default: "Westland Website Design & Development | CodeStudioWorks",
         template: "%s | CodeStudioWorks",
     },
     description:
-        "Detroit-based web developer building professional websites, web and mobile apps, custom software, and digital systems for businesses in Michigan and worldwide.",
+        "Westland-based web developer building professional websites, web and mobile apps, custom software, and digital systems for businesses in Michigan and worldwide.",
     applicationName: SITE_NAME,
     category: "technology",
     authors: [{ name: FOUNDER_NAME, url: absoluteUrl("/about") }],
@@ -59,9 +60,9 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: "Detroit Web Developer & Software Studio | CodeStudioWorks",
+        title: "Westland Website Design & Development | CodeStudioWorks",
         description:
-            "Detroit-based, founder-led web, app, and software development for local businesses, startups, and companies worldwide.",
+            "Westland-based, founder-led web, app, and software development for local businesses, startups, and companies worldwide.",
         url: SITE_URL,
         siteName: SITE_NAME,
         locale: "en_US",
@@ -71,15 +72,15 @@ export const metadata = {
                 url: "/opengraph-image",
                 width: 1200,
                 height: 630,
-                alt: "CodeStudioWorks — Detroit-based web, app, and software development",
+                alt: "CodeStudioWorks — Westland-based web, app, and software development",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Detroit Web Developer & Software Studio | CodeStudioWorks",
+        title: "Westland Website Design & Development | CodeStudioWorks",
         description:
-            "Detroit-based, founder-led websites, apps, custom software, and ongoing development support—available worldwide.",
+            "Westland-based, founder-led websites, apps, custom software, and ongoing development support—available worldwide.",
         images: ["/twitter-image"],
     },
 };
@@ -91,7 +92,7 @@ const siteSchema = graphSchema([
         name: SITE_NAME,
         url: SITE_URL,
         description:
-            "Detroit-based independent development studio delivering websites, web and mobile apps, custom business software, integrations, and ongoing technical support for clients locally and worldwide.",
+            "Westland-based independent development studio delivering websites, web and mobile apps, custom business software, integrations, and ongoing technical support for clients locally and worldwide.",
         logo: {
             "@type": "ImageObject",
             url: absoluteUrl("/brand/csw/codestudioworks-csw-icon-512.png"),
@@ -102,7 +103,7 @@ const siteSchema = graphSchema([
         telephone: BUSINESS_PHONE,
         address: {
             "@type": "PostalAddress",
-            addressLocality: "Detroit",
+            addressLocality: "Westland",
             addressRegion: "MI",
             addressCountry: "US",
         },
@@ -114,6 +115,8 @@ const siteSchema = graphSchema([
             "Custom business software development",
             "Fractional development support",
             "Website maintenance and technical SEO",
+            "Local SEO",
+            "Digital marketing foundations",
         ],
         knowsAbout: [
             "Web development",
@@ -140,7 +143,7 @@ const siteSchema = graphSchema([
         name: FOUNDER_NAME,
         jobTitle: "Founder and Full-Stack Developer",
         description:
-            "Detroit-based full-stack developer with more than 15 years of professional software experience.",
+            "Westland-based full-stack developer with more than 15 years of professional software experience.",
         worksFor: { "@id": `${SITE_URL}/#organization` },
         url: absoluteUrl("/about"),
         image: absoluteUrl("/images/ryno.webp"),
@@ -159,7 +162,7 @@ const siteSchema = graphSchema([
         url: SITE_URL,
         name: SITE_NAME,
         description:
-            "Websites, apps, and software from a Detroit-based independent development studio serving clients worldwide.",
+            "Websites, apps, and software from a Westland-based independent development studio serving clients worldwide.",
         inLanguage: "en-US",
         publisher: { "@id": `${SITE_URL}/#organization` },
     },
@@ -174,6 +177,7 @@ export default function RootLayout({ children }) {
             <body className="antialiased">
                 <a href="#main-content" className="skip-link">Skip to content</a>
                 <CampaignAttribution />
+                <OptionalAnalytics />
                 <MotionExperience />
                 <Navbar />
                 {children}

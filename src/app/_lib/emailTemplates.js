@@ -241,7 +241,7 @@ export function buildRequesterReceiptEmail(submission) {
             `Reference: ${reference}`,
             `Support: ${siteUrl}/support`,
             "",
-            "CodeStudioWorks — Detroit-based, available worldwide",
+            "CodeStudioWorks — Westland-based, available worldwide",
         ].join("\n"),
     };
 }

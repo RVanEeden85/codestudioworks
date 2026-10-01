@@ -7,6 +7,7 @@ export const BUSINESS_PHONE = "+1-313-213-5404";
 export const DEFAULT_SOCIAL_IMAGE = "/opengraph-image";
 
 export const SERVICE_AREAS = [
+    { "@type": "City", name: "Westland" },
     { "@type": "City", name: "Detroit" },
     { "@type": "AdministrativeArea", name: "Metro Detroit" },
     { "@type": "AdministrativeArea", name: "Michigan" },
@@ -16,7 +17,7 @@ export const SERVICE_AREAS = [
 
 export function absoluteUrl(path = "/") {
     if (/^https?:\/\//i.test(path)) return path;
-    return `${SITE_URL}${path === "/" ? "" : path.startsWith("/") ? path : `/${path}`}`;
+    return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 export function buildMetadata({ title, description, path = "/", image = DEFAULT_SOCIAL_IMAGE }) {
@@ -38,7 +39,7 @@ export function buildMetadata({ title, description, path = "/", image = DEFAULT_
                     url: image,
                     width: 1200,
                     height: 630,
-                    alt: `${SITE_NAME} — Detroit-based web, app, and software development`,
+                    alt: `${SITE_NAME} — Westland web, app, and software development for Metro Detroit and worldwide clients`,
                 },
             ],
         },

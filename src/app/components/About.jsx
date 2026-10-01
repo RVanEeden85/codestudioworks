@@ -49,7 +49,7 @@ const About = () => {
                         Meet Ryno, your full-stack developer.
                     </h1>
                     <div className="mt-6 space-y-5 text-lg leading-relaxed text-white/85">
-                        <p>I’m Ryno van Eeden, the developer behind CodeStudioWorks. I’m based in Detroit and work with businesses locally and worldwide.</p>
+                        <p>I’m Ryno van Eeden, the developer behind CodeStudioWorks. I’m based in Westland and work with businesses across Metro Detroit and worldwide.</p>
                         <p>I bring more than 15 years of software experience to websites, web and mobile apps, and business tools. My work includes a service-business website for Rolleston Tinting, full-stack contributions to State Champs! Sports Network and my independent product, EventBookr.</p>
                         <p>I can build a new project or join your team to improve an existing one. We’ll agree on priorities, review progress together and keep your code and accounts organised for the future.</p>
                         <Link href="/work" className="inline-flex font-bold text-accent underline">Explore my work</Link>
@@ -58,7 +58,7 @@ const About = () => {
                     <div className="mt-8 grid gap-3">
                         {[
                             "15+ years of professional software experience",
-                            "Detroit based, with worldwide online delivery",
+                        "Westland based, with worldwide online delivery",
                             "Web, mobile, integrations, and operational systems",
                             "Clear scope, regular communication, and launch support",
                         ].map((item) => (

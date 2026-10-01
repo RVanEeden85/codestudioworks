@@ -8,6 +8,10 @@ export const metadata = {
 
 const sections = [
     {
+        title: "Optional website analytics",
+        content: "If Google Analytics is enabled, its scripts load only after you choose Allow analytics. It measures page visits, contact-link clicks and successful enquiries. Form contents, names, email addresses and phone numbers are not included in our analytics events. You can decline or change your choice using Analytics preferences. Your choice is saved in your browser; withdrawing permission stops future analytics measurement. Google may retain information already collected under its own retention settings. Advertising features are disabled.",
+    },
+    {
         title: "Information I collect",
         content: "When you send an enquiry or request a consultation, I may collect your name, email address, phone number, business or project details, budget range, preferred availability, and any other information you choose to provide. Basic technical logs may also be processed by the website host for security and reliability.",
     },
@@ -44,7 +48,7 @@ export default function PrivacyPage() {
                 <div className="section-shell max-w-4xl">
                     <p className="eyebrow">Privacy</p>
                     <h1 className="mt-4 text-5xl font-black leading-tight text-secondary md:text-7xl">Privacy Policy</h1>
-                    <p className="mt-5 text-sm font-bold text-black/50">Effective September 15, 2026</p>
+                    <p className="mt-5 text-sm font-bold text-black/50">Effective September 30, 2026</p>
                     <p className="mt-6 max-w-3xl text-lg font-medium leading-8 text-black/64">This policy explains how CodeStudioWorks, an independent studio operated by Ryno van Eeden, handles information submitted through this website.</p>
                 </div>
             </section>

@@ -5,7 +5,7 @@ import { absoluteUrl, breadcrumbSchema, buildMetadata, graphSchema } from "../_l
 export const metadata = buildMetadata({
     title: "Client Website & Software Support",
     description:
-        "Request support for an existing CodeStudioWorks website, app, or software project. Secure intake for Detroit and worldwide clients.",
+        "Request support for an existing CodeStudioWorks website, app, or software project. Secure intake for Westland, Metro Detroit, and worldwide clients.",
     path: "/support",
 });
 

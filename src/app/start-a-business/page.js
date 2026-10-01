@@ -12,7 +12,7 @@ import { absoluteUrl, breadcrumbSchema, buildMetadata, faqSchema, graphSchema } 
 export const metadata = buildMetadata({
     title: "Small Business Website & Online Launch Help",
     description:
-        "Launch a new business with a professional website, bookings, payments, email, and online tools from a Detroit-based developer serving clients worldwide.",
+        "Launch a new business with a professional website, bookings, payments, email, and online tools from a Westland-based developer serving Metro Detroit and worldwide clients.",
     path: "/start-a-business",
 });
 
@@ -51,7 +51,7 @@ const pageSchema = graphSchema([
         url: absoluteUrl("/start-a-business"),
         name: "Small Business Website and Online Launch Help",
         description:
-            "Practical planning, website development, and online launch help for new businesses in Detroit, Michigan, and worldwide.",
+            "Practical planning, website development, and online launch help for new businesses in Westland, Metro Detroit, Michigan, and worldwide.",
         about: { "@id": `${absoluteUrl("/")}#organization` },
         inLanguage: "en-US",
     },

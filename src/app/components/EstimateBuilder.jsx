@@ -1,4 +1,5 @@
 "use client";
+import { trackLead } from "../_lib/analytics";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -103,6 +104,7 @@ function EstimateBuilder() {
 
             const result = await response.json();
             if (!response.ok) throw new Error(result.error || "Request failed");
+            if (!result.duplicate) trackLead("project_planner");
 
             form.reset();
             setStatus("sent");

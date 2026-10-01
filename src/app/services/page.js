@@ -8,7 +8,7 @@ import { services } from "./_lib/services";
 export const metadata = buildMetadata({
     title: "Web, App & Software Development Services",
     description:
-        "Explore Detroit-based website, web and mobile app, custom software, technical SEO, and ongoing development services available to businesses worldwide.",
+        "Explore Westland-based website, web and mobile app, custom software, technical SEO, and ongoing development services for Metro Detroit and worldwide clients.",
     path: "/services",
 });
 
@@ -19,7 +19,7 @@ const pageSchema = graphSchema([
         url: absoluteUrl("/services"),
         name: "Web, App and Software Development Services",
         description:
-            "Website, app, custom software, technical support, and fractional development services from a Detroit-based independent studio.",
+            "Website, app, custom software, technical support, and fractional development services from a Westland-based independent studio.",
         mainEntity: { "@id": `${absoluteUrl("/services")}#services` },
         about: { "@id": `${absoluteUrl("/")}#organization` },
         inLanguage: "en-US",

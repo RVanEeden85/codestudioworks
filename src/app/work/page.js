@@ -9,7 +9,7 @@ import { projects } from "./_lib/projects";
 export const metadata = buildMetadata({
     title: "Web Development Portfolio & Software Case Studies",
     description:
-        "See selected website, web app, mobile, and platform work by CodeStudioWorks, a Detroit-based independent developer serving businesses worldwide.",
+        "See selected website, web app, mobile, and platform work by CodeStudioWorks, a Westland-based independent developer serving Metro Detroit and worldwide businesses.",
     path: "/work",
 });
 

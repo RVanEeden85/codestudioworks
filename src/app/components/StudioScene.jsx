@@ -22,7 +22,7 @@ export default function StudioScene({ progress, paused, station = 0, onReady }) 
             renderer.toneMapping = T.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.35;
             renderer.shadowMap.enabled = window.innerWidth >= 768;
-            renderer.shadowMap.type = T.PCFSoftShadowMap;
+            renderer.shadowMap.type = T.PCFShadowMap;
             container.appendChild(renderer.domElement);
             const scene = new T.Scene();
             scene.background = new T.Color("#141b1b");

@@ -6,7 +6,7 @@ import { absoluteUrl, breadcrumbSchema, buildMetadata, graphSchema } from "../_l
 export const metadata = buildMetadata({
     title: "Web Development Pricing & Engagements",
     description:
-        "Review starting prices for business websites, custom apps, ongoing development, and website care from a Detroit-based developer serving clients worldwide.",
+        "Review starting prices for business websites, custom apps, ongoing development, and website care from a Westland-based developer serving Metro Detroit and worldwide clients.",
     path: "/pricing",
 });
 

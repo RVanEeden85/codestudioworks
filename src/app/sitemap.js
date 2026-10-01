@@ -6,8 +6,11 @@ import { projects } from "./work/_lib/projects";
 export default function sitemap() {
     const siteUrl = getSiteUrl();
     const lastModified = new Date("2026-09-15T00:00:00.000Z");
+    const updated = new Date("2026-09-30T00:00:00.000Z");
+    const changedPaths = new Set(["/", "/services", "/contact", "/about", "/work", "/pricing", "/privacy", "/support", "/start-a-business", "/detroit-web-development", "/westland-web-design"]);
 
     const staticRoutes = [
+        { url: `${siteUrl}/westland-web-design`, lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
         {
             url: siteUrl,
             lastModified,
@@ -78,7 +81,7 @@ export default function sitemap() {
 
     const serviceRoutes = services.map((service) => ({
         url: `${siteUrl}/services/${service.slug}`,
-        lastModified,
+        lastModified: updated,
         changeFrequency: "monthly",
         priority: 0.6,
     }));
@@ -90,5 +93,5 @@ export default function sitemap() {
         priority: 0.5,
     }));
 
-    return [...staticRoutes, ...serviceRoutes, ...projectRoutes, {url: `${siteUrl}/guides`}, ...guides.map(g=>({url:`${siteUrl}/guides/${g.slug}`}))];
+    return [...staticRoutes.map(route => ({ ...route, lastModified: changedPaths.has(new URL(route.url).pathname) ? updated : route.lastModified })), ...serviceRoutes, ...projectRoutes, {url: `${siteUrl}/guides`, lastModified}, ...guides.map(g=>({url:`${siteUrl}/guides/${g.slug}`, lastModified}))];
 }

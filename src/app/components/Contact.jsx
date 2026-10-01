@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { projectTypes, projectTypeAliases } from "../_lib/projectTypes";
 import { getLeadAttribution } from "../_lib/leadAttribution";
+import { trackLead } from "../_lib/analytics";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FiArrowRight, FiClock, FiMapPin, FiMessageSquare } from "react-icons/fi";
@@ -57,6 +58,7 @@ export default function Contact({ initialService = "" }) {
             if (!response.ok) throw new Error(result.error || "Request failed");
 
             setStatus("success");
+            if (!result.duplicate) trackLead("contact");
             setRequestReference(result.requestId || "");
             toast.success("Your enquiry was received");
             form.reset();
@@ -80,7 +82,7 @@ export default function Contact({ initialService = "" }) {
                         Let’s discuss your project.
                     </h1>
                     <p className="mt-6 text-lg font-medium leading-8 text-black/64">
-                        Tell me what you want to build or improve. I’ll review your message and reply personally.
+                        Tell me what you want to build or improve. I’ll reply personally to clarify the scope, price and next step. You do not need a finished brief to ask for a quote.
                     </p>
 
                     <div className="contact-options mt-6 grid gap-3">
@@ -97,11 +99,11 @@ export default function Contact({ initialService = "" }) {
                         </a>
                         <div className="architectural-rule flex items-center gap-3 py-4 font-bold text-white/76">
                             <FiMapPin className="text-2xl text-primary" aria-hidden="true" />
-                            Based in Detroit—serving Metro Detroit and clients worldwide
+                            Based in Westland, Michigan—serving Metro Detroit and clients worldwide
                         </div>
                         <div className="architectural-rule flex items-center gap-3 py-4 font-bold text-white/76">
                             <FiClock className="text-2xl text-primary" aria-hidden="true" />
-                            You’ll hear directly from me
+                            Local meetings by arrangement after 5pm or on weekends; remote meetings available
                         </div>
                         <Link href="/support" className="inline-flex items-center gap-2 pt-3 text-sm font-black text-accent hover:text-white">
                             Already a client? Open a support request <FiArrowRight aria-hidden="true" />
@@ -135,8 +137,7 @@ export default function Contact({ initialService = "" }) {
                         </label>
                         <label className="grid gap-2 text-sm font-black text-secondary">
                             Project type
-                            <select className={fieldClass} name="projectType" defaultValue={serviceOptions.includes(selectedService) ? selectedService : ""} required>
-                                <option value="" disabled>Select one</option>
+                            <select className={fieldClass} name="projectType" defaultValue={serviceOptions.includes(selectedService) ? selectedService : "Not sure yet"} required>
                                 {serviceOptions.map((option) => <option key={option}>{option}</option>)}
                             </select>
                         </label>
@@ -153,7 +154,7 @@ export default function Contact({ initialService = "" }) {
                         </label>
                         <label className="grid gap-2 text-sm font-black text-secondary sm:col-span-2">
                             What would you like help with?
-                            <textarea className={`${fieldClass} min-h-44`} name="message" required />
+                            <textarea className={`${fieldClass} min-h-44`} name="message" maxLength={5000} placeholder="What does your business do, and what would you like your website or software to help with? An existing website link is useful if you have one." required />
                         </label>
                     </div>
 
@@ -178,7 +179,7 @@ export default function Contact({ initialService = "" }) {
                     </div>
 
                     <button disabled={status === "sending" || !turnstileToken} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md bg-secondary px-6 py-4 text-base font-black text-white transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60" type="submit">
-                        {status === "sending" ? "Sending..." : "Send Enquiry"}
+                        {status === "sending" ? "Sending..." : "Request a quote"}
                         <FiArrowRight aria-hidden="true" />
                     </button>
                 </form>

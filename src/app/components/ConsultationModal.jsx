@@ -1,4 +1,5 @@
 "use client";
+import { trackLead } from "../_lib/analytics";
 
 import Link from "next/link";
 import { projectTypes } from "../_lib/projectTypes";
@@ -87,6 +88,7 @@ const ConsultationModal = ({ isOpen, onClose }) => {
             if (!response.ok) throw new Error(result.error || "Request failed");
 
             setStatus("success");
+            if (!result.duplicate) trackLead("consultation");
             setRequestReference(result.requestId || "");
             form.reset();
             setSubmissionId(crypto.randomUUID());

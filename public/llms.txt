@@ -1,6 +1,6 @@
 # CodeStudioWorks
 
-> CodeStudioWorks is Ryno van Eeden's independent development studio in Detroit, Michigan. Ryno builds business websites, web and mobile apps, and custom software for clients in Metro Detroit and worldwide.
+> CodeStudioWorks is Ryno van Eeden's independent development studio in Westland, Michigan. Ryno builds business websites, web and mobile apps, and custom software for clients in Metro Detroit and worldwide.
 
 Clients work directly with Ryno, who brings more than 15 years of professional software experience, from planning through development, launch and optional ongoing support. Remote projects use online meetings, shared reviews and digital delivery.
 
@@ -15,6 +15,7 @@ The work pages distinguish client projects, professional contributions and an in
 - [CodeStudioWorks home](https://www.codestudioworks.com/): Overview of the studio, services and approach.
 - [About Ryno van Eeden](https://www.codestudioworks.com/about): Developer background and how clients work directly with Ryno.
 - [Detroit web development](https://www.codestudioworks.com/detroit-web-development): Website and software services for Detroit and Metro Detroit businesses.
+- [Westland web design](https://www.codestudioworks.com/westland-web-design): Custom coded business websites from Westland for Metro Detroit and worldwide clients, with local meetings by arrangement after 5pm or weekends.
 - [Starting a business](https://www.codestudioworks.com/start-a-business): Help planning and launching a new business website and its connected tools.
 - [Pricing and engagements](https://www.codestudioworks.com/pricing): Current starting prices, engagement options and scope considerations.
 - [Discuss your project](https://www.codestudioworks.com/contact): Send a new project enquiry.
@@ -24,6 +25,9 @@ The work pages distinguish client projects, professional contributions and an in
 - [All services](https://www.codestudioworks.com/services): Compare the available development and support services.
 - [Business websites](https://www.codestudioworks.com/services/business-website-launch): Website planning, design, development, redesign and launch.
 - [Web and mobile apps](https://www.codestudioworks.com/services/custom-web-apps): Custom applications, portals, dashboards and connected business tools.
+- [Custom software development](https://www.codestudioworks.com/services/custom-software-development): Purpose-built internal workflows, business tools, permissions, reporting and integrations.
+- [Local SEO and search foundations](https://www.codestudioworks.com/services/seo-local-presence): Technical SEO, local business information, crawlability and measurement planning without ranking promises.
+- [Digital marketing foundations](https://www.codestudioworks.com/services/digital-marketing): Campaign planning, landing pages and measurement support; advertising spend and ongoing channel work are agreed separately.
 - [Ongoing development](https://www.codestudioworks.com/services/fractional-development-partner): Regular development help for features, improvements and integrations.
 - [Website maintenance](https://www.codestudioworks.com/services/care-maintenance): Ongoing updates, fixes and technical care.
 
