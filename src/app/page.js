@@ -14,6 +14,7 @@ import {
 } from "react-icons/fi";
 import { services } from "./services/_lib/services";
 import StudioWalkthrough from "./components/StudioWalkthrough";
+import StudioHomeHero from "./components/StudioHomeHero";
 import ProjectRail from "./components/ProjectRail";
 import JsonLd from "./components/JsonLd";
 import { absoluteUrl, faqSchema, graphSchema } from "./_lib/seo";
@@ -90,6 +91,7 @@ export default function Home() {
     return (
         <main id="main-content" className="architectural-page overflow-x-clip bg-background pt-[72px]">
             <JsonLd data={homeSchema} />
+            <StudioHomeHero />
             <StudioWalkthrough />
 
             <section aria-label="Studio facts" className="border-b border-white/10 bg-[#080909]">

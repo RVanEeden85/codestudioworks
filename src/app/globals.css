@@ -2136,3 +2136,5 @@ textarea {
  .studio-journey-compact .studio-stage .studio-secondary { display:inline-flex; font-size:12px; min-height:44px; align-items:center; }
  .studio-journey-compact .studio-stage .studio-note { display:block; font-size:11px; line-height:1.5; margin-top:12px; }
 }
+
+#studio-walkthrough { scroll-margin-top:72px; }
