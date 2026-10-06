@@ -108,16 +108,6 @@ const siteSchema = graphSchema([
             addressCountry: "US",
         },
         areaServed: SERVICE_AREAS,
-        serviceType: [
-            "Website design and development",
-            "Web application development",
-            "Mobile application development",
-            "Custom business software development",
-            "Fractional development support",
-            "Website maintenance and technical SEO",
-            "Local SEO",
-            "Digital marketing foundations",
-        ],
         knowsAbout: [
             "Web development",
             "Software engineering",
