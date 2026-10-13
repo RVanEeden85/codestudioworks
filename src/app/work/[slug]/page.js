@@ -176,6 +176,21 @@ export default async function ProjectPage({ params }) {
                             {project.summary}
                         </p>
                         <section className="drafting-card mt-8"><p className="eyebrow">A closer look</p><h2 className="mt-4 text-2xl font-bold text-secondary">{project.media.evidence.title}</h2><p className="mt-4 leading-7 text-white/75">{project.media.evidence.description}</p><p className="mt-4 text-sm leading-6 text-white/60">{project.context === "Professional software work" ? "This case study describes my contribution to the wider platform." : project.context === "Independent product" ? "This is my independent product, rather than a commissioned client project." : "This case study shows the website and features delivered."} The examples describe functionality; no traffic or revenue uplift is claimed.</p><Link href={project.slug === "rolleston-tinting" ? "/services/business-website-launch" : "/services/custom-web-apps"} className="mt-5 inline-block text-accent underline">Explore this type of development ↗</Link></section>
+                        {project.slug === "rolleston-tinting" && (
+                            <section className="mt-10">
+                                <h2 className="text-3xl font-black text-secondary">From service information to a quote request</h2>
+                                <p className="mt-4 text-lg font-medium leading-8 text-black/66">
+                                    Vehicle, home and commercial customers need different information. Separate service pages give each audience a relevant starting point, while completed-work galleries let visitors explore examples before getting in touch.
+                                </p>
+                                <p className="mt-4 text-lg font-medium leading-8 text-black/66">
+                                    Contact forms and quote-request paths provide the next step. Responsive layouts bring the service information, galleries and enquiry options to phone, tablet and desktop screens.
+                                </p>
+                                <p className="mt-4 text-lg font-medium leading-8 text-black/66">
+                                    Rolleston Tinting is a New Zealand client, not a Metro Detroit project. For a Westland business considering a similar website, this is an example of the delivered functionality: explain the services, show the work and provide a way to request a quote.
+                                </p>
+                                <Link href="/westland-web-design" className="mt-5 inline-block font-bold text-secondary underline">Explore website development in Westland ↗</Link>
+                            </section>
+                        )}
                         <h2 className="mt-10 text-3xl font-black text-secondary">
                             {project.context === "Professional software work" ? "What I contributed to" : "What I built"}
                         </h2>
