@@ -101,6 +101,7 @@ export const services = [
             "We plan the first version around the most useful features. Further features can be added in separately agreed stages.",
         typicalTimeline: "Most first releases require 6–16+ weeks.",
         priceGuide: "App projects start from $7,500 USD.",
+        caseStudies: ["state-champs-network", "eventbookr"],
         faqs: [
             {
                 question: "Can you help shape an idea before development?",

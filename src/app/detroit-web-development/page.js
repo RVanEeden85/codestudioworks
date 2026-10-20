@@ -194,6 +194,25 @@ export default function DetroitWebDevelopmentPage() {
                 </div>
             </section>
 
+            <section className="py-20 text-white md:py-28">
+                <div className="section-shell">
+                    <p className="eyebrow">Relevant experience</p>
+                    <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">Relevant website and application work</h2>
+                    <div className="mt-10 grid gap-6 md:grid-cols-2">
+                        <article className="drafting-card">
+                            <h3 className="text-2xl font-black">Rolleston Tinting</h3>
+                            <p className="mt-4 leading-8 text-white/70">Rolleston Tinting combines separate service pages, completed-work galleries and quote-request paths. It is a New Zealand client example of the website functionality available to Metro Detroit businesses.</p>
+                            <Link href="/work/rolleston-tinting" className="mt-6 inline-block font-bold text-accent underline">Explore the Rolleston Tinting website project ↗</Link>
+                        </article>
+                        <article className="drafting-card">
+                            <h3 className="text-2xl font-black">State Champs! Sports Network</h3>
+                            <p className="mt-4 leading-8 text-white/70">My professional work for State Champs! Sports Network includes contributions across its website, mobile app, API and administration tools. The case study describes my contribution to the wider platform.</p>
+                            <Link href="/work/state-champs-network" className="mt-6 inline-block font-bold text-accent underline">Explore the State Champs web and mobile work ↗</Link>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
             <section className="bg-[#101211] py-20 text-white md:py-28">
                 <div className="section-shell grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
                     <div>
