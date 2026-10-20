@@ -8,6 +8,13 @@ export default function sitemap() {
     const lastModified = new Date("2026-09-15T00:00:00.000Z");
     const updated = new Date("2026-09-30T00:00:00.000Z");
     const changedPaths = new Set(["/", "/services", "/contact", "/about", "/work", "/pricing", "/privacy", "/support", "/start-a-business", "/detroit-web-development", "/westland-web-design"]);
+    // Actual content publication dates from PRs #4 and #5.
+    const publicationDates = {
+        "/westland-web-design": "2026-10-13T00:00:00.000Z",
+        "/work/rolleston-tinting": "2026-10-13T00:00:00.000Z",
+        "/detroit-web-development": "2026-10-20T00:00:00.000Z",
+        "/services/custom-web-apps": "2026-10-20T00:00:00.000Z",
+    };
 
     const staticRoutes = [
         { url: `${siteUrl}/westland-web-design`, lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
@@ -93,5 +100,9 @@ export default function sitemap() {
         priority: 0.5,
     }));
 
-    return [...staticRoutes.map(route => ({ ...route, lastModified: changedPaths.has(new URL(route.url).pathname) ? updated : route.lastModified })), ...serviceRoutes, ...projectRoutes, {url: `${siteUrl}/guides`, lastModified}, ...guides.map(g=>({url:`${siteUrl}/guides/${g.slug}`, lastModified}))];
+    const routes = [...staticRoutes.map(route => ({ ...route, lastModified: changedPaths.has(new URL(route.url).pathname) ? updated : route.lastModified })), ...serviceRoutes, ...projectRoutes, {url: `${siteUrl}/guides`, lastModified}, ...guides.map(g=>({url:`${siteUrl}/guides/${g.slug}`, lastModified}))];
+    return routes.map(route => {
+        const publicationDate = publicationDates[new URL(route.url).pathname];
+        return publicationDate ? { ...route, lastModified: new Date(publicationDate) } : route;
+    });
 }
